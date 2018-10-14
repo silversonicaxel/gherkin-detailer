@@ -1,0 +1,14 @@
+{
+  "name": "gherkin-detailer",
+  "version": "0.0.1",
+  "description": "gherkin-detailer is a tool that check the gherkins included in you project and list them",
+  "license": "MIT",
+  "author": {
+    "name": "Alessandro (silversonicaxel) Rabitti",
+    "url": "https://github.com/silversonicaxel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silversonicaxel/gherkin-detailer"
+  }
+}

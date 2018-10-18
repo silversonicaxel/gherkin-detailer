@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "gherkin-detailer is a tool that check the gherkins included in you project and list them",
   "license": "MIT",
+  "scripts": {
+    "lint": "tslint src/**/*.ts"
+  },
   "author": {
     "name": "Alessandro (silversonicaxel) Rabitti",
     "url": "https://github.com/silversonicaxel"
@@ -17,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.12.0",
+    "tslint": "^5.11.0",
     "typescript": "^3.1.3"
   }
 }

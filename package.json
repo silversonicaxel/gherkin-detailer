@@ -4,7 +4,9 @@
   "description": "gherkin-detailer is a tool that check the gherkins included in you project and list them",
   "license": "MIT",
   "scripts": {
-    "lint": "tslint src/**/*.ts"
+    "lint": "tslint src/**/*.ts",
+    "test": "node node_modules/.bin/_mocha -r ts-node/register ./src/**/*.spec.ts",
+    "test-watch": "node node_modules/.bin/_mocha -r ts-node/register --watch-extensions spec.ts ./src/**/*.spec.ts --watch -R min"
   },
   "author": {
     "name": "Alessandro (silversonicaxel) Rabitti",
@@ -19,7 +21,12 @@
     "npm": ">= 6.0.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.3"
   }

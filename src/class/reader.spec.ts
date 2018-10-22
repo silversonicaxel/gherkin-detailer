@@ -12,7 +12,7 @@ describe('#Reader', () => {
   describe('#readFeatureFilesFromFolder', () => {
     it('should call readdir', () => {
       const done = () => {};
-      reader.readFeatureFilesFromFolder('folder', done);
+      reader.readFeatureFilesFromFolder('./', done);
 
       expect(fs).to.respondTo('readdir');
     });

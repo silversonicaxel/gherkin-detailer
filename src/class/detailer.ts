@@ -5,6 +5,6 @@ export class Detailer {
       throw readError;
     }
 
-    console.log(readFiles);
+    console.error(readFiles);
   }
 }

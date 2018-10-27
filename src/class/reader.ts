@@ -13,49 +13,45 @@ export class Reader {
     this.statAsync = util.promisify(fs.stat);
   }
 
-  readFeatureFilesFromFolder(folder: string, onReadFilesFromFolder: Function): void {
+  async readFeatureFilesFromFolder(folder: string, onReadFilesFromFolder: Function): Promise<void> {
     let results: string[] = [];
 
-    this.readDirAsync(folder)
-      .then((readFilesList: string[]) => {
-        let pending = readFilesList.length;
-        if (!pending) {
-          return onReadFilesFromFolder(null, results);
+    try {
+      const readFilesList: string[] = await this.readDirAsync(folder);
+      let pending = readFilesList.length;
+
+      if (!pending) {
+        return onReadFilesFromFolder(null, results);
+      }
+
+      readFilesList.forEach(async(readFile: string) => {
+        readFile = path.resolve(folder, readFile);
+
+        const stat = await this.statAsync(readFile);
+
+        if (stat && stat.isDirectory()) {
+          if (this.foldersToExlcude.includes(readFile)) {
+            return;
+          }
+
+          this.readFeatureFilesFromFolder(readFile, (readFilesFromFolderError: Error, readData: string[]) => {
+            results = results.concat(readData);
+            if (!--pending) {
+              onReadFilesFromFolder(null, results);
+            }
+          });
+        } else {
+          if (readFile.indexOf(this.extensionToRead) >= 0) {
+            results.push(readFile);
+          }
+
+          if (!--pending) {
+            onReadFilesFromFolder(null, results);
+          }
         }
-
-        readFilesList.forEach((readFile: string) => {
-          readFile = path.resolve(folder, readFile);
-
-          this.statAsync(readFile)
-            .then((stat: any) => {
-              if (stat && stat.isDirectory()) {
-                if (this.foldersToExlcude.includes(readFile)) {
-                  return;
-                }
-
-                this.readFeatureFilesFromFolder(readFile, (readFilesFromFolderError: Error, readData: string[]) => {
-                  results = results.concat(readData);
-                  if (!--pending) {
-                    onReadFilesFromFolder(null, results);
-                  }
-                });
-              } else {
-                if (readFile.indexOf(this.extensionToRead) >= 0) {
-                  results.push(readFile);
-                }
-
-                if (!--pending) {
-                  onReadFilesFromFolder(null, results);
-                }
-              }
-            })
-            .catch((statError: Error) => {
-              return onReadFilesFromFolder(statError, []);
-            });
-        });
-      })
-      .catch((readdirError: Error) => {
-        return onReadFilesFromFolder(readdirError, []);
       });
+    } catch (readFeatureFilesFromFolderError) {
+      return onReadFilesFromFolder(readFeatureFilesFromFolderError, []);
+    }
   }
 }

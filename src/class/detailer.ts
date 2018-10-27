@@ -2,9 +2,9 @@ export class Detailer {
 
   detailFeaturesFiles(readError: Error, readFiles: string[]) {
     if (readError) {
-      throw readError;
+      console.error(readError);
     }
 
-    console.error(readFiles);
+    console.log(readFiles);
   }
 }

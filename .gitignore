@@ -8,5 +8,7 @@ yarn-error.log*
 # node modules
 node_modules/
 
-# output folder
+# output folders
 dist
+coverage
+.nyc_output

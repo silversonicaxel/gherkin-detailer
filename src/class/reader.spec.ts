@@ -6,7 +6,7 @@ import { Reader } from './reader';
 
 describe('#Reader', () => {
   let reader: Reader;
-  let done: Function;
+  let executeWhenRead: Function;
 
   beforeEach(() => {
     reader = new Reader();
@@ -20,18 +20,18 @@ describe('#Reader', () => {
 
   describe('#readFeatureFilesFromFolder', () => {
     beforeEach(() => {
-      done = () => {};
+      executeWhenRead = () => {};
     });
 
     it('should read the initial folder', async () => {
-      await reader.readFeatureFilesFromFolder('./fixtures/', done);
+      await reader.readFeatureFilesFromFolder('./fixtures/', executeWhenRead);
 
       expect(reader).to.respondTo('readDirAsync');
       expect(fs).to.respondTo('readdir');
     });
 
     it('should read folders recursively', async () => {
-      await reader.readFeatureFilesFromFolder('./fixtures/', done);
+      await reader.readFeatureFilesFromFolder('./fixtures/', executeWhenRead);
 
       expect(path).to.respondTo('resolve');
       expect(reader).to.respondTo('statAsync');

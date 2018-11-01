@@ -51,7 +51,7 @@ export class Reader {
         }
       });
     } catch (readFeatureFilesFromFolderError) {
-      return onReadFilesFromFolder(readFeatureFilesFromFolderError, []);
+      onReadFilesFromFolder(readFeatureFilesFromFolderError, []);
     }
   }
 }

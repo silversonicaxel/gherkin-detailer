@@ -24,33 +24,33 @@ export class Reader {
         return onReadFilesFromFolder(null, results);
       }
 
-      readFilesList.forEach(async(baseNameReadFile: string) => {
-        let readFile = baseNameReadFile;
-        readFile = path.resolve(folder, readFile);
+      readFilesList
+        .map(async(baseNameReadFile: string) => {
+          let readFile = baseNameReadFile;
+          readFile = path.resolve(folder, readFile);
 
-        const stat = await this.statAsync(readFile);
+          const stat = await this.statAsync(readFile);
 
-        if (stat && stat.isDirectory()) {
-          if (this.foldersToExlcude.includes(baseNameReadFile)) {
-            return;
-          }
+          if (stat && stat.isDirectory()) {
+            this.readFeatureFilesFromFolder(readFile, (readFilesFromFolderError: Error, readData: string[]) => {
+              if (!this.foldersToExlcude.includes(baseNameReadFile)) {
+                results = results.concat(readData);
+              }
 
-          this.readFeatureFilesFromFolder(readFile, (readFilesFromFolderError: Error, readData: string[]) => {
-            results = results.concat(readData);
+              if (!--pending) {
+                onReadFilesFromFolder(null, results);
+              }
+            });
+          } else {
+            if (readFile.indexOf(this.extensionToRead) >= 0) {
+              results.push(readFile);
+            }
+
             if (!--pending) {
               onReadFilesFromFolder(null, results);
             }
-          });
-        } else {
-          if (readFile.indexOf(this.extensionToRead) >= 0) {
-            results.push(readFile);
           }
-
-          if (!--pending) {
-            onReadFilesFromFolder(null, results);
-          }
-        }
-      });
+        });
     } catch (readFeatureFilesFromFolderError) {
       onReadFilesFromFolder(readFeatureFilesFromFolderError, []);
     }

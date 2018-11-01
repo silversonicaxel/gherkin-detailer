@@ -24,13 +24,14 @@ export class Reader {
         return onReadFilesFromFolder(null, results);
       }
 
-      readFilesList.forEach(async(readFile: string) => {
+      readFilesList.forEach(async(baseNameReadFile: string) => {
+        let readFile = baseNameReadFile;
         readFile = path.resolve(folder, readFile);
 
         const stat = await this.statAsync(readFile);
 
         if (stat && stat.isDirectory()) {
-          if (this.foldersToExlcude.includes(readFile)) {
+          if (this.foldersToExlcude.includes(baseNameReadFile)) {
             return;
           }
 

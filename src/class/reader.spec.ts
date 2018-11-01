@@ -37,5 +37,17 @@ describe('#Reader', () => {
       expect(reader).to.respondTo('statAsync');
       expect(reader).to.respondTo('readFeatureFilesFromFolder');
     });
+
+    it('should manage error without thrown exception if folders does not exist', async () => {
+      let readFeatureFilesFromFolderError;
+
+      try {
+        await reader.readFeatureFilesFromFolder('./not-existing-folder', executeWhenRead);
+      } catch (error) {
+        readFeatureFilesFromFolderError = error;
+      }
+
+      expect(readFeatureFilesFromFolderError).to.equal(undefined);
+    });
   });
 });

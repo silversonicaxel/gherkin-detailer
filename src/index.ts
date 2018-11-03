@@ -1,7 +1,5 @@
-import { Reader } from './class/reader';
-import { Detailer } from './class/detailer';
+import { Reporter } from './class/reporter';
 
-const reader = new Reader();
-const detailer = new Detailer();
+const detailer = new Reporter();
 
-reader.readFeatureFilesFromFolder('./', detailer.detailFeaturesFiles);
+detailer.createGherkinsReport();

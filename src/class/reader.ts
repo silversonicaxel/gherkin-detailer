@@ -18,9 +18,9 @@ export class Reader {
 
     try {
       const readFilesList: string[] = await this.readDirAsync(folder);
-      let pending = readFilesList.length;
+      let totalFilesToRead = readFilesList.length;
 
-      if (!pending) {
+      if (!totalFilesToRead) {
         return onReadFilesFromFolder(null, results);
       }
 
@@ -37,7 +37,7 @@ export class Reader {
                 results = results.concat(readData);
               }
 
-              if (!--pending) {
+              if (!--totalFilesToRead) {
                 onReadFilesFromFolder(null, results);
               }
             });
@@ -46,7 +46,7 @@ export class Reader {
               results.push(readFile);
             }
 
-            if (!--pending) {
+            if (!--totalFilesToRead) {
               onReadFilesFromFolder(null, results);
             }
           }

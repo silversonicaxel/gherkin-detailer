@@ -38,7 +38,7 @@
   },
   "nyc": {
     "include": [
-      "src/**/*.ts"
+      "src/class/**/*.ts"
     ],
     "exclude": [
       "src/**/*.spec.ts"

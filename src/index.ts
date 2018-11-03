@@ -1,5 +1,5 @@
 import { Reporter } from './class/reporter';
 
-const detailer = new Reporter();
+const reporter = new Reporter();
 
-detailer.createGherkinsReport();
+reporter.createGherkinsReport();

@@ -5,12 +5,14 @@ import * as util from 'util';
 export class Reader {
   private readDirAsync: Function;
   private statAsync: Function;
+  private readFileAsync: Function;
   private foldersToExlcude: string[] = ['node_modules', 'dist', '.git'];
   private extensionToRead = '.feature';
 
   constructor () {
     this.readDirAsync = util.promisify(fs.readdir);
     this.statAsync = util.promisify(fs.stat);
+    this.readFileAsync = util.promisify(fs.readFile);
   }
 
   async readFeatureFilesFromFolder(folder: string, onReadFilesFromFolder: Function): Promise<void> {
@@ -53,6 +55,15 @@ export class Reader {
         });
     } catch (readFeatureFilesFromFolderError) {
       onReadFilesFromFolder(readFeatureFilesFromFolderError, []);
+    }
+  }
+
+  async readContentFeatureFile(file: string): Promise<string> {
+    try {
+      return await this.readFileAsync(file, 'utf8');
+
+    } catch (readContentFeatureFileError) {
+      return '';
     }
   }
 }

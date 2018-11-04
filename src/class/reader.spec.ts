@@ -50,4 +50,20 @@ describe('#Reader', () => {
       expect(readFeatureFilesFromFolderError).to.equal(undefined);
     });
   });
+
+  describe('#readContentFeatureFile', async () => {
+    it('should read file content', async () => {
+      const contentFile = await reader.readContentFeatureFile('./fixtures/features/copy-folder/copy.feature');
+
+      expect(reader).to.respondTo('readFileAsync');
+      expect(contentFile).not.to.equal('');
+    });
+
+    it('should return an empty string if file does not exist', async () => {
+      const contentFile = await reader.readContentFeatureFile('./fake-file.txt');
+
+      expect(reader).to.respondTo('readFileAsync');
+      expect(contentFile).to.equal('');
+    });
+  });
 });

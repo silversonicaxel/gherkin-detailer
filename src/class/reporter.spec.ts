@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { Reporter } from './reporter';
 
-
 describe('#Reporter', () => {
   let reporter: Reporter;
 

@@ -6,6 +6,7 @@ export class Reporter {
 
   constructor() {
     this.reader = new Reader();
+    this.reportFeaturesFiles = this.reportFeaturesFiles.bind(this);
   }
 
   createGherkinsReport(folderToDetail?: string): void {
@@ -14,11 +15,20 @@ export class Reporter {
     this.reader.readFeatureFilesFromFolder(this.folderToReport, this.reportFeaturesFiles);
   }
 
-  private reportFeaturesFiles(readError: Error, readFiles: string[]) {
+  private reportFeaturesFiles(readError: Error, readFiles: string[]): void {
     if (readError) {
       console.error(readError);
-    } else {
-      console.log(readFiles);
+      return;
     }
+
+    readFiles
+      .map(async (readFile: string) => {
+        const contentFile = await this.reader.readContentFeatureFile(readFile);
+
+        console.log(contentFile);
+      });
+
+    console.log(readFiles);
+    return;
   }
 }

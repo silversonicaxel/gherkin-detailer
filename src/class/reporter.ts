@@ -24,11 +24,9 @@ export class Reporter {
     readFiles
       .map(async (readFile: string) => {
         const contentFile = await this.reader.readContentFeatureFile(readFile);
-
-        console.log(contentFile);
+        this.reader.getRowsFeatureFile(contentFile);
       });
 
-    console.log(readFiles);
     return;
   }
 }

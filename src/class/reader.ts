@@ -67,7 +67,7 @@ export class Reader {
     }
   }
 
-  analyzeContentFeatureFile(contentFile: string): string[] {
+  getRowsFeatureFile(contentFile: string): string[] {
     let rowsFile = contentFile.split('\n');
     rowsFile = rowsFile
       .map(row => row.trim())

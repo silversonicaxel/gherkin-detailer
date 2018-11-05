@@ -72,7 +72,14 @@ describe('#Reader', () => {
       const contentFile = '  A\n\n B\nC\n  D ';
       const analizyedContentFile = ['A', 'B', 'C', 'D'];
 
-      expect(reader.analyzeContentFeatureFile(contentFile)).to.deep.equal(analizyedContentFile);
+      expect(reader.getRowsFeatureFile(contentFile)).to.deep.equal(analizyedContentFile);
+    });
+
+    it('should retrive an empty array', () => {
+      const emptyFile = '';
+      const analizyedEmptyFile: string[] = [];
+
+      expect(reader.getRowsFeatureFile(emptyFile)).to.deep.equal(analizyedEmptyFile);
     });
   });
 });

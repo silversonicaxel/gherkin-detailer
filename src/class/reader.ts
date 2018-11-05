@@ -66,4 +66,13 @@ export class Reader {
       return '';
     }
   }
+
+  analyzeContentFeatureFile(contentFile: string): string[] {
+    let rowsFile = contentFile.split('\n');
+    rowsFile = rowsFile
+      .map(row => row.trim())
+      .filter(row => !(row === ''));
+
+    return rowsFile;
+  }
 }

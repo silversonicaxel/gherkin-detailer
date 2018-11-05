@@ -66,4 +66,13 @@ describe('#Reader', () => {
       expect(contentFile).to.equal('');
     });
   });
+
+  describe('#analyzeContentFeatureFile', () => {
+    it('should filter out from content of a file empty useless spaces', () => {
+      const contentFile = '  A\n\n B\nC\n  D ';
+      const analizyedContentFile = ['A', 'B', 'C', 'D'];
+
+      expect(reader.analyzeContentFeatureFile(contentFile)).to.deep.equal(analizyedContentFile);
+    });
+  });
 });

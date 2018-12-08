@@ -41,6 +41,8 @@ describe('#Reporter', () => {
     });
 
     it('should read features files from folder', () => {
+      reporter.createGherkinsReport();
+
       expect(reporter['reader']).to.respondTo('readFeatureFilesFromFolder');
     });
   });

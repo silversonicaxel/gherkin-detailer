@@ -27,7 +27,7 @@ export class Reporter {
     const rowsFiles: any = [];
 
     readFiles
-      .map(async (readFile: string) => {
+      .map(async(readFile: string) => {
         const contentFile = await this.reader.readContentFeatureFile(readFile);
         const rowsFile = this.reader.getRowsFeatureFile(contentFile);
 

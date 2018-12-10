@@ -33,12 +33,12 @@
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
-    "sinon": "^7.1.1",
+    "sinon": "^7.2.0",
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.9",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "^3.2.1"
+    "typescript": "^3.2.2"
   },
   "nyc": {
     "include": [

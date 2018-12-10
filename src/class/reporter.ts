@@ -18,7 +18,7 @@ export class Reporter {
     this.reader.readFeatureFilesFromFolder(this.folderToReport, this.reportFeaturesFiles);
   }
 
-  private reportFeaturesFiles(readError: Error, readFiles: string[]): void {
+  private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
     if (readError) {
       console.error(readError);
       return;
@@ -26,15 +26,17 @@ export class Reporter {
 
     const rowsFiles: any = [];
 
-    readFiles
-      .map(async(readFile: string) => {
-        const contentFile = await this.reader.readContentFeatureFile(readFile);
-        const rowsFile = this.reader.getRowsFeatureFile(contentFile);
+    await Promise.all(
+      readFiles
+        .map(async(readFile: string) => {
+          const contentFile = await this.reader.readContentFeatureFile(readFile);
+          const rowsFile = this.reader.getRowsFeatureFile(contentFile);
 
-        rowsFiles[readFile] = this.analyzer.getGherkins(rowsFile);
-        console.log(rowsFiles);
-      });
+          rowsFiles[readFile] = this.analyzer.getGherkins(rowsFile);
+        })
+    );
 
+    console.log(rowsFiles);
     return;
   }
 }

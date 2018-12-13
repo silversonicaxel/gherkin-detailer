@@ -92,7 +92,7 @@
   dependencies:
     "@sinonjs/samsam" "^2 || ^3"
 
-"@sinonjs/samsam@^2 || ^3", "@sinonjs/samsam@^3.0.1":
+"@sinonjs/samsam@^2 || ^3", "@sinonjs/samsam@^3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-3.0.2.tgz#304fb33bd5585a0b2df8a4c801fcb47fa84d8e43"
   dependencies:
@@ -112,20 +112,24 @@
   version "0.8.32"
   resolved "https://registry.yarnpkg.com/@types/mustache/-/mustache-0.8.32.tgz#7db3b81f2bf450bd38805f596d20eca97c4ed595"
 
-"@types/node@^10.12.12":
-  version "10.12.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.12.tgz#e15a9d034d9210f00320ef718a50c4a799417c47"
+"@types/node@^10.12.15":
+  version "10.12.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.15.tgz#20e85651b62fd86656e57c9c9bc771ab1570bc59"
 
-"@types/sinon-chai@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@types/sinon-chai/-/sinon-chai-3.2.1.tgz#731e0e277a30d41f0c6a25548d10fe22db501c22"
+"@types/sinon-chai@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@types/sinon-chai/-/sinon-chai-3.2.2.tgz#5cfdbda70bae30f79a9423334af9e490e4cce793"
   dependencies:
     "@types/chai" "*"
     "@types/sinon" "*"
 
-"@types/sinon@*", "@types/sinon@^5.0.7":
+"@types/sinon@*":
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-5.0.7.tgz#0d9f89dd0c9988c4f1505a92a3a324ee7bdb18a6"
+
+"@types/sinon@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-7.0.0.tgz#84e707e157ec17d3e4c2a137f41fc3f416c0551e"
 
 abbrev@1:
   version "1.1.1"
@@ -1127,13 +1131,13 @@ sinon-chai@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-3.3.0.tgz#8084ff99451064910fbe2c2cb8ab540c00b740ea"
 
-sinon@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/sinon/-/sinon-7.2.0.tgz#929472d3a85cb7e9ad7eec42b41e17bfa40fb165"
+sinon@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-7.2.2.tgz#388ecabd42fa93c592bfc71d35a70894d5a0ca07"
   dependencies:
     "@sinonjs/commons" "^1.2.0"
     "@sinonjs/formatio" "^3.1.0"
-    "@sinonjs/samsam" "^3.0.1"
+    "@sinonjs/samsam" "^3.0.2"
     diff "^3.5.0"
     lolex "^3.0.0"
     nise "^1.4.7"

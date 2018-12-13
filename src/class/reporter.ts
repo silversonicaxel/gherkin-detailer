@@ -1,10 +1,15 @@
 import { Reader } from './reader';
 import { Analyzer } from './analyzer';
+import * as Mustache from 'mustache';
+import * as fs from 'fs';
+import * as del from 'del';
 
 export class Reporter {
   private reader: Reader;
   private analyzer: Analyzer;
-  private folderToReport = './';
+  private folderToReadReport = './';
+  private folderToWriteReport = './report/gherkin-detailer/';
+  private folderToReadTemplates = './templates/';
 
   constructor() {
     this.reader = new Reader();
@@ -13,9 +18,10 @@ export class Reporter {
   }
 
   createGherkinsReport(folderToDetail?: string): void {
-    this.folderToReport = folderToDetail || this.folderToReport;
+    this.folderToReadReport = folderToDetail || this.folderToReadReport;
 
-    this.reader.readFeatureFilesFromFolder(this.folderToReport, this.reportFeaturesFiles);
+    this.setupReportFolder();
+    this.reader.readFeatureFilesFromFolder(this.folderToReadReport, this.reportFeaturesFiles);
   }
 
   private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
@@ -31,12 +37,29 @@ export class Reporter {
         .map(async(readFile: string) => {
           const contentFile = await this.reader.readContentFeatureFile(readFile);
           const rowsFile = this.reader.getRowsFeatureFile(contentFile);
-
-          rowsFiles[readFile] = this.analyzer.getGherkins(rowsFile);
+          const gherkinsFile = this.analyzer.getGherkins(rowsFile);
+          const dataFile = { ...gherkinsFile, file: readFile.replace(process.cwd(), '.') };
+          rowsFiles.push(dataFile);
         })
     );
 
-    console.log(rowsFiles);
+    const templateFilesList = await this.reader.readContentFeatureFile(`${this.folderToReadTemplates}files.mustache`);
+    const reportFilesList = Mustache.render(templateFilesList, {list: rowsFiles});
+
+    fs.writeFile(`${this.folderToWriteReport}index.html`, reportFilesList, writeError => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+    });
     return;
+  }
+
+  private setupReportFolder(): void {
+    if (fs.existsSync(this.folderToWriteReport)) {
+      del.sync(this.folderToWriteReport);
+    }
+    fs.mkdirSync(this.folderToWriteReport, { recursive: true });
+    fs.copyFileSync(`${this.folderToReadTemplates}style.css`, `${this.folderToWriteReport}style.css`);
   }
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Gherkins Detailer - Files List</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Gherkins Detailer - Files List</h1>
+      {{#list}}
+        <h2>{{file}}</h2>
+        {{#gherkins}}
+          {{.}}<br/>
+        {{/gherkins}}
+        <br/>
+      {{/list}}
+    </main>
+  </body>
+</html>

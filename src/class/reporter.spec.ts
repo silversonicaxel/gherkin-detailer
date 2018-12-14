@@ -30,14 +30,14 @@ describe('#Reporter', () => {
     it('should initialize the report folder with default one', () => {
       reporter.createGherkinsReport();
 
-      expect(reporter['folderToReport']).to.equal('./');
+      expect(reporter['folderToReadReport']).to.equal('./');
     });
 
     it('should initialize the report folder with provided one', () => {
       const reportFolder = './fixtures';
       reporter.createGherkinsReport(reportFolder);
 
-      expect(reporter['folderToReport']).to.equal(reportFolder);
+      expect(reporter['folderToReadReport']).to.equal(reportFolder);
     });
 
     it('should read features files from folder', () => {

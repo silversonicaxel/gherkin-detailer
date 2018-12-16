@@ -14,5 +14,8 @@ report
 coverage
 .nyc_output
 
-#exceptions
+# exceptions
 !fixtures/features/dist
+
+# private
+.coveralls.yml

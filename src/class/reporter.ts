@@ -59,6 +59,7 @@ export class Reporter {
     if (fs.existsSync(this.folderToWriteReport)) {
       del.sync(this.folderToWriteReport);
     }
+
     fs.mkdirSync(this.folderToWriteReport, { recursive: true });
     fs.copyFileSync(`${this.folderToReadTemplates}style.css`, `${this.folderToWriteReport}style.css`);
   }

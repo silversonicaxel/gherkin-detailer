@@ -6,11 +6,48 @@ html, body {
 }
 
 body {
-  background-color: #000;
-  color: #fff;
+  color: #2a2a4a;
   font-size: 14px;
+  margin: 20px 10px;
+}
+
+header {
+
+}
+
+main {
+
+}
+
+footer {
+  color: #ccc;
+  font-size: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+footer a {
+  color: #ccc;
 }
 
 h1 {
   font-size: 24px;
 }
+
+table {
+  border: 1px solid #b6b6b6;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 10px;
+  width: 100%;
+}
+table tr th {
+  background-color: #a2caf7;
+  border: 1px solid #b6b6b6;
+  padding: 5px;
+  text-align: left;
+}
+table tr td {
+  border: 1px solid #b6b6b6;
+  padding: 5px;
+}
+

@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <title>Gherkins Detailer - Files List</title>
+    <title>Gherkins Detailer - Features List</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-      <h1>Gherkins Detailer - Files List</h1>
+      <h1>Gherkins Detailer - Features List</h1>
     </header>
     <main>
       {{#list}}
@@ -19,11 +19,11 @@
           </tr>
         </thead>
         <tbody>
-          {{#gherkins}}
+          {{#features}}
           <tr>
             <td>{{.}}</td>
           </tr>
-          {{/gherkins}}
+          {{/features}}
         </tbody>
       </table>
       {{/list}}

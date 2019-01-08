@@ -45,13 +45,22 @@ export class Reporter {
 
     const templateFilesList = await this.reader.readContentFeatureFile(`${this.folderToReadTemplates}files.mustache`);
     const reportFilesList = Mustache.render(templateFilesList, {list: rowsFiles});
-
-    fs.writeFile(`${this.folderToWriteReport}index.html`, reportFilesList, writeError => {
+    fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
         return;
       }
     });
+
+    const templateFeaturesList = await this.reader.readContentFeatureFile(`${this.folderToReadTemplates}features.mustache`);
+    const reportFeaturesList = Mustache.render(templateFeaturesList, {list: rowsFiles});
+    fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+    });
+
     return;
   }
 

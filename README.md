@@ -11,4 +11,4 @@ gherkin-detailer is a tool that generates HTML reports related to the gherkins t
 
 ## Installation
 
-Out on npm.js soon
+Out on npm.js soon.

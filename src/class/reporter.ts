@@ -43,8 +43,20 @@ export class Reporter {
         })
     );
 
-    const templateFilesList = await this.reader.readContentFeatureFile(`${this.folderToReadTemplates}files.mustache`);
-    const reportFilesList = Mustache.render(templateFilesList, {list: rowsFiles});
+    const templatesNames = ['meta', 'footer', 'files', 'features'];
+    const templates: any = {};
+    await Promise.all(
+      templatesNames
+        .map(async(templateName: string) => {
+          const readTemplate = await this.reader.readContentFeatureFile(`${this.folderToReadTemplates}${templateName}.mustache`);
+          templates[templateName] = readTemplate;
+          return{
+            [templateName]: readTemplate
+          };
+        })
+    );
+
+    const reportFilesList = Mustache.render(templates.files, {list: rowsFiles}, {meta: templates.meta, footer: templates.footer});
     fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
@@ -52,8 +64,7 @@ export class Reporter {
       }
     });
 
-    const templateFeaturesList = await this.reader.readContentFeatureFile(`${this.folderToReadTemplates}features.mustache`);
-    const reportFeaturesList = Mustache.render(templateFeaturesList, {list: rowsFiles});
+    const reportFeaturesList = Mustache.render(templates.features , {list: rowsFiles}, {meta: templates.meta, footer: templates.footer});
     fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
       if (writeError) {
         console.error(writeError);

@@ -8,7 +8,9 @@ describe('#Analyzer', () => {
     'Scenario: Scenario Extension Feature',
     'Given an initial state is set',
     'When an extension action is taken',
-    'Then an outcome happens'
+    'Then an outcome happens',
+    '',
+    'This line is not part of the report'
   ];
 
   beforeEach(() => {

@@ -4,6 +4,13 @@ import * as Mustache from 'mustache';
 import * as fs from 'fs';
 import * as del from 'del';
 
+type ReporterTemplatesList = {
+  meta: string;
+  footer: string;
+  files: string;
+  features: string;
+};
+
 export class Reporter {
   private reader: Reader;
   private analyzer: Analyzer;
@@ -24,12 +31,7 @@ export class Reporter {
     this.reader.readFeatureFilesFromFolder(this.folderToReadReport, this.reportFeaturesFiles);
   }
 
-  private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
-    if (readError) {
-      console.error(readError);
-      return;
-    }
-
+  private async readAllGherkins(readFiles: string[]): Promise<any> {
     const rowsFiles: any = [];
 
     await Promise.all(
@@ -42,7 +44,10 @@ export class Reporter {
           rowsFiles.push(dataFile);
         })
     );
+    return rowsFiles;
+  }
 
+  private async readAllTemplates(): Promise<ReporterTemplatesList> {
     const templatesNames = ['meta', 'footer', 'files', 'features'];
     const templates: any = {};
     await Promise.all(
@@ -56,7 +61,19 @@ export class Reporter {
         })
     );
 
-    const reportFilesList = Mustache.render(templates.files, {list: rowsFiles}, {meta: templates.meta, footer: templates.footer});
+    return templates;
+  }
+
+  private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
+    if (readError) {
+      console.error(readError);
+      return;
+    }
+
+    const gherkins = await this.readAllGherkins(readFiles);
+    const templates = await this.readAllTemplates();
+
+    const reportFilesList = Mustache.render(templates.files, {list: gherkins}, {meta: templates.meta, footer: templates.footer});
     fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
@@ -64,7 +81,7 @@ export class Reporter {
       }
     });
 
-    const reportFeaturesList = Mustache.render(templates.features , {list: rowsFiles}, {meta: templates.meta, footer: templates.footer});
+    const reportFeaturesList = Mustache.render(templates.features , {list: gherkins}, {meta: templates.meta, footer: templates.footer});
     fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
       if (writeError) {
         console.error(writeError);

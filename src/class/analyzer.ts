@@ -11,7 +11,7 @@ export class Analyzer {
     const states: string[] = [];
     const actions: string[] = [];
     const outcomes: string[] = [];
-    const gherkins: string[] = [];
+    const files: string[] = [];
     let listRowToAnalyze: RegExpExecArray | null;
 
     for (const listRow of listRows) {
@@ -29,10 +29,10 @@ export class Analyzer {
         continue;
       }
 
-      gherkins.push(listRow);
+      files.push(listRow);
     }
 
-    return {gherkins, features, scenarios, states, actions, outcomes};
+    return {files, features, scenarios, states, actions, outcomes};
   }
 
 }

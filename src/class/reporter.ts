@@ -17,6 +17,8 @@ export class Reporter {
   private folderToReadReport = './';
   private folderToWriteReport = './report/gherkin-detailer/';
   private folderToReadTemplates = './templates/';
+  private gherkins: string[] = [];
+  private templates: ReporterTemplatesList = <ReporterTemplatesList>{};
 
   constructor() {
     this.reader = new Reader();
@@ -31,7 +33,7 @@ export class Reporter {
     this.reader.readFeatureFilesFromFolder(this.folderToReadReport, this.reportFeaturesFiles);
   }
 
-  private async readAllGherkins(readFiles: string[]): Promise<any> {
+  private async readAllGherkins(readFiles: string[]): Promise<string[]> {
     const rowsFiles: any = [];
 
     await Promise.all(
@@ -64,32 +66,37 @@ export class Reporter {
     return templates;
   }
 
-  private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
-    if (readError) {
-      console.error(readError);
-      return;
-    }
-
-    const gherkins = await this.readAllGherkins(readFiles);
-    const templates = await this.readAllTemplates();
-
-    const reportFilesList = Mustache.render(templates.files, {list: gherkins}, {meta: templates.meta, footer: templates.footer});
+  private writeFilesReport(): void {
+    const reportFilesList = Mustache.render(this.templates.files, {list: this.gherkins}, {meta: this.templates.meta, footer: this.templates.footer});
     fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
         return;
       }
     });
+  }
 
-    const reportFeaturesList = Mustache.render(templates.features , {list: gherkins}, {meta: templates.meta, footer: templates.footer});
+  private writeFeaturesReport(): void {
+    const reportFeaturesList = Mustache.render(this.templates.features , {list: this.gherkins}, {meta: this.templates.meta, footer: this.templates.footer});
     fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
       if (writeError) {
         console.error(writeError);
         return;
       }
     });
+  }
 
-    return;
+  private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
+    if (readError) {
+      console.error(readError);
+      return;
+    }
+
+    this.gherkins = await this.readAllGherkins(readFiles);
+    this.templates = await this.readAllTemplates();
+
+    this.writeFilesReport();
+    this.writeFeaturesReport();
   }
 
   private setupReportFolder(): void {

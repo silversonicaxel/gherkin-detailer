@@ -11,6 +11,11 @@ type ReporterTemplatesList = {
   features: string;
 };
 
+type ReporterTemplatePartialsList = {
+  meta: string;
+  footer: string;
+};
+
 export class Reporter {
   private reader: Reader;
   private analyzer: Analyzer;
@@ -19,6 +24,7 @@ export class Reporter {
   private folderToReadTemplates = './templates/';
   private gherkins: string[] = [];
   private templates: ReporterTemplatesList = <ReporterTemplatesList>{};
+  private templatePartials: ReporterTemplatePartialsList = <ReporterTemplatePartialsList>{};
 
   constructor() {
     this.reader = new Reader();
@@ -31,6 +37,15 @@ export class Reporter {
 
     this.setupReportFolder();
     this.reader.readFeatureFilesFromFolder(this.folderToReadReport, this.reportFeaturesFiles);
+  }
+
+  private setupReportFolder(): void {
+    if (fs.existsSync(this.folderToWriteReport)) {
+      del.sync(this.folderToWriteReport);
+    }
+
+    fs.mkdirSync(this.folderToWriteReport, { recursive: true });
+    fs.copyFileSync(`${this.folderToReadTemplates}style.css`, `${this.folderToWriteReport}style.css`);
   }
 
   private async readAllGherkins(readFiles: string[]): Promise<string[]> {
@@ -66,8 +81,17 @@ export class Reporter {
     return templates;
   }
 
+  private prepareReports(): void {
+    this.templatePartials = {
+      meta: this.templates.meta,
+      footer: this.templates.footer
+    };
+  }
+
   private writeFilesReport(): void {
-    const reportFilesList = Mustache.render(this.templates.files, {list: this.gherkins}, {meta: this.templates.meta, footer: this.templates.footer});
+    const filesData = {list: this.gherkins};
+
+    const reportFilesList = Mustache.render(this.templates.files, filesData, this.templatePartials);
     fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
@@ -77,7 +101,9 @@ export class Reporter {
   }
 
   private writeFeaturesReport(): void {
-    const reportFeaturesList = Mustache.render(this.templates.features , {list: this.gherkins}, {meta: this.templates.meta, footer: this.templates.footer});
+    const featuresData = {list: this.gherkins};
+
+    const reportFeaturesList = Mustache.render(this.templates.features, featuresData, this.templatePartials);
     fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
       if (writeError) {
         console.error(writeError);
@@ -95,16 +121,9 @@ export class Reporter {
     this.gherkins = await this.readAllGherkins(readFiles);
     this.templates = await this.readAllTemplates();
 
+    this.prepareReports();
+
     this.writeFilesReport();
     this.writeFeaturesReport();
-  }
-
-  private setupReportFolder(): void {
-    if (fs.existsSync(this.folderToWriteReport)) {
-      del.sync(this.folderToWriteReport);
-    }
-
-    fs.mkdirSync(this.folderToWriteReport, { recursive: true });
-    fs.copyFileSync(`${this.folderToReadTemplates}style.css`, `${this.folderToWriteReport}style.css`);
   }
 }

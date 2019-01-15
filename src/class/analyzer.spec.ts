@@ -18,7 +18,7 @@ describe('#Analyzer', () => {
   describe('#getGherkins', () => {
     it('should initialize the report folder with default one', () => {
       const expectedGherkins = {
-        gherkins: [
+        files: [
           'Feature: Extension Feature',
           'Scenario: Scenario Extension Feature',
           'Given an initial state is set',

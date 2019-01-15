@@ -13,6 +13,8 @@ type ReporterTemplatesList = {
 
 type ReporterTemplateViewList = {
   list: string[];
+  date: string;
+  time: string;
 };
 
 type ReporterTemplatePartialsList = {
@@ -87,8 +89,24 @@ export class Reporter {
   }
 
   private prepareReports(): void {
+    const currentDate = new Date();
+    let hours = currentDate.getHours().toString();
+    if (parseInt(hours, 10) < 10) {
+      hours = `0${hours}`;
+    }
+    let minutes = currentDate.getMinutes().toString();
+    if (parseInt(minutes, 10) < 10) {
+      minutes = `0${minutes}`;
+    }
+    let seconds = currentDate.getSeconds().toString();
+    if (parseInt(seconds, 10) < 10) {
+      seconds = `0${seconds}`;
+    }
+
     this.templatesView = {
-      list: this.gherkins
+      list: this.gherkins,
+      date: `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`,
+      time: `${hours}:${minutes}:${seconds}`
     };
 
     this.templatePartials = {

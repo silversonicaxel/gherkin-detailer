@@ -11,6 +11,10 @@ type ReporterTemplatesList = {
   features: string;
 };
 
+type ReporterTemplateViewList = {
+  list: string[];
+};
+
 type ReporterTemplatePartialsList = {
   meta: string;
   footer: string;
@@ -24,6 +28,7 @@ export class Reporter {
   private folderToReadTemplates = './templates/';
   private gherkins: string[] = [];
   private templates: ReporterTemplatesList = <ReporterTemplatesList>{};
+  private templatesView: ReporterTemplateViewList = <ReporterTemplateViewList>{};
   private templatePartials: ReporterTemplatePartialsList = <ReporterTemplatePartialsList>{};
 
   constructor() {
@@ -82,6 +87,10 @@ export class Reporter {
   }
 
   private prepareReports(): void {
+    this.templatesView = {
+      list: this.gherkins
+    };
+
     this.templatePartials = {
       meta: this.templates.meta,
       footer: this.templates.footer
@@ -89,9 +98,7 @@ export class Reporter {
   }
 
   private writeFilesReport(): void {
-    const filesData = {list: this.gherkins};
-
-    const reportFilesList = Mustache.render(this.templates.files, filesData, this.templatePartials);
+    const reportFilesList = Mustache.render(this.templates.files, this.templatesView, this.templatePartials);
     fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
@@ -101,9 +108,7 @@ export class Reporter {
   }
 
   private writeFeaturesReport(): void {
-    const featuresData = {list: this.gherkins};
-
-    const reportFeaturesList = Mustache.render(this.templates.features, featuresData, this.templatePartials);
+    const reportFeaturesList = Mustache.render(this.templates.features, this.templatesView, this.templatePartials);
     fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
       if (writeError) {
         console.error(writeError);

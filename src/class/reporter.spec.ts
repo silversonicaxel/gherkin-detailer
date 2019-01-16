@@ -1,9 +1,11 @@
 import * as chai from 'chai';
-import { spy, assert, sandbox, createSandbox } from 'sinon';
+import { spy, assert, createSandbox } from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import { Reporter } from './reporter';
 import { Analyzer } from './analyzer';
 import { Reader } from './reader';
+import * as fs from 'fs';
+import * as del from 'del';
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -44,6 +46,38 @@ describe('#Reporter', () => {
       reporter.createGherkinsReport();
 
       expect(reporter['reader']).to.respondTo('readFeatureFilesFromFolder');
+    });
+  });
+
+  describe('#setupReportFolder', () => {
+    it('should delete an old report folder if it exists', () => {
+      const existsSyncReturn = true;
+      const fsExistsSyncStub = sandboxSet.stub(fs, 'existsSync').returns(existsSyncReturn);
+      const delSyncStub = sandboxSet.stub(del, 'sync').returns(existsSyncReturn);
+      const fsMkdirSyncStub = sandboxSet.stub(fs, 'mkdirSync').returns(existsSyncReturn);
+      const fsCopyFileSyncStub = sandboxSet.stub(fs, 'copyFileSync').returns(existsSyncReturn);
+
+      reporter['setupReportFolder']();
+
+      assert.called(fsExistsSyncStub);
+      assert.called(delSyncStub);
+      assert.called(fsMkdirSyncStub);
+      assert.called(fsCopyFileSyncStub);
+    });
+
+    it('should delete any report folder if it does not exists', () => {
+      const existsSyncReturn = false;
+      const fsExistsSyncStub = sandboxSet.stub(fs, 'existsSync').returns(existsSyncReturn);
+      const delSyncStub = sandboxSet.stub(del, 'sync').returns(existsSyncReturn);
+      const fsMkdirSyncStub = sandboxSet.stub(fs, 'mkdirSync').returns(existsSyncReturn);
+      const fsCopyFileSyncStub = sandboxSet.stub(fs, 'copyFileSync').returns(existsSyncReturn);
+
+      reporter['setupReportFolder']();
+
+      assert.called(fsExistsSyncStub);
+      assert.notCalled(delSyncStub);
+      assert.called(fsMkdirSyncStub);
+      assert.called(fsCopyFileSyncStub);
     });
   });
 

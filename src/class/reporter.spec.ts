@@ -56,13 +56,19 @@ describe('#Reporter', () => {
       const delSyncStub = sandboxSet.stub(del, 'sync').returns(existsSyncReturn);
       const fsMkdirSyncStub = sandboxSet.stub(fs, 'mkdirSync').returns(existsSyncReturn);
       const fsCopyFileSyncStub = sandboxSet.stub(fs, 'copyFileSync').returns(existsSyncReturn);
+      const templatesFolder = `${reporter['folderToReadTemplates']}style.css`;
+      const reportFolder = `${reporter['folderToWriteReport']}style.css`;
 
       reporter['setupReportFolder']();
 
-      assert.called(fsExistsSyncStub);
-      assert.called(delSyncStub);
-      assert.called(fsMkdirSyncStub);
+      assert.calledOnce(fsExistsSyncStub);
+      assert.calledWith(fsExistsSyncStub, reporter['folderToWriteReport']);
+      assert.calledOnce(delSyncStub);
+      assert.calledWith(delSyncStub, reporter['folderToWriteReport']);
+      assert.calledOnce(fsMkdirSyncStub);
+      assert.calledWith(fsMkdirSyncStub, reporter['folderToWriteReport'], { recursive: true });
       assert.called(fsCopyFileSyncStub);
+      assert.calledWith(fsCopyFileSyncStub, templatesFolder, reportFolder);
     });
 
     it('should delete any report folder if it does not exists', () => {

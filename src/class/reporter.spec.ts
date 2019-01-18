@@ -67,7 +67,7 @@ describe('#Reporter', () => {
       assert.calledWith(delSyncStub, reporter['folderToWriteReport']);
       assert.calledOnce(fsMkdirSyncStub);
       assert.calledWith(fsMkdirSyncStub, reporter['folderToWriteReport'], { recursive: true });
-      assert.called(fsCopyFileSyncStub);
+      assert.calledOnce(fsCopyFileSyncStub);
       assert.calledWith(fsCopyFileSyncStub, templatesFolder, reportFolder);
     });
 

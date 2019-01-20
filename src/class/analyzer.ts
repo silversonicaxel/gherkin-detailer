@@ -34,5 +34,4 @@ export class Analyzer {
 
     return {files, features, scenarios, states, actions, outcomes};
   }
-
 }

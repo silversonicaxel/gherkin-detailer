@@ -87,6 +87,71 @@ describe('#Reporter', () => {
     });
   });
 
+  describe('#readAllGherkins', () => {
+    it('should not read the provided empty folders', () => {
+      const readContentFeatureFileSpy  = spy(reader, 'readContentFeatureFile');
+      const getRowsFeatureFileSpy = spy(reader, 'getRowsFeatureFile');
+      const getGherkinsSpy = spy(analyzer, 'getGherkins');
+
+      reporter['readAllGherkins']([]);
+
+      expect(reader).to.respondTo('readContentFeatureFile');
+      expect(reader).to.respondTo('getRowsFeatureFile');
+      expect(analyzer).to.respondTo('getGherkins');
+      assert.notCalled(readContentFeatureFileSpy);
+      assert.notCalled(getRowsFeatureFileSpy);
+      assert.notCalled(getGherkinsSpy);
+    });
+
+    it('should read provided folders', async () => {
+      const readContentFeatureFileData = 'Content File';
+      const readContentFeatureFileStub = sandboxSet.stub(reader, 'readContentFeatureFile').returns(readContentFeatureFileData);
+      const getRowsFeatureFileData = 'Rows File';
+      const getRowsFeatureFileStub = sandboxSet.stub(reader, 'getRowsFeatureFile').returns(getRowsFeatureFileData);
+      const getGherkinsData = 'Gherkins';
+      const getGherkinsStub = sandboxSet.stub(analyzer, 'getGherkins').returns(getGherkinsData);
+
+      const fileList = ['./fixtures/features/base.feature'];
+      reporter['readAllGherkins'](fileList);
+
+      await reader.readContentFeatureFile(fileList[0]);
+      await reader.getRowsFeatureFile(readContentFeatureFileData);
+      await analyzer.getGherkins([getRowsFeatureFileData]);
+
+      expect(analyzer).to.respondTo('getGherkins');
+      assert.calledOnce(readContentFeatureFileStub);
+      assert.calledWith(readContentFeatureFileStub, fileList[0]);
+      assert.calledOnce(getRowsFeatureFileStub);
+      assert.calledWith(getRowsFeatureFileStub, readContentFeatureFileData);
+      assert.calledOnce(getGherkinsStub);
+      assert.calledWith(getGherkinsStub, [getRowsFeatureFileData]);
+    });
+  });
+
+  describe('#readAllTemplates', () => {
+    it('should not read the provided empty folders', () => {
+      const readContentFeatureFileSpy  = spy(reader, 'readContentFeatureFile');
+
+      reporter['readAllTemplates']();
+
+      expect(reader).to.respondTo('readContentFeatureFile');
+      assert.notCalled(readContentFeatureFileSpy);
+    });
+
+    it('should read provided folders', async () => {
+      const readContentFeatureFileData = 'Content File';
+      const readContentFeatureFileStub = sandboxSet.stub(reader, 'readContentFeatureFile').returns(readContentFeatureFileData);
+
+      const fileList = ['./fixtures/features/base.feature'];
+      reporter['readAllTemplates']();
+
+      await reader.readContentFeatureFile(fileList[0]);
+
+      assert.calledOnce(readContentFeatureFileStub);
+      assert.calledWith(readContentFeatureFileStub, fileList[0]);
+    });
+  });
+
   describe('#prepareReports', () => {
     it('set all full digits date and time in templates view', () => {
       const now = new Date(2019, 9, 20, 13, 22, 30, 0);
@@ -135,47 +200,6 @@ describe('#Reporter', () => {
 
       expect(reporter['templatePartials'].meta).to.equal(expectedMeta);
       expect(reporter['templatePartials'].footer).to.equal(expectedFooter);
-    });
-  });
-
-  describe('#readAllGherkins', () => {
-    it('should not read the provided empty folders', () => {
-      const readContentFeatureFileSpy  = spy(reader, 'readContentFeatureFile');
-      const getRowsFeatureFileSpy = spy(reader, 'getRowsFeatureFile');
-      const getGherkinsSpy = spy(analyzer, 'getGherkins');
-
-      reporter['readAllGherkins']([]);
-
-      expect(reader).to.respondTo('readContentFeatureFile');
-      expect(reader).to.respondTo('getRowsFeatureFile');
-      expect(analyzer).to.respondTo('getGherkins');
-      assert.notCalled(readContentFeatureFileSpy);
-      assert.notCalled(getRowsFeatureFileSpy);
-      assert.notCalled(getGherkinsSpy);
-    });
-
-    it('should read provided folders', async () => {
-      const readContentFeatureFileData = 'Content File';
-      const readContentFeatureFileStub = sandboxSet.stub(reader, 'readContentFeatureFile').returns(readContentFeatureFileData);
-      const getRowsFeatureFileData = 'Rows File';
-      const getRowsFeatureFileStub = sandboxSet.stub(reader, 'getRowsFeatureFile').returns(getRowsFeatureFileData);
-      const getGherkinsData = 'Gherkins';
-      const getGherkinsStub = sandboxSet.stub(analyzer, 'getGherkins').returns(getGherkinsData);
-
-      const fileList = ['./fixtures/features/base.feature'];
-      reporter['readAllGherkins']([]);
-
-      await reader.readContentFeatureFile(fileList[0]);
-      await reader.getRowsFeatureFile(readContentFeatureFileData);
-      await analyzer.getGherkins([getRowsFeatureFileData]);
-
-      expect(analyzer).to.respondTo('getGherkins');
-      assert.calledOnce(readContentFeatureFileStub);
-      assert.calledWith(readContentFeatureFileStub, fileList[0]);
-      assert.calledOnce(getRowsFeatureFileStub);
-      assert.calledWith(getRowsFeatureFileStub, readContentFeatureFileData);
-      assert.calledOnce(getGherkinsStub);
-      assert.calledWith(getGherkinsStub, [getRowsFeatureFileData]);
     });
   });
 });

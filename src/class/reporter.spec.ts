@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import { spy, assert, createSandbox } from 'sinon';
+import { spy, assert, createSandbox, useFakeTimers } from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import { Reporter } from './reporter';
 import { Analyzer } from './analyzer';
@@ -84,6 +84,57 @@ describe('#Reporter', () => {
       assert.notCalled(delSyncStub);
       assert.called(fsMkdirSyncStub);
       assert.called(fsCopyFileSyncStub);
+    });
+  });
+
+  describe('#prepareReports', () => {
+    it('set all full digits date and time in templates view', () => {
+      const now = new Date(2019, 9, 20, 13, 22, 30, 0);
+      const clock = useFakeTimers(now.getTime());
+
+      reporter['prepareReports']();
+
+      expect(reporter['templatesView'].date).to.equal('2019/10/20');
+      expect(reporter['templatesView'].time).to.equal('13:22:30');
+
+      clock.restore();
+    });
+
+    it('set not full digits date and time in templates view', () => {
+      const now = new Date(2019, 0, 5, 2, 3, 4, 0);
+      const clock = useFakeTimers(now.getTime());
+
+      reporter['prepareReports']();
+
+      expect(reporter['templatesView'].date).to.equal('2019/01/05');
+      expect(reporter['templatesView'].time).to.equal('02:03:04');
+
+      clock.restore();
+    });
+
+    it('set list of gherkins in templates view', () => {
+      const expectedGherkins = ['a', 'b'];
+      reporter['gherkins'] = expectedGherkins;
+
+      reporter['prepareReports']();
+
+      expect(reporter['templatesView'].list).to.equal(expectedGherkins);
+    });
+
+    it('set data in templates partials', () => {
+      const expectedMeta = '<meta />';
+      const expectedFooter = '<footer>footer</footer>';
+      reporter['templates'] = {
+        meta: expectedMeta,
+        footer: expectedFooter,
+        files: '',
+        features: '',
+      };
+
+      reporter['prepareReports']();
+
+      expect(reporter['templatePartials'].meta).to.equal(expectedMeta);
+      expect(reporter['templatePartials'].footer).to.equal(expectedFooter);
     });
   });
 

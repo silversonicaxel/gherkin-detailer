@@ -202,4 +202,25 @@ describe('#Reporter', () => {
       expect(reporter['templatePartials'].footer).to.equal(expectedFooter);
     });
   });
+
+  describe('#reportFeaturesFiles', () => {
+    it('should create report frome features file', () => {
+      const reporterReadAllGherkinsStub = sandboxSet.stub(reporter, 'readAllGherkins');
+
+      const emptyError = <unknown>null;
+      reporter['reportFeaturesFiles'](<Error>emptyError, []);
+
+      assert.calledOnce(reporterReadAllGherkinsStub);
+      assert.calledWith(reporterReadAllGherkinsStub, []);
+    });
+
+    it('should do nothing due to an error', () => {
+      const reporterReadAllGherkinsStub = sandboxSet.stub(reporter, 'readAllGherkins');
+      const readError = <unknown>'random error';
+
+      reporter['reportFeaturesFiles'](<Error>readError, []);
+
+      assert.notCalled(reporterReadAllGherkinsStub);
+    });
+  });
 });

@@ -60,7 +60,8 @@
       ".ts"
     ],
     "require": [
-      "ts-node/register"
+      "ts-node/register",
+      "source-map-support/register"
     ],
     "reporter": [
       "html",

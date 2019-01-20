@@ -63,8 +63,7 @@
       "ts-node/register"
     ],
     "reporter": [
-      "text-summary",
-      "html"
+      "text-lcov"
     ],
     "check-coverage": true,
     "all": true,

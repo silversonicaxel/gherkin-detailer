@@ -6,6 +6,7 @@ import { Analyzer } from './analyzer';
 import { Reader } from './reader';
 import * as fs from 'fs';
 import * as del from 'del';
+import * as Mustache from 'mustache';
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -18,6 +19,12 @@ describe('#Reporter', () => {
 
   beforeEach(() => {
     reporter = new Reporter();
+    reporter['templates'] = {
+      meta: 'meta',
+      footer: 'footer',
+      files: 'files',
+      features: 'features'
+    };
     analyzer = new Analyzer();
     reader = new Reader();
 
@@ -202,6 +209,63 @@ describe('#Reporter', () => {
       expect(reporter['templatePartials'].footer).to.equal(expectedFooter);
     });
   });
+
+  describe('#writeFilesReport', () => {
+    it('should call the rendering functionality', () => {
+      const filesReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(filesReportTemplate);
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
+      const writeFileDestination = `${reporter['folderToWriteReport']}files.html`;
+
+      reporter['writeFilesReport']();
+
+      assert.calledOnce(mustacheRenderStub);
+      assert.calledWith(mustacheRenderStub, reporter['templates'].files, reporter['templatesView'], reporter['templatePartials']);
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, filesReportTemplate);
+    });
+
+    it('should return an error', () => {
+      const writeError = 'No file written';
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
+      const consoleStub = sandboxSet.stub(console, 'error');
+
+      reporter['writeFilesReport']();
+
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub);
+      expect(consoleStub).to.have.been.calledWith(writeError);
+    });
+  });
+
+  describe('#writeFeaturesReport', () => {
+    it('should call the rendering functionality', () => {
+      const filesReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(filesReportTemplate);
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
+      const writeFileDestination = `${reporter['folderToWriteReport']}features.html`;
+
+      reporter['writeFeaturesReport']();
+
+      assert.calledOnce(mustacheRenderStub);
+      assert.calledWith(mustacheRenderStub, reporter['templates'].features, reporter['templatesView'], reporter['templatePartials']);
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, filesReportTemplate);
+    });
+
+    it('should return an error', () => {
+      const writeError = 'No file written';
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
+      const consoleStub = sandboxSet.stub(console, 'error');
+
+      reporter['writeFeaturesReport']();
+
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub);
+      expect(consoleStub).to.have.been.calledWith(writeError);
+    });
+  });
+
 
   describe('#reportFeaturesFiles', () => {
     it('should create report frome features file', () => {

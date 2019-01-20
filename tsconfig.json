@@ -7,7 +7,7 @@
       "strict": true,
       "noImplicitAny": true,
       "moduleResolution": "node",
-      "inlineSourceMap": false
+      "inlineSourceMap": true
   },
   "exclude": [
       "node_modules",

@@ -68,7 +68,7 @@
     ],
     "check-coverage": true,
     "all": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "cache": true,
     "instrument": true,
     "lines": 95,

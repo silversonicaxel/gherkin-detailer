@@ -8,6 +8,7 @@ import * as moment from 'moment';
 type ReporterTemplatesList = {
   meta: string;
   footer: string;
+  menu: string;
   files: string;
   features: string;
 };
@@ -21,6 +22,7 @@ type ReporterTemplateViewList = {
 type ReporterTemplatePartialsList = {
   meta: string;
   footer: string;
+  menu: string;
 };
 
 export class Reporter {
@@ -73,7 +75,7 @@ export class Reporter {
   }
 
   private async readAllTemplates(): Promise<ReporterTemplatesList> {
-    const templatesNames = ['meta', 'footer', 'files', 'features'];
+    const templatesNames = ['meta', 'menu', 'footer', 'files', 'features'];
     const templates: any = {};
     await Promise.all(
       templatesNames
@@ -98,7 +100,8 @@ export class Reporter {
 
     this.templatePartials = {
       meta: this.templates.meta,
-      footer: this.templates.footer
+      footer: this.templates.footer,
+      menu:  this.templates.menu
     };
   }
 

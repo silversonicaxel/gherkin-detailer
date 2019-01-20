@@ -22,6 +22,7 @@ describe('#Reporter', () => {
     reporter['templates'] = {
       meta: 'meta',
       footer: 'footer',
+      menu: 'menu',
       files: 'files',
       features: 'features'
     };
@@ -198,6 +199,7 @@ describe('#Reporter', () => {
       const expectedFooter = '<footer>footer</footer>';
       reporter['templates'] = {
         meta: expectedMeta,
+        menu: 'menu',
         footer: expectedFooter,
         files: '',
         features: '',

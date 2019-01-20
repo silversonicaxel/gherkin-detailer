@@ -6,35 +6,47 @@ html, body {
 }
 
 body {
-  color: #2a2b4c;
+  color: #1060bc;
   font-size: 14px;
   margin: 20px 10px;
 }
 
-header {
-
+nav {
+  height: 30px;
+  margin-bottom: 15px;
+  width: 100%;
 }
-
-main {
-
+nav ul {
+  line-height: 30px;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+nav ul li {
+  float: left;
+  padding-right: 25px;
+}
+nav ul li a {
+  color: #1060bc;
 }
 
 footer {
-  color: #ccc;
+  color: #d0e4fb;
   font-size: 12px;
   margin-bottom: 20px;
   text-align: center;
 }
 footer a {
-  color: #ccc;
+  color: #d0e4fb;
 }
 
 h1 {
   font-size: 24px;
+  color: #1060bc;
 }
 
 table {
-  border: 1px solid #b6b6b6;
+  border: 1px solid #d0e4fb;
   border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 10px;
@@ -42,12 +54,14 @@ table {
 }
 table tr th {
   background-color: #a2caf7;
-  border: 1px solid #b6b6b6;
+  border: 1px solid #d0e4fb;
+  color: #04182f;
   padding: 5px;
   text-align: left;
 }
 table tr td {
-  border: 1px solid #b6b6b6;
+  border: 1px solid #d0e4fb;
+  color: #04182f;
   padding: 5px;
 }
 

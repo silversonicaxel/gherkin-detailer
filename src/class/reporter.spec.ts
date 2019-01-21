@@ -201,10 +201,11 @@ describe('#Reporter', () => {
 
     it('set data in templates partials', () => {
       const expectedMeta = '<meta />';
+      const expectedMenu = '<nav>menu<nav>';
       const expectedFooter = '<footer>footer</footer>';
       reporter['templates'] = {
         meta: expectedMeta,
-        menu: 'menu',
+        menu: expectedMenu,
         footer: expectedFooter,
         files: '',
         features: '',
@@ -214,6 +215,7 @@ describe('#Reporter', () => {
       reporter['prepareReports']();
 
       expect(reporter['templatePartials'].meta).to.equal(expectedMeta);
+      expect(reporter['templatePartials'].menu).to.equal(expectedMenu);
       expect(reporter['templatePartials'].footer).to.equal(expectedFooter);
     });
   });

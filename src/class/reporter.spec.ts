@@ -24,7 +24,8 @@ describe('#Reporter', () => {
       footer: 'footer',
       menu: 'menu',
       files: 'files',
-      features: 'features'
+      features: 'features',
+      scenarios: 'scenarios'
     };
     analyzer = new Analyzer();
     reader = new Reader();
@@ -203,6 +204,7 @@ describe('#Reporter', () => {
         footer: expectedFooter,
         files: '',
         features: '',
+        scenarios: ''
       };
 
       reporter['prepareReports']();
@@ -268,16 +270,67 @@ describe('#Reporter', () => {
     });
   });
 
+  describe('#writeScenariosReport', () => {
+    it('should call the rendering functionality', () => {
+      const filesReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(filesReportTemplate);
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
+      const writeFileDestination = `${reporter['folderToWriteReport']}scenarios.html`;
+
+      reporter['writeScenariosReport']();
+
+      assert.calledOnce(mustacheRenderStub);
+      assert.calledWith(mustacheRenderStub, reporter['templates'].scenarios, reporter['templatesView'], reporter['templatePartials']);
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, filesReportTemplate);
+    });
+
+    it('should return an error', () => {
+      const writeError = 'No file written';
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
+      const consoleStub = sandboxSet.stub(console, 'error');
+
+      reporter['writeScenariosReport']();
+
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub);
+      expect(consoleStub).to.have.been.calledWith(writeError);
+    });
+  });
 
   describe('#reportFeaturesFiles', () => {
-    it('should create report frome features file', () => {
+    it('should create report frome features file', async () => {
       const reporterReadAllGherkinsStub = sandboxSet.stub(reporter, 'readAllGherkins');
+      const readAllTemplatesStub = sandboxSet.stub(reporter, 'readAllTemplates');
+      const prepareReportsStub = sandboxSet.stub(reporter, 'prepareReports');
+      const writeFilesReportStub = sandboxSet.stub(reporter, 'writeFilesReport');
+      const writeFeaturesReportStub = sandboxSet.stub(reporter, 'writeFeaturesReport');
+      const writeScenariosReportStub = sandboxSet.stub(reporter, 'writeScenariosReport');
 
       const emptyError = <unknown>null;
-      reporter['reportFeaturesFiles'](<Error>emptyError, []);
+      const readFiles = [
+        'Feature: Extension Feature',
+        'Scenario: Scenario Extension Feature',
+        'Given an initial state is set',
+        'When an extension action is taken',
+        'Then an outcome happens'
+      ];
+
+      await reporter['reportFeaturesFiles'](<Error>emptyError, readFiles);
 
       assert.calledOnce(reporterReadAllGherkinsStub);
-      assert.calledWith(reporterReadAllGherkinsStub, []);
+      assert.calledWith(reporterReadAllGherkinsStub, readFiles);
+      assert.calledOnce(readAllTemplatesStub);
+      assert.calledWith(readAllTemplatesStub);
+
+      assert.calledOnce(prepareReportsStub);
+      assert.calledWith(prepareReportsStub);
+      assert.calledOnce(writeFilesReportStub);
+      assert.calledWith(writeFilesReportStub);
+      assert.calledOnce(writeFeaturesReportStub);
+      assert.calledWith(writeFeaturesReportStub);
+      assert.calledOnce(writeScenariosReportStub);
+      assert.calledWith(writeScenariosReportStub);
     });
 
     it('should do nothing due to an error', () => {

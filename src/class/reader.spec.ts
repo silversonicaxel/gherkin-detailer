@@ -51,7 +51,7 @@ describe('#Reader', () => {
     });
   });
 
-  describe('#readContentFeatureFile', async () => {
+  describe('#readContentFeatureFile', () => {
     it('should read file content', async () => {
       const contentFile = await reader.readContentFeatureFile('./fixtures/features/copy-folder/copy.feature');
 

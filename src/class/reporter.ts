@@ -11,6 +11,7 @@ type ReporterTemplatesList = {
   menu: string;
   files: string;
   features: string;
+  scenarios: string;
 };
 
 type ReporterTemplateViewList = {
@@ -75,7 +76,7 @@ export class Reporter {
   }
 
   private async readAllTemplates(): Promise<ReporterTemplatesList> {
-    const templatesNames = ['meta', 'menu', 'footer', 'files', 'features'];
+    const templatesNames = ['meta', 'menu', 'footer', 'files', 'features', 'scenarios'];
     const templates: any = {};
     await Promise.all(
       templatesNames
@@ -125,6 +126,16 @@ export class Reporter {
     });
   }
 
+  private writeScenariosReport(): void {
+    const reportScenariosList = Mustache.render(this.templates.scenarios, this.templatesView, this.templatePartials);
+    fs.writeFile(`${this.folderToWriteReport}scenarios.html`, reportScenariosList, writeError => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+    });
+  }
+
   private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
     if (readError) {
       console.error(readError);
@@ -138,5 +149,6 @@ export class Reporter {
 
     this.writeFilesReport();
     this.writeFeaturesReport();
+    this.writeScenariosReport();
   }
 }

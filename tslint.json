@@ -90,7 +90,10 @@
       "check-decl",
       "check-operator",
       "check-separator",
-      "check-type"
+      "check-type",
+      "check-preblock",
+      "check-postbrace",
+      "check-rest-spread"
     ]
   }
 }

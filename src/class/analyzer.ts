@@ -32,6 +32,6 @@ export class Analyzer {
       files.push(listRow);
     }
 
-    return {files, features, scenarios, states, actions, outcomes};
+    return { files, features, scenarios, states, actions, outcomes };
   }
 }

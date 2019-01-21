@@ -33,9 +33,9 @@ export class Reporter {
   private folderToWriteReport = './report/gherkin-detailer/';
   private folderToReadTemplates = './templates/';
   private gherkins: string[] = [];
-  private templates: ReporterTemplatesList = <ReporterTemplatesList>{};
-  private templatesView: ReporterTemplateViewList = <ReporterTemplateViewList>{};
-  private templatePartials: ReporterTemplatePartialsList = <ReporterTemplatePartialsList>{};
+  private templates: ReporterTemplatesList = <ReporterTemplatesList>{ };
+  private templatesView: ReporterTemplateViewList = <ReporterTemplateViewList>{ };
+  private templatePartials: ReporterTemplatePartialsList = <ReporterTemplatePartialsList>{ };
 
   constructor() {
     this.reader = new Reader();
@@ -77,7 +77,7 @@ export class Reporter {
 
   private async readAllTemplates(): Promise<ReporterTemplatesList> {
     const templatesNames = ['meta', 'menu', 'footer', 'files', 'features', 'scenarios'];
-    const templates: any = {};
+    const templates: any = { };
     await Promise.all(
       templatesNames
         .map(async(templateName: string) => {

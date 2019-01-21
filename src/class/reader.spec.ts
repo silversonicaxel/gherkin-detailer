@@ -20,7 +20,7 @@ describe('#Reader', () => {
 
   describe('#readFeatureFilesFromFolder', () => {
     beforeEach(() => {
-      executeWhenRead = () => {};
+      executeWhenRead = () => { };
     });
 
     it('should read the initial folder', async () => {

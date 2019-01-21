@@ -9,6 +9,7 @@ gherkin-detailer is a tool that check the gherkins included in you project and l
 gherkin-detailer is a tool that generates HTML reports related to the gherkins that are part of the project you are working on. Currently there are two sections available:
 * Files List
 * Features List
+* Scenarios List
 
 
 ## Installation

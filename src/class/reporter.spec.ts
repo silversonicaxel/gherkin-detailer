@@ -52,9 +52,13 @@ describe('#Reporter', () => {
     });
 
     it('should read features files from folder', () => {
+      const readFeatureFilesFromFolderStub = sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
+
       reporter.createGherkinsReport();
 
       expect(reporter['reader']).to.respondTo('readFeatureFilesFromFolder');
+      assert.calledOnce(readFeatureFilesFromFolderStub);
+      assert.calledWith(readFeatureFilesFromFolderStub, reporter['folderToReadReport'], reporter['reportFeaturesFiles']);
     });
   });
 

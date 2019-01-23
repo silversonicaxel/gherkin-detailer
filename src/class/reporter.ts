@@ -12,6 +12,9 @@ type ReporterTemplatesList = {
   files: string;
   features: string;
   scenarios: string;
+  states: string;
+  actions: string;
+  outcomes: string;
 };
 
 type ReporterTemplateViewList = {
@@ -76,7 +79,7 @@ export class Reporter {
   }
 
   private async readAllTemplates(): Promise<ReporterTemplatesList> {
-    const templatesNames = ['meta', 'menu', 'footer', 'files', 'features', 'scenarios'];
+    const templatesNames = ['meta', 'menu', 'footer', 'files', 'features', 'scenarios', 'states', 'actions', 'outcomes'];
     const templates: any = { };
     await Promise.all(
       templatesNames
@@ -136,6 +139,36 @@ export class Reporter {
     });
   }
 
+  private writeStatesReport(): void {
+    const reportStatesList = Mustache.render(this.templates.states, this.templatesView, this.templatePartials);
+    fs.writeFile(`${this.folderToWriteReport}states.html`, reportStatesList, writeError => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+    });
+  }
+
+  private writeActionsReport(): void {
+    const reportActionsList = Mustache.render(this.templates.actions, this.templatesView, this.templatePartials);
+    fs.writeFile(`${this.folderToWriteReport}actions.html`, reportActionsList, writeError => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+    });
+  }
+
+  private writeOutcomesReport(): void {
+    const reportOutcomesList = Mustache.render(this.templates.outcomes  , this.templatesView, this.templatePartials);
+    fs.writeFile(`${this.folderToWriteReport}outcomes.html`, reportOutcomesList, writeError => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+    });
+  }
+
   private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
     if (readError) {
       console.error(readError);
@@ -150,5 +183,8 @@ export class Reporter {
     this.writeFilesReport();
     this.writeFeaturesReport();
     this.writeScenariosReport();
+    this.writeStatesReport();
+    this.writeActionsReport();
+    this.writeOutcomesReport();
   }
 }

@@ -25,7 +25,10 @@ describe('#Reporter', () => {
       menu: 'menu',
       files: 'files',
       features: 'features',
-      scenarios: 'scenarios'
+      scenarios: 'scenarios',
+      states: 'states',
+      actions: 'actions',
+      outcomes: 'outcomes'
     };
     analyzer = new Analyzer();
     reader = new Reader();
@@ -209,7 +212,10 @@ describe('#Reporter', () => {
         footer: expectedFooter,
         files: '',
         features: '',
-        scenarios: ''
+        scenarios: '',
+        states: '',
+        actions: '',
+        outcomes: ''
       };
 
       reporter['prepareReports']();
@@ -250,8 +256,8 @@ describe('#Reporter', () => {
 
   describe('#writeFeaturesReport', () => {
     it('should call the rendering functionality', () => {
-      const filesReportTemplate = '<html></html>';
-      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(filesReportTemplate);
+      const featuresReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(featuresReportTemplate);
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
       const writeFileDestination = `${reporter['folderToWriteReport']}features.html`;
 
@@ -260,7 +266,7 @@ describe('#Reporter', () => {
       assert.calledOnce(mustacheRenderStub);
       assert.calledWith(mustacheRenderStub, reporter['templates'].features, reporter['templatesView'], reporter['templatePartials']);
       assert.calledOnce(fsWriteFileStub);
-      assert.calledWith(fsWriteFileStub, writeFileDestination, filesReportTemplate);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, featuresReportTemplate);
     });
 
     it('should return an error', () => {
@@ -278,8 +284,8 @@ describe('#Reporter', () => {
 
   describe('#writeScenariosReport', () => {
     it('should call the rendering functionality', () => {
-      const filesReportTemplate = '<html></html>';
-      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(filesReportTemplate);
+      const scenariosReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(scenariosReportTemplate);
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
       const writeFileDestination = `${reporter['folderToWriteReport']}scenarios.html`;
 
@@ -288,7 +294,7 @@ describe('#Reporter', () => {
       assert.calledOnce(mustacheRenderStub);
       assert.calledWith(mustacheRenderStub, reporter['templates'].scenarios, reporter['templatesView'], reporter['templatePartials']);
       assert.calledOnce(fsWriteFileStub);
-      assert.calledWith(fsWriteFileStub, writeFileDestination, filesReportTemplate);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, scenariosReportTemplate);
     });
 
     it('should return an error', () => {
@@ -304,6 +310,90 @@ describe('#Reporter', () => {
     });
   });
 
+  describe('#writeStatesReport', () => {
+    it('should call the rendering functionality', () => {
+      const statesReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(statesReportTemplate);
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
+      const writeFileDestination = `${reporter['folderToWriteReport']}states.html`;
+
+      reporter['writeStatesReport']();
+
+      assert.calledOnce(mustacheRenderStub);
+      assert.calledWith(mustacheRenderStub, reporter['templates'].states, reporter['templatesView'], reporter['templatePartials']);
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, statesReportTemplate);
+    });
+
+    it('should return an error', () => {
+      const writeError = 'No file written';
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
+      const consoleStub = sandboxSet.stub(console, 'error');
+
+      reporter['writeStatesReport']();
+
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub);
+      expect(consoleStub).to.have.been.calledWith(writeError);
+    });
+  });
+
+  describe('#writeActionsReport', () => {
+    it('should call the rendering functionality', () => {
+      const actionsReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(actionsReportTemplate);
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
+      const writeFileDestination = `${reporter['folderToWriteReport']}actions.html`;
+
+      reporter['writeActionsReport']();
+
+      assert.calledOnce(mustacheRenderStub);
+      assert.calledWith(mustacheRenderStub, reporter['templates'].actions, reporter['templatesView'], reporter['templatePartials']);
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, actionsReportTemplate);
+    });
+
+    it('should return an error', () => {
+      const writeError = 'No file written';
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
+      const consoleStub = sandboxSet.stub(console, 'error');
+
+      reporter['writeActionsReport']();
+
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub);
+      expect(consoleStub).to.have.been.calledWith(writeError);
+    });
+  });
+
+  describe('#writeOutcomesReport', () => {
+    it('should call the rendering functionality', () => {
+      const outcomesReportTemplate = '<html></html>';
+      const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(outcomesReportTemplate);
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
+      const writeFileDestination = `${reporter['folderToWriteReport']}outcomes.html`;
+
+      reporter['writeOutcomesReport']();
+
+      assert.calledOnce(mustacheRenderStub);
+      assert.calledWith(mustacheRenderStub, reporter['templates'].outcomes, reporter['templatesView'], reporter['templatePartials']);
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub, writeFileDestination, outcomesReportTemplate);
+    });
+
+    it('should return an error', () => {
+      const writeError = 'No file written';
+      const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
+      const consoleStub = sandboxSet.stub(console, 'error');
+
+      reporter['writeOutcomesReport']();
+
+      assert.calledOnce(fsWriteFileStub);
+      assert.calledWith(fsWriteFileStub);
+      expect(consoleStub).to.have.been.calledWith(writeError);
+    });
+  });
+
   describe('#reportFeaturesFiles', () => {
     it('should create report frome features file', async () => {
       const reporterReadAllGherkinsStub = sandboxSet.stub(reporter, 'readAllGherkins');
@@ -312,6 +402,9 @@ describe('#Reporter', () => {
       const writeFilesReportStub = sandboxSet.stub(reporter, 'writeFilesReport');
       const writeFeaturesReportStub = sandboxSet.stub(reporter, 'writeFeaturesReport');
       const writeScenariosReportStub = sandboxSet.stub(reporter, 'writeScenariosReport');
+      const writeStatesReportStub = sandboxSet.stub(reporter, 'writeStatesReport');
+      const writeActionsReportStub = sandboxSet.stub(reporter, 'writeActionsReport');
+      const writeOutcomesReportStub = sandboxSet.stub(reporter, 'writeOutcomesReport');
 
       const emptyError = <unknown>null;
       const readFiles = [
@@ -319,6 +412,7 @@ describe('#Reporter', () => {
         'Scenario: Scenario Extension Feature',
         'Given an initial state is set',
         'When an extension action is taken',
+        'And another action is taken',
         'Then an outcome happens'
       ];
 
@@ -337,6 +431,12 @@ describe('#Reporter', () => {
       assert.calledWith(writeFeaturesReportStub);
       assert.calledOnce(writeScenariosReportStub);
       assert.calledWith(writeScenariosReportStub);
+      assert.calledOnce(writeStatesReportStub);
+      assert.calledWith(writeStatesReportStub);
+      assert.calledOnce(writeActionsReportStub);
+      assert.calledWith(writeActionsReportStub);
+      assert.calledOnce(writeOutcomesReportStub);
+      assert.calledWith(writeOutcomesReportStub);
     });
 
     it('should do nothing due to an error', () => {

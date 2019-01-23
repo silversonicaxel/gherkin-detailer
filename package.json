@@ -75,5 +75,14 @@
     "statements": 95,
     "functions": 95,
     "branches": 95
-  }
+  },
+  "keywords": [
+    "gherkin-detailer",
+    "gherkins",
+    "features",
+    "scenarios",
+    "states",
+    "actions",
+    "outcomes"
+  ]
 }

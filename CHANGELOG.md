@@ -1,6 +1,17 @@
+## 0.2.0 (January 23, 2019)
+
+### First base Files, Features, Scenarios, States, Actions and Outcomes lists report implementation
+
+* Add HTML report for Features list
+* Add HTML report for Scenarios list
+* Add HTML report for States list
+* Add HTML report for Actions list
+* Add HTML report for Outcomes list
+
+
 ## 0.1.0 (December 14, 2018)
 
 ### First base Files List report implementation
 
-* Add HTML report for files list containing gherkins
+* Add HTML report for Files list containing all gherkins
 * Create CHANGELOG

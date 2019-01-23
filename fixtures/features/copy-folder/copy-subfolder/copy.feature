@@ -8,4 +8,5 @@ Feature: Copy Feature
   Scenario: Different Scenario Copy Feature
     Given the initial state is set
     When a different action is taken
+    But a third action is not taken
     Then a different outcome happens

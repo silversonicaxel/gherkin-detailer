@@ -65,8 +65,7 @@
     "reporter": [
       "html",
       "lcov",
-      "text",
-      "text-summary"
+      "text"
     ],
     "report-dir": "coverage/",
     "all": true,

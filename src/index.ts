@@ -1,5 +1,8 @@
+import { Configurer } from './class/configurer';
 import { Reporter } from './class/reporter';
 
-const reporter = new Reporter();
+const configurer = new Configurer();
+const userConfiguration = configurer.fetchData();
 
-reporter.createGherkinsReport();
+const reporter = new Reporter();
+reporter.createGherkinsReport(userConfiguration.folder);

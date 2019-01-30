@@ -9,7 +9,7 @@ export class Reader {
   private foldersToExlcude: string[] = ['node_modules', 'dist', '.git'];
   private extensionToRead = '.feature';
 
-  constructor () {
+  constructor() {
     this.readDirAsync = util.promisify(fs.readdir);
     this.statAsync = util.promisify(fs.stat);
     this.readFileAsync = util.promisify(fs.readFile);

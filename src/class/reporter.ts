@@ -114,6 +114,7 @@ export class Reporter {
     fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
+        process.exit(1);
         return;
       }
     });
@@ -124,6 +125,7 @@ export class Reporter {
     fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
       if (writeError) {
         console.error(writeError);
+        process.exit(1);
         return;
       }
     });
@@ -134,6 +136,7 @@ export class Reporter {
     fs.writeFile(`${this.folderToWriteReport}scenarios.html`, reportScenariosList, writeError => {
       if (writeError) {
         console.error(writeError);
+        process.exit(1);
         return;
       }
     });
@@ -144,6 +147,7 @@ export class Reporter {
     fs.writeFile(`${this.folderToWriteReport}states.html`, reportStatesList, writeError => {
       if (writeError) {
         console.error(writeError);
+        process.exit(1);
         return;
       }
     });
@@ -154,6 +158,7 @@ export class Reporter {
     fs.writeFile(`${this.folderToWriteReport}actions.html`, reportActionsList, writeError => {
       if (writeError) {
         console.error(writeError);
+        process.exit(1);
         return;
       }
     });
@@ -164,6 +169,7 @@ export class Reporter {
     fs.writeFile(`${this.folderToWriteReport}outcomes.html`, reportOutcomesList, writeError => {
       if (writeError) {
         console.error(writeError);
+        process.exit(1);
         return;
       }
     });
@@ -172,6 +178,7 @@ export class Reporter {
   private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
     if (readError) {
       console.error(readError);
+      process.exit(1);
       return;
     }
 

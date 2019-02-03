@@ -245,12 +245,14 @@ describe('#Reporter', () => {
       const writeError = 'No file written';
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
       const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['writeFilesReport']();
 
       assert.calledOnce(fsWriteFileStub);
       assert.calledWith(fsWriteFileStub);
       expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 
@@ -273,12 +275,14 @@ describe('#Reporter', () => {
       const writeError = 'No file written';
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
       const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['writeFeaturesReport']();
 
       assert.calledOnce(fsWriteFileStub);
       assert.calledWith(fsWriteFileStub);
       expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 
@@ -301,12 +305,14 @@ describe('#Reporter', () => {
       const writeError = 'No file written';
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
       const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['writeScenariosReport']();
 
       assert.calledOnce(fsWriteFileStub);
       assert.calledWith(fsWriteFileStub);
       expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 
@@ -329,12 +335,14 @@ describe('#Reporter', () => {
       const writeError = 'No file written';
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
       const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['writeStatesReport']();
 
       assert.calledOnce(fsWriteFileStub);
       assert.calledWith(fsWriteFileStub);
       expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 
@@ -357,12 +365,14 @@ describe('#Reporter', () => {
       const writeError = 'No file written';
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
       const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['writeActionsReport']();
 
       assert.calledOnce(fsWriteFileStub);
       assert.calledWith(fsWriteFileStub);
       expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 
@@ -385,12 +395,14 @@ describe('#Reporter', () => {
       const writeError = 'No file written';
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile').yields(writeError);
       const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['writeOutcomesReport']();
 
       assert.calledOnce(fsWriteFileStub);
       assert.calledWith(fsWriteFileStub);
       expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 
@@ -442,10 +454,14 @@ describe('#Reporter', () => {
     it('should do nothing due to an error', () => {
       const reporterReadAllGherkinsStub = sandboxSet.stub(reporter, 'readAllGherkins');
       const readError = <unknown>'random error';
+      const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
 
       reporter['reportFeaturesFiles'](<Error>readError, []);
 
       assert.notCalled(reporterReadAllGherkinsStub);
+      expect(consoleStub).to.have.been.calledWith(readError);
+      expect(processStub).to.have.been.calledWith(1);
     });
   });
 });

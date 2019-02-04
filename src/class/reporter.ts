@@ -33,7 +33,7 @@ export class Reporter {
   private reader: Reader;
   private analyzer: Analyzer;
   private folderToReadReport = `${__dirname}/../../`;
-  private folderToWriteReport = `${__dirname}/../../report/gherkin-detailer/`;
+  private folderToWriteReport = `${process.cwd()}/report/gherkin-detailer/`;
   private folderToReadTemplates = `${__dirname}/../templates/`;
   private gherkins: string[] = [];
   private templates: ReporterTemplatesList = <ReporterTemplatesList>{ };
@@ -44,6 +44,8 @@ export class Reporter {
     this.reader = new Reader();
     this.analyzer = new Analyzer();
     this.reportFeaturesFiles = this.reportFeaturesFiles.bind(this);
+
+    console.log(this.folderToWriteReport);
   }
 
   createGherkinsReport(folderToDetail?: string): void {

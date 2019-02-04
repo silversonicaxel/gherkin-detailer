@@ -29,22 +29,24 @@
     "node": ">=10.5.0",
     "npm": ">= 6.0.0"
   },
+  "dependencies": {
+    "@types/mustache": "^0.8.32",
+    "commander": "^2.19.0",
+    "moment": "^2.24.0",
+    "mustache": "^3.0.1"
+  },
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/del": "^3.0.1",
     "@types/mocha": "^5.2.5",
-    "@types/mustache": "^0.8.32",
     "@types/node": "^10.12.21",
     "@types/sinon": "^7.0.5",
     "@types/sinon-chai": "^3.2.2",
     "chai": "^4.2.0",
-    "commander": "^2.19.0",
     "coveralls": "^3.0.2",
     "del": "^3.0.0",
     "istanbul": "1.1.0-alpha.1",
     "mocha": "^5.2.0",
-    "moment": "^2.24.0",
-    "mustache": "^3.0.1",
     "nyc": "^13.1.0",
     "sinon": "^7.2.3",
     "sinon-chai": "^3.3.0",

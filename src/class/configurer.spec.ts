@@ -42,7 +42,7 @@ describe('#Configurer', () => {
     });
 
     it('should return particular data', () => {
-      program['analysisFolder'] = '/directory';
+      program['analysis'] = '/directory';
       const data = configurer.fetchData();
       expect(data).to.deep.equal({ analysisFolder: '/directory' });
     });

@@ -17,4 +17,42 @@ gherkin-detailer is a tool that generates HTML reports related to the gherkins t
 
 ## Installation
 
-Out on npm.js soon.
+```bash
+$ npm install -D gherkin-detailer
+$ npm install -g gherkin-detailer
+$ yarn add --dev gherkin-detailer
+$ yarn global add gherkin-detailer
+```
+
+
+## Usage
+Once the package is installed, it needs to be added in the `package.json` scripts
+
+```bash
+"gherkin-detailer": "node node_modules/gherkin-detailer/dist/index.js"
+```
+
+Then the `gherkin-detailer` can be executed in order to have a gherkins report created in a default folder `./report/gherkin-detailer/`
+
+
+## Help
+```bash
+
+$ gherkin-detailer --help
+
+Usage: gherkin-detailer [options] <option>
+
+  Options:
+
+    -v, --version                           Output the version number
+    -a, --analysis [analysis]               Select folder to analyse
+    -h, --help                              Output usage information
+
+```
+
+
+# Future improvements
+* Customize report folder
+* Customize report theme
+* Management of Scenario Outlines
+* Management of similarities in Gherkins

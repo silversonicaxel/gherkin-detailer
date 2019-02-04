@@ -26,8 +26,8 @@ $ yarn global add gherkin-detailer
 
 
 ## Requirements
-**node 10.12+**
-**npm* 6.0+**
+* node 10.12+
+* npm 6.0+
 
 
 ## Usage

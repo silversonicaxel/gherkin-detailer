@@ -34,7 +34,7 @@ export class Reporter {
   private analyzer: Analyzer;
   private folderToReadReport = './';
   private folderToWriteReport = './report/gherkin-detailer/';
-  private folderToReadTemplates = './templates/';
+  private folderToReadTemplates = './src/templates/';
   private gherkins: string[] = [];
   private templates: ReporterTemplatesList = <ReporterTemplatesList>{ };
   private templatesView: ReporterTemplateViewList = <ReporterTemplateViewList>{ };

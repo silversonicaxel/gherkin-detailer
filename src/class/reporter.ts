@@ -32,9 +32,9 @@ type ReporterTemplatePartialsList = {
 export class Reporter {
   private reader: Reader;
   private analyzer: Analyzer;
-  private folderToReadReport = './';
-  private folderToWriteReport = './report/gherkin-detailer/';
-  private folderToReadTemplates = './src/templates/';
+  private folderToReadReport = `${__dirname}/../../`;
+  private folderToWriteReport = `${__dirname}/../../report/gherkin-detailer/`;
+  private folderToReadTemplates = `${__dirname}/../templates/`;
   private gherkins: string[] = [];
   private templates: ReporterTemplatesList = <ReporterTemplatesList>{ };
   private templatesView: ReporterTemplateViewList = <ReporterTemplateViewList>{ };

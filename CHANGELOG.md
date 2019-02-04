@@ -1,9 +1,15 @@
-## 1.0.1 (February 4, 2019)
+## 1.0.2 (February 4, 2019)
 
 ### Bugfixes
 
 * Fix wrong package.json dependencies and devDependencies
 
+
+## 1.0.1 (February 4, 2019)
+
+### Bugfixes
+
+* Fix wrong package.json dependencies and devDependencies
 
 
 ## 1.0.0 (February 4, 2019)

@@ -10,7 +10,7 @@ export class Configurer {
   }
 
   private setupOptions(): void {
-    const version = '0.2.0';
+    const version = '1.0.1';
 
     program
       .version(version, '-v, --version')

@@ -1,3 +1,10 @@
+## 1.0.6 (February 5, 2019)
+
+### Bugfixes
+
+* Fix correct report folder
+
+
 ## 1.0.5 (February 4, 2019)
 
 ### Bugfixes

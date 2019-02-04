@@ -1,3 +1,10 @@
+## 1.0.0 (February 4, 2019)
+
+### First release
+
+* Make `gherkin-detailer` stable and ready for its first release
+
+
 ## 0.2.0 (January 23, 2019)
 
 ### First base Files, Features, Scenarios, States, Actions and Outcomes lists report implementation

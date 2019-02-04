@@ -1,3 +1,10 @@
+## 1.0.3 (February 4, 2019)
+
+### Bugfixes
+
+* Fix relative paths error in dist project
+
+
 ## 1.0.2 (February 4, 2019)
 
 ### Bugfixes

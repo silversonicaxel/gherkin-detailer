@@ -1,3 +1,10 @@
+## 1.0.4 (February 4, 2019)
+
+### Bugfixes
+
+* Add postinstall to package.json
+
+
 ## 1.0.3 (February 4, 2019)
 
 ### Bugfixes

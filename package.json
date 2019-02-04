@@ -1,6 +1,6 @@
 {
   "name": "gherkin-detailer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "gherkin-detailer is a tool that check the gherkins included in you project and list them",
   "license": "MIT",
   "scripts": {
@@ -12,7 +12,8 @@
     "coveralls": "node node_modules/nyc/bin/nyc npm run test && node node_modules/nyc/bin/nyc report --reporter=text-lcov | node node_modules/coveralls/bin/coveralls",
     "clean": "rm -rf dist",
     "pre-build": "mkdir -p dist/templates; cp src/templates/* dist/templates",
-    "build": "npm run clean; npm run pre-build; tsc -p tsconfig.build.json"
+    "build": "npm run clean; npm run pre-build; tsc -p tsconfig.build.json",
+    "postinstall": "npm run build"
   },
   "main": "dist/index.js",
   "bin": {

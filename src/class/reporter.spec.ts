@@ -44,7 +44,7 @@ describe('#Reporter', () => {
     it('should initialize the report folder with default one', () => {
       reporter.createGherkinsReport();
 
-      expect(reporter['folderToReadReport']).to.equal('./');
+      expect(reporter['folderToReadReport']).to.equal(`${__dirname}/../../`);
     });
 
     it('should initialize the report folder with provided one', () => {

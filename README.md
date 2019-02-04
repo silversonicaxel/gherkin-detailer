@@ -25,6 +25,11 @@ $ yarn global add gherkin-detailer
 ```
 
 
+## Requirements
+**node 10.12+**
+**npm* 6.0+**
+
+
 ## Usage
 Once the package is installed, it needs to be added in the `package.json` scripts
 

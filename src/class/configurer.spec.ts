@@ -38,13 +38,13 @@ describe('#Configurer', () => {
   describe('#fetchData', () => {
     it('should return configurer default data', () => {
       const data = configurer.fetchData();
-      expect(data).to.deep.equal({ folder: '' });
+      expect(data).to.deep.equal({ analysisFolder: '' });
     });
 
     it('should return particular data', () => {
-      program['folder'] = '/directory';
+      program['analysisFolder'] = '/directory';
       const data = configurer.fetchData();
-      expect(data).to.deep.equal({ folder: '/directory' });
+      expect(data).to.deep.equal({ analysisFolder: '/directory' });
     });
   });
 });

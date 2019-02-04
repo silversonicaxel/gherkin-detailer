@@ -1,7 +1,7 @@
 import * as program from 'commander';
 
 type ConfigurerData = {
-  folder: string;
+  analysisFolder: string;
 };
 
 export class Configurer {
@@ -15,13 +15,13 @@ export class Configurer {
     program
       .version(version, '-v, --version')
       .allowUnknownOption()
-      .option('-f, --folder [folder]', 'Select report folder')
+      .option('-a, --analysis [analysis]', 'Select folder to analyse')
       .parse(process.argv);
   }
 
   fetchData(): ConfigurerData {
     return {
-      folder: program.folder || ''
+      analysisFolder: program.analysis || ''
     };
   }
 }

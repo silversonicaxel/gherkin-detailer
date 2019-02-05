@@ -22,24 +22,38 @@ gherkin detailer can be installed as a global tool:
 
 ```bash
 $ npm install -g gherkin-detailer
+
+$ yarn global add gherkin-detailer
 ```
 
 or as a devDependency:
 
 ```bash
 $ npm install -D gherkin-detailer
+
+$ yarn add --dev gherkin-detailer
 ```
 
 ## Usage
-### TBD: example of working usage
-If you've installed it as a devDependency, you need to add it in the `script` section of the `package.json`:
+If you've installed it as a devDependency, you need to add it in the `script` section of the `package.json`.
 
+To execute it with all default options, so to let its analysis starts from the current folder, set this up:
 ```bash
-"gherkin-report": "gherkin-detailer"
+"gherkin-detailer": "gherkin-detailer"
+```
+
+To customize the analysis folder, set this up:
+```bash
+"gherkin-detailer": "gherkin-detailer -a '.src/' "
 ```
 
 Then the `gherkin-detailer` can be executed in order to have a gherkins report created in a default folder `./report/gherkin-detailer/`
 
+```bash
+$ npm run gherkin-detailer
+
+$ yarn run gherkin-detailer
+```
 
 ## Help
 ```bash
@@ -55,7 +69,6 @@ Usage: gherkin-detailer [options] <option>
     -h, --help                              Output usage information
 
 ```
-
 
 # Future improvements
 * Customize report folder

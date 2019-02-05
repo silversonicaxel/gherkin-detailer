@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/silversonicaxel/gherkin-detailer/badge.svg?branch=master)](https://coveralls.io/github/silversonicaxel/gherkin-detailer?branch=master)
 
 # gherkin-detailer
-gherkin-detailer is a tool that check the gherkins included in you project and list them.
+gherkin-detailer is a tool that checks the gherkins included in you project and list them.
 
 
 ## Introduction

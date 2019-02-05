@@ -44,7 +44,7 @@ To execute it with all default options, so to let its analysis starts from the c
 
 To customize the analysis folder, set this up:
 ```bash
-"gherkin-detailer": "gherkin-detailer -a '.src/' "
+"gherkin-detailer": "gherkin-detailer -a './src/'"
 ```
 
 Then the `gherkin-detailer` can be executed in order to have a gherkins report created in a default folder `./report/gherkin-detailer/`

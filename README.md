@@ -20,6 +20,8 @@ gherkin-detailer is a tool that generates HTML reports related to the gherkins t
 ```bash
 $ npm install -D gherkin-detailer
 $ npm install -g gherkin-detailer
+```
+```bash
 $ yarn add --dev gherkin-detailer
 $ yarn global add gherkin-detailer
 ```
@@ -38,6 +40,13 @@ Once the package is installed, it needs to be added in the `package.json` script
 ```
 
 Then the `gherkin-detailer` can be executed in order to have a gherkins report created in a default folder `./report/gherkin-detailer/`
+
+```bash
+$ npm run gherkin-detailer
+```
+```bash
+$ yarn run gherkin-detailer
+```
 
 
 ## Help

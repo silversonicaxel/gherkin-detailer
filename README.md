@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/silversonicaxel/gherkin-detailer/badge.svg?branch=master)](https://coveralls.io/github/silversonicaxel/gherkin-detailer?branch=master)
 
 # gherkin-detailer
-gherkin-detailer is a tool that checks the gherkins included in you project and list them.
+gherkin-detailer is a tool that checks the gherkin files included in you project and list them, highlighting some of their details.
 
 ## Introduction
 gherkin-detailer is a tool that generates HTML reports related to the gherkins that are part of the project you are working on. Currently there are six sections available:
@@ -18,7 +18,7 @@ gherkin-detailer is a tool that generates HTML reports related to the gherkins t
 * npm 6.0+
 
 ## Installation
-gherkin detailer can be installed as a global tool:
+gherkin-detailer can be installed as a global tool:
 
 ```bash
 $ npm install -g gherkin-detailer

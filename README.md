@@ -6,6 +6,7 @@ gherkin-detailer is a tool that checks the gherkin files included in you project
 
 ## Documentation
 * [Summary](SUMMARY.md)
+* [Gitbook](https://silversonicaxel.gitbook.io/gherkin-detailer/)
 
 ## Introduction
 gherkin-detailer is a tool that generates HTML reports related to the gherkins that are part of the project you are working on. Currently there are six sections available:

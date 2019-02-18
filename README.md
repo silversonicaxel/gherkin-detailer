@@ -52,7 +52,7 @@ Then the `gherkin-detailer` can be executed in order to have a gherkins report c
 ```bash
 $ npm run gherkin-detailer
 
-$ yarn run gherkin-detailer
+$ yarn gherkin-detailer
 ```
 
 ## Help

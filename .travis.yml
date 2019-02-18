@@ -2,8 +2,8 @@ language: node_js
 node_js:
   - 10.12
 script:
-  - yarn run lint
-  - yarn run test
-  - yarn run test-coverage
+  - yarn lint
+  - yarn test
+  - yarn test-coverage
 after_success:
-  - yarn run coveralls
+  - yarn coveralls

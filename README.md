@@ -70,7 +70,7 @@ Usage: gherkin-detailer [options] <option>
 
 ```
 
-# Future improvements
+## Future improvements
 * Customize report folder
 * Customize report theme
 * Management of Scenario Outlines

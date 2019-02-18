@@ -51,6 +51,11 @@ To customize the analysis folder, set this up:
 "gherkin-detailer": "gherkin-detailer -a './src/'"
 ```
 
+To customize the output folder, set this up:
+```bash
+"gherkin-detailer": "gherkin-detailer -o './report/'"
+```
+
 Then the `gherkin-detailer` can be executed in order to have a gherkins report created in a default folder `./report/gherkin-detailer/`
 
 ```bash
@@ -70,12 +75,12 @@ Usage: gherkin-detailer [options] <option>
 
     -v, --version                           Output the version number
     -a, --analysis [analysis]               Select folder to analyse
+    -o, --output [output]                   Select folder to output
     -h, --help                              Output usage information
 
 ```
 
 ## Future improvements
-* Customize report folder
 * Customize report theme
 * Management of Scenario Outlines
 * Management of similarities in Gherkins

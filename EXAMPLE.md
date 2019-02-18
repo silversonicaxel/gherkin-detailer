@@ -8,7 +8,7 @@
 
 This command starts to read all the files contained in the current folder.
 
-All the **.feature** files will be analyzed in order to retrieve all scenarios written with the gherkins.
+All the **.feature** files will be analysed in order to retrieve all scenarios written with the gherkins.
 
 Once the analysis is done, an html report will be store in the deafult folder.
 
@@ -25,7 +25,7 @@ Once the analysis is done, an html report will be store in the deafult folder.
 
 This command starts to read all the files contained in the folder *documentation/features*.
 
-All the **.feature** files will be analyzed in order to retrieve all scenarios written with the gherkins.
+All the **.feature** files will be analysed in order to retrieve all scenarios written with the gherkins.
 
 Once the analysis is done, an html report will be store in the deafult folder.
 

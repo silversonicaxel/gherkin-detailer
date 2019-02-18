@@ -50,7 +50,7 @@ export class Reporter {
   createGherkinsReport(config: ConfigurerData): void {
     this.folderToReadReport = config.analysisFolder || this.folderToReadReport;
     this.folderToWriteReport = config.outputFolder || this.folderToWriteReport;
-    if (this.folderToWriteReport.charAt(this.folderToWriteReport.length - 1) !== '/') {
+    if (this.folderToWriteReport.substr(-1) !== '/') {
       this.folderToWriteReport += '/';
     }
 

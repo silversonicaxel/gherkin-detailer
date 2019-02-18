@@ -4,14 +4,17 @@
 # gherkin-detailer
 gherkin-detailer is a tool that checks the gherkin files included in you project and list them, highlighting some of their details.
 
+## Documentation
+* [Summary](SUMMARY.md)
+
 ## Introduction
 gherkin-detailer is a tool that generates HTML reports related to the gherkins that are part of the project you are working on. Currently there are six sections available:
-* Files list
-* Features list
-* Scenarios list
-* States list
-* Actions list
-* Outcomes list
+* Files list (containing the entire list of all the detailed scenarios)
+* Features list (containing the simple list of all the features)
+* Scenarios list (containing the simple list of all the scenarios)
+* States list (containing the simple list of all the **given** - states)
+* Actions list (containing the simple list of all the **when** - actions)
+* Outcomes list (containing the simple list of all the **then** - outcomes)
 
 ## Requirements
 * node 10.12+

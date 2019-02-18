@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Configurer } from './class/configurer';
 import { Reporter } from './class/reporter';
 

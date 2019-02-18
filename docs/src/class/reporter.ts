@@ -111,7 +111,7 @@ export class Reporter {
 
   private writeFilesReport(): void {
     const reportFilesList = Mustache.render(this.templates.files, this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}files.html`, reportFilesList, writeError => {
+    fs.writeFile(`${this.folderToWriteReport}index.html`, reportFilesList, writeError => {
       if (writeError) {
         console.error(writeError);
         process.exit(1);

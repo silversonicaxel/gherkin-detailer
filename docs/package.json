@@ -6,16 +6,16 @@
   "scripts": {
     "lint": "tslint src/**/*.ts",
     "pre-test": "mkdir -p fixtures/features/empty-folder/",
-    "test": "npm run pre-test && node node_modules/.bin/_mocha --opts ./mocha.opts",
-    "test-watch": "npm run pre-test && node node_modules/.bin/_mocha --watch-extensions spec.ts --watch --opts ./mocha.opts",
-    "test-coverage": "npm run pre-test && node node_modules/nyc/bin/nyc node node_modules/.bin/_mocha --opts ./mocha.opts",
-    "coveralls": "node node_modules/nyc/bin/nyc npm run test && node node_modules/nyc/bin/nyc report --reporter=text-lcov | node node_modules/coveralls/bin/coveralls",
+    "test": "npm run pre-test && _mocha --opts ./mocha.opts",
+    "test-watch": "npm run pre-test && _mocha --watch-extensions spec.ts --watch --opts ./mocha.opts",
+    "test-coverage": "npm run pre-test && nyc _mocha --opts ./mocha.opts",
+    "coveralls": "nyc npm run test && nyc report --reporter=text-lcov | coveralls",
     "clean": "rm -rf dist",
     "prepare-dist": "mkdir -p dist/templates; cp src/templates/* dist/templates",
     "build": "npm run clean; npm run prepare-dist; tsc -p tsconfig.build.json",
     "postinstall": "npm run prepare-dist",
     "serve-doc": "gitbook serve",
-    "build-doc": "gitbook build . doc"
+    "build-doc": "gitbook build . docs"
   },
   "main": "dist/index.js",
   "bin": {

@@ -231,7 +231,7 @@ describe('#Reporter', () => {
       const filesReportTemplate = '<html></html>';
       const mustacheRenderStub = sandboxSet.stub(Mustache, 'render').returns(filesReportTemplate);
       const fsWriteFileStub = sandboxSet.stub(fs, 'writeFile');
-      const writeFileDestination = `${reporter['folderToWriteReport']}files.html`;
+      const writeFileDestination = `${reporter['folderToWriteReport']}index.html`;
 
       reporter['writeFilesReport']();
 

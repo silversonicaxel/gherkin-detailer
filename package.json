@@ -15,7 +15,7 @@
     "build": "npm run clean; npm run prepare-dist; tsc -p tsconfig.build.json",
     "postinstall": "npm run prepare-dist",
     "serve-doc": "gitbook serve",
-    "build-doc": "gitbook build . doc"
+    "build-doc": "gitbook build . docs"
   },
   "main": "dist/index.js",
   "bin": {

@@ -1,3 +1,13 @@
+## 1.1.0 (2019)
+
+### Documentation, Upgrade of libraries, Improvements
+
+* Install documenation with _gitbook_
+* Upgrade libraries
+* Setup index.html in the report folder
+* Improve package.json script commands
+
+
 ## 1.0.7 (February 5, 2019)
 
 ### Bugfixes

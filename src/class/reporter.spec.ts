@@ -62,6 +62,16 @@ describe('#Reporter', () => {
       expect(reporter['folderToReadReport']).to.equal(config.analysisFolder);
     });
 
+    it('should initialize the output folder with default one', () => {
+      sandboxSet.stub(reporter, 'setupReportFolder');
+      sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
+
+      const config = <ConfigurerData>{ };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['folderToWriteReport']).to.equal(`${process.cwd()}/report/gherkin-detailer/`);
+    });
+
     it('should initialize the output folder with provided one', () => {
       sandboxSet.stub(reporter, 'setupReportFolder');
       sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
@@ -80,16 +90,6 @@ describe('#Reporter', () => {
       reporter.createGherkinsReport(config);
 
       expect(reporter['folderToWriteReport']).to.equal(`${config.outputFolder}/`);
-    });
-
-    it('should initialize the output folder with default one', () => {
-      sandboxSet.stub(reporter, 'setupReportFolder');
-      sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
-
-      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '' };
-      reporter.createGherkinsReport(config);
-
-      expect(reporter['folderToWriteReport']).to.equal(`${process.cwd()}/report/gherkin-detailer/`);
     });
 
     it('should read features files from folder', () => {

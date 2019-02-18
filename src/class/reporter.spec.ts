@@ -72,6 +72,16 @@ describe('#Reporter', () => {
       expect(reporter['folderToWriteReport']).to.equal(config.outputFolder);
     });
 
+    it('should initialize the output folder with provided one ending with a slash', () => {
+      sandboxSet.stub(reporter, 'setupReportFolder');
+      sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
+
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report' };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['folderToWriteReport']).to.equal(`${config.outputFolder}/`);
+    });
+
     it('should initialize the output folder with default one', () => {
       sandboxSet.stub(reporter, 'setupReportFolder');
       sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');

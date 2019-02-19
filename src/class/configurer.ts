@@ -23,10 +23,7 @@ export class Configurer {
 
   fetchData(): ConfigurerData {
     const analysis = program.analysis || '';
-    let output = program.output || '';
-    if (output === '/') {
-      output = '';
-    }
+    const output = program.output || '';
 
     return {
       analysisFolder: analysis,

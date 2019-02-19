@@ -1,4 +1,4 @@
-import { Configurer } from './configurer';
+import { Configurer, ConfigurerData } from './configurer';
 import { spy, assert, createSandbox } from 'sinon';
 import * as program from 'commander';
 import { expect } from 'chai';
@@ -37,14 +37,58 @@ describe('#Configurer', () => {
 
   describe('#fetchData', () => {
     it('should return configurer default data', () => {
+      const expectedConfigurerData = <ConfigurerData>{
+        analysisFolder: '',
+        outputFolder: ''
+      };
+      program['analysis'] = '';
+      program['output'] = '';
+
       const data = configurer.fetchData();
-      expect(data).to.deep.equal({ analysisFolder: '' });
+
+      expect(data).to.deep.equal(expectedConfigurerData);
     });
 
-    it('should return particular data', () => {
-      program['analysis'] = '/directory';
+    it('should return customized analysis folder', () => {
+      const analysisFolder = 'directory';
+      const expectedConfigurerData = <ConfigurerData>{
+        analysisFolder: analysisFolder,
+        outputFolder: ''
+      };
+      program['analysis'] = analysisFolder;
+      program['output'] = '';
+
       const data = configurer.fetchData();
-      expect(data).to.deep.equal({ analysisFolder: '/directory' });
+
+      expect(data).to.deep.equal(expectedConfigurerData);
+    });
+
+    it('should return customized output folder', () => {
+      const outputFolder = 'html/report/features';
+      const expectedConfigurerData = <ConfigurerData>{
+        analysisFolder: '',
+        outputFolder: outputFolder
+      };
+      program['analysis'] = '';
+      program['output'] = outputFolder;
+
+      const data = configurer.fetchData();
+
+      expect(data).to.deep.equal(expectedConfigurerData);
+    });
+
+    it('should return customized output folder removing the absolute root', () => {
+      const outputFolder = '/';
+      const expectedConfigurerData = <ConfigurerData>{
+        analysisFolder: '',
+        outputFolder: ''
+      };
+      program['analysis'] = '';
+      program['output'] = outputFolder;
+
+      const data = configurer.fetchData();
+
+      expect(data).to.deep.equal(expectedConfigurerData);
     });
   });
 });

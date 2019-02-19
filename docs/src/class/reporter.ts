@@ -1,5 +1,6 @@
 import { Reader } from './reader';
 import { Analyzer } from './analyzer';
+import { ConfigurerData } from './configurer';
 import * as Mustache from 'mustache';
 import * as fs from 'fs';
 import * as del from 'del';
@@ -46,8 +47,12 @@ export class Reporter {
     this.reportFeaturesFiles = this.reportFeaturesFiles.bind(this);
   }
 
-  createGherkinsReport(folderToDetail?: string): void {
-    this.folderToReadReport = folderToDetail || this.folderToReadReport;
+  createGherkinsReport(config: ConfigurerData): void {
+    this.folderToReadReport = config.analysisFolder || this.folderToReadReport;
+    this.folderToWriteReport = config.outputFolder || this.folderToWriteReport;
+    if (this.folderToWriteReport.substr(-1) !== '/') {
+      this.folderToWriteReport += '/';
+    }
 
     this.setupReportFolder();
     this.reader.readFeatureFilesFromFolder(this.folderToReadReport, this.reportFeaturesFiles);

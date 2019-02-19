@@ -4,6 +4,7 @@ import * as sinonChai from 'sinon-chai';
 import { Reporter } from './reporter';
 import { Analyzer } from './analyzer';
 import { Reader } from './reader';
+import { ConfigurerData } from './configurer';
 import * as fs from 'fs';
 import * as del from 'del';
 import * as Mustache from 'mustache';
@@ -41,23 +42,63 @@ describe('#Reporter', () => {
   });
 
   describe('#createGherkinsReport', () => {
-    it('should initialize the report folder with default one', () => {
-      reporter.createGherkinsReport();
+    beforeEach(() => {
+      sandboxSet.stub(del, 'sync');
+      sandboxSet.stub(fs, 'mkdirSync');
+      sandboxSet.stub(fs, 'copyFileSync');
+      sandboxSet.stub(reporter, 'reportFeaturesFiles');
+    });
+
+    it('should initialize the analysis folder with default one', () => {
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '' };
+      reporter.createGherkinsReport(config);
 
       expect(reporter['folderToReadReport']).to.equal(`${process.cwd()}/`);
     });
 
-    it('should initialize the report folder with provided one', () => {
-      const reportFolder = './fixtures';
-      reporter.createGherkinsReport(reportFolder);
+    it('should initialize the analysis folder with provided one', () => {
+      const config = <ConfigurerData>{ analysisFolder: './fixtures', outputFolder: '' };
+      reporter.createGherkinsReport(config);
 
-      expect(reporter['folderToReadReport']).to.equal(reportFolder);
+      expect(reporter['folderToReadReport']).to.equal(config.analysisFolder);
+    });
+
+    it('should initialize the output folder with default one', () => {
+      sandboxSet.stub(reporter, 'setupReportFolder');
+      sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
+
+      const config = <ConfigurerData>{ };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['folderToWriteReport']).to.equal(`${process.cwd()}/report/gherkin-detailer/`);
+    });
+
+    it('should initialize the output folder with provided one', () => {
+      sandboxSet.stub(reporter, 'setupReportFolder');
+      sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
+
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report/' };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['folderToWriteReport']).to.equal(config.outputFolder);
+    });
+
+    it('should initialize the output folder with provided one ending with a slash', () => {
+      sandboxSet.stub(reporter, 'setupReportFolder');
+      sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
+
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report' };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['folderToWriteReport']).to.equal(`${config.outputFolder}/`);
     });
 
     it('should read features files from folder', () => {
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '' };
+      sandboxSet.stub(reporter, 'setupReportFolder');
       const readFeatureFilesFromFolderStub = sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
 
-      reporter.createGherkinsReport();
+      reporter.createGherkinsReport(config);
 
       expect(reporter['reader']).to.respondTo('readFeatureFilesFromFolder');
       assert.calledOnce(readFeatureFilesFromFolderStub);

@@ -46,6 +46,7 @@ describe('#Reporter', () => {
       sandboxSet.stub(del, 'sync');
       sandboxSet.stub(fs, 'mkdirSync');
       sandboxSet.stub(fs, 'copyFileSync');
+      sandboxSet.stub(reporter, 'reportFeaturesFiles');
     });
 
     it('should initialize the analysis folder with default one', () => {

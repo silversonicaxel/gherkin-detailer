@@ -1,4 +1,4 @@
-## 1.1.0 (2019)
+## 1.1.0 (February 18, 2019)
 
 ### Documentation, Upgrade of libraries, Improvements
 

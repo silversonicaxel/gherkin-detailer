@@ -94,6 +94,7 @@ describe('#Reporter', () => {
 
     it('should read features files from folder', () => {
       const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '' };
+      sandboxSet.stub(reporter, 'setupReportFolder');
       const readFeatureFilesFromFolderStub = sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
 
       reporter.createGherkinsReport(config);

@@ -76,19 +76,5 @@ describe('#Configurer', () => {
 
       expect(data).to.deep.equal(expectedConfigurerData);
     });
-
-    it('should return customized output folder removing the absolute root', () => {
-      const outputFolder = '/';
-      const expectedConfigurerData = <ConfigurerData>{
-        analysisFolder: '',
-        outputFolder: ''
-      };
-      program['analysis'] = '';
-      program['output'] = outputFolder;
-
-      const data = configurer.fetchData();
-
-      expect(data).to.deep.equal(expectedConfigurerData);
-    });
   });
 });

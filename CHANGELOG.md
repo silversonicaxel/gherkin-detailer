@@ -1,3 +1,10 @@
+## 1.1.1 (February 22, 2019)
+
+### New feature
+
+* Configuration output folder of the report
+
+
 ## 1.1.0 (February 18, 2019)
 
 ### Documentation, Upgrade of libraries, Improvements

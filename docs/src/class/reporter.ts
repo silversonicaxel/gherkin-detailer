@@ -33,6 +33,7 @@ type ReporterTemplatePartialsList = {
 export class Reporter {
   private reader: Reader;
   private analyzer: Analyzer;
+  private theme = 'white';
   private folderToReadReport = `${process.cwd()}/`;
   private folderToWriteReport = `${process.cwd()}/report/gherkin-detailer/`;
   private folderToReadTemplates = `${__dirname}/../templates/`;
@@ -48,6 +49,7 @@ export class Reporter {
   }
 
   createGherkinsReport(config: ConfigurerData): void {
+    this.theme = config.theme;
     this.folderToReadReport = config.analysisFolder || this.folderToReadReport;
     this.folderToWriteReport = config.outputFolder || this.folderToWriteReport;
     if (this.folderToWriteReport.substr(-1) !== '/') {
@@ -64,7 +66,7 @@ export class Reporter {
     }
 
     fs.mkdirSync(this.folderToWriteReport, { recursive: true });
-    fs.copyFileSync(`${this.folderToReadTemplates}style.css`, `${this.folderToWriteReport}style.css`);
+    fs.copyFileSync(`${this.folderToReadTemplates}${this.theme}.css`, `${this.folderToWriteReport}style.css`);
   }
 
   private async readAllGherkins(readFiles: string[]): Promise<string[]> {

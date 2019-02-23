@@ -217,6 +217,9 @@ $ yarn add --dev gherkin-detailer
 <p>To customize the output folder, set this up:</p>
 <pre><code class="lang-bash"><span class="hljs-string">&quot;gherkin-detailer&quot;</span>: <span class="hljs-string">&quot;gherkin-detailer -o &apos;./report/&apos;&quot;</span>
 </code></pre>
+<p>To customize the report theme, set this up:</p>
+<pre><code class="lang-bash"><span class="hljs-string">&quot;gherkin-detailer&quot;</span>: <span class="hljs-string">&quot;gherkin-detailer -t &apos;black&apos;&quot;</span>
+</code></pre>
 <p>Then the <code>gherkin-detailer</code> can be executed in order to have a gherkins report created in a default folder <code>./report/gherkin-detailer/</code></p>
 <pre><code class="lang-bash">$ npm run gherkin-detailer
 
@@ -233,11 +236,11 @@ Usage: gherkin-detailer [options] &lt;option&gt;
     -v, --version                           Output the version number
     <span class="hljs-_">-a</span>, --analysis [analysis]               Select folder to analyse
     -o, --output [output]                   Select folder to output
+    -t, --theme [theme]                     Select report theme (white|black)
     -h, --help                              Output usage information
 </code></pre>
 <h2 id="future-improvements">Future improvements</h2>
 <ul>
-<li>Customize report theme</li>
 <li>Management of <a href="GLOSSARY.html#scenario" class="glossary-term" title="A scenario is a flow of events through the feature being described and maps one to one with an executable test case for the system.">Scenario</a> Outlines</li>
 <li>Management of similarities in Gherkins</li>
 </ul>
@@ -280,7 +283,7 @@ Usage: gherkin-detailer [options] &lt;option&gt;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"EXAMPLE.md","ref":"EXAMPLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-02-18T23:24:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-02-22T06:52:44.776Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"EXAMPLE.md","ref":"EXAMPLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-02-23T21:05:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-02-23T21:34:50.519Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

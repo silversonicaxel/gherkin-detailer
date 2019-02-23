@@ -39,7 +39,8 @@ describe('#Configurer', () => {
     it('should return configurer default data', () => {
       const expectedConfigurerData = <ConfigurerData>{
         analysisFolder: '',
-        outputFolder: ''
+        outputFolder: '',
+        theme: 'white'
       };
       program['analysis'] = '';
       program['output'] = '';
@@ -53,7 +54,8 @@ describe('#Configurer', () => {
       const analysisFolder = 'directory';
       const expectedConfigurerData = <ConfigurerData>{
         analysisFolder: analysisFolder,
-        outputFolder: ''
+        outputFolder: '',
+        theme: 'white'
       };
       program['analysis'] = analysisFolder;
       program['output'] = '';
@@ -67,10 +69,43 @@ describe('#Configurer', () => {
       const outputFolder = 'html/report/features';
       const expectedConfigurerData = <ConfigurerData>{
         analysisFolder: '',
-        outputFolder: outputFolder
+        outputFolder: outputFolder,
+        theme: 'white'
       };
       program['analysis'] = '';
       program['output'] = outputFolder;
+
+      const data = configurer.fetchData();
+
+      expect(data).to.deep.equal(expectedConfigurerData);
+    });
+
+    it('should return customized report theme', () => {
+      const theme = 'black';
+      const expectedConfigurerData = <ConfigurerData>{
+        analysisFolder: '',
+        outputFolder: '',
+        theme: theme
+      };
+      program['analysis'] = '';
+      program['output'] = '';
+      program['theme'] = theme;
+
+      const data = configurer.fetchData();
+
+      expect(data).to.deep.equal(expectedConfigurerData);
+    });
+
+    it('should return default report theme', () => {
+      const theme = 'white';
+      const expectedConfigurerData = <ConfigurerData>{
+        analysisFolder: '',
+        outputFolder: '',
+        theme: 'white'
+      };
+      program['analysis'] = '';
+      program['output'] = '';
+      program['theme'] = theme;
 
       const data = configurer.fetchData();
 

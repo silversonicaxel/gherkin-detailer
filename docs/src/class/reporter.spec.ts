@@ -49,15 +49,29 @@ describe('#Reporter', () => {
       sandboxSet.stub(reporter, 'reportFeaturesFiles');
     });
 
+    it('should initialize the theme with the default one', () => {
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '', theme: 'white' };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['theme']).to.equal('white');
+    });
+
+    it('should initialize the theme with a provided one', () => {
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '', theme: 'black' };
+      reporter.createGherkinsReport(config);
+
+      expect(reporter['theme']).to.equal('black');
+    });
+
     it('should initialize the analysis folder with default one', () => {
-      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '' };
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '', theme: 'white' };
       reporter.createGherkinsReport(config);
 
       expect(reporter['folderToReadReport']).to.equal(`${process.cwd()}/`);
     });
 
     it('should initialize the analysis folder with provided one', () => {
-      const config = <ConfigurerData>{ analysisFolder: './fixtures', outputFolder: '' };
+      const config = <ConfigurerData>{ analysisFolder: './fixtures', outputFolder: '', theme: 'white' };
       reporter.createGherkinsReport(config);
 
       expect(reporter['folderToReadReport']).to.equal(config.analysisFolder);
@@ -77,7 +91,7 @@ describe('#Reporter', () => {
       sandboxSet.stub(reporter, 'setupReportFolder');
       sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
 
-      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report/' };
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report/', theme: 'white' };
       reporter.createGherkinsReport(config);
 
       expect(reporter['folderToWriteReport']).to.equal(config.outputFolder);
@@ -87,14 +101,14 @@ describe('#Reporter', () => {
       sandboxSet.stub(reporter, 'setupReportFolder');
       sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
 
-      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report' };
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: 'doc/to/report', theme: 'white' };
       reporter.createGherkinsReport(config);
 
       expect(reporter['folderToWriteReport']).to.equal(`${config.outputFolder}/`);
     });
 
     it('should read features files from folder', () => {
-      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '' };
+      const config = <ConfigurerData>{ analysisFolder: '', outputFolder: '', theme: 'white' };
       sandboxSet.stub(reporter, 'setupReportFolder');
       const readFeatureFilesFromFolderStub = sandboxSet.stub(reporter['reader'], 'readFeatureFilesFromFolder');
 
@@ -113,8 +127,8 @@ describe('#Reporter', () => {
       const delSyncStub = sandboxSet.stub(del, 'sync').returns(existsSyncReturn);
       const fsMkdirSyncStub = sandboxSet.stub(fs, 'mkdirSync').returns(existsSyncReturn);
       const fsCopyFileSyncStub = sandboxSet.stub(fs, 'copyFileSync').returns(existsSyncReturn);
-      const templatesFolder = `${reporter['folderToReadTemplates']}style.css`;
-      const reportFolder = `${reporter['folderToWriteReport']}style.css`;
+      const themeSource = `${reporter['folderToReadTemplates']}${reporter['theme']}.css`;
+      const themeDestination = `${reporter['folderToWriteReport']}style.css`;
 
       reporter['setupReportFolder']();
 
@@ -125,7 +139,7 @@ describe('#Reporter', () => {
       assert.calledOnce(fsMkdirSyncStub);
       assert.calledWith(fsMkdirSyncStub, reporter['folderToWriteReport'], { recursive: true });
       assert.calledOnce(fsCopyFileSyncStub);
-      assert.calledWith(fsCopyFileSyncStub, templatesFolder, reportFolder);
+      assert.calledWith(fsCopyFileSyncStub, themeSource, themeDestination);
     });
 
     it('should delete any report folder if it does not exists', () => {

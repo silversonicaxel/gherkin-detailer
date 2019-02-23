@@ -1,3 +1,10 @@
+## 1.1.2 (February 24, 2019)
+
+### New feature
+
+* Configuration theme of the report
+
+
 ## 1.1.1 (February 22, 2019)
 
 ### New feature

@@ -1,5 +1,6 @@
 export class Analyzer {
   private featureRegExp = new RegExp('^(feature)+[:]?', 'i');
+  private scenarioOutlineRegExp = new RegExp('^(scenario+[ ]+outline)+[:]?', 'i');
   private scenarioRegExp = new RegExp('^(scenario)+[:]?', 'i');
   private stateRegExp = new RegExp('^(given)+[:]?', 'i');
   private actionRegExp = new RegExp('^(when)+[:]?', 'i');
@@ -20,6 +21,9 @@ export class Analyzer {
       if (rowAnalyzed = this.getValidFeature(listRow)) {
         features.push(rowAnalyzed);
         currentReadRow = 'feature';
+      } else if (rowAnalyzed = this.getValidScenarioOutline(listRow)) {
+        scenarios.push(rowAnalyzed);
+        currentReadRow = 'scenario';
       } else if (rowAnalyzed = this.getValidScenario(listRow)) {
         scenarios.push(rowAnalyzed);
         currentReadRow = 'scenario';
@@ -44,6 +48,11 @@ export class Analyzer {
 
   private getValidFeature(listRow: string): string | null {
     const listRowToAnalyze = this.featureRegExp.exec(listRow);
+    return listRowToAnalyze ? listRow.replace(listRowToAnalyze[0], '').trim() : null;
+  }
+
+  private getValidScenarioOutline(listRow: string): string | null {
+    const listRowToAnalyze = this.scenarioOutlineRegExp.exec(listRow);
     return listRowToAnalyze ? listRow.replace(listRowToAnalyze[0], '').trim() : null;
   }
 

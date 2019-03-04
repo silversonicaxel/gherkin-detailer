@@ -11,7 +11,16 @@ describe('#Analyzer', () => {
     'When an extension action is taken',
     'Then an outcome happens',
     '',
-    'This line is not part of the report'
+    'This line is not part of the report',
+    'Scenario Outline: Scenario Outline Feature with <a> and <b>',
+    'Given an initial state is set',
+    'When an action is taken',
+    'Then an outcome happens',
+    '',
+    'Examples',
+    '| a | b |',
+    '| 1 | 2 |',
+    '| 4 | 3 |'
   ];
 
   let sandboxSet: any;
@@ -29,21 +38,29 @@ describe('#Analyzer', () => {
           'Scenario: Scenario Extension Feature',
           'Given an initial state is set',
           'When an extension action is taken',
+          'Then an outcome happens',
+          'Scenario Outline: Scenario Outline Feature with <a> and <b>',
+          'Given an initial state is set',
+          'When an action is taken',
           'Then an outcome happens'
         ],
         features: [
           'Extension Feature'
         ],
         scenarios: [
-          'Scenario Extension Feature'
+          'Scenario Extension Feature',
+          'Scenario Outline Feature with <a> and <b>'
         ],
         states: [
+          'an initial state is set',
           'an initial state is set'
         ],
         actions: [
-          'an extension action is taken'
+          'an extension action is taken',
+          'an action is taken'
         ],
         outcomes: [
+          'an outcome happens',
           'an outcome happens'
         ]
       };
@@ -55,6 +72,7 @@ describe('#Analyzer', () => {
 
     it('should call validation methods', () => {
       const getValidFeatureStub = sandboxSet.stub(analyzer, 'getValidFeature');
+      const getValidScenarioOutlineStub = sandboxSet.stub(analyzer, 'getValidScenarioOutline');
       const getValidScenarioStub = sandboxSet.stub(analyzer, 'getValidScenario');
       const getValidStateStub = sandboxSet.stub(analyzer, 'getValidState');
       const getValidActionStub = sandboxSet.stub(analyzer, 'getValidAction');
@@ -63,6 +81,7 @@ describe('#Analyzer', () => {
       analyzer.getGherkins(gherkin);
 
       assert.calledWith(getValidFeatureStub);
+      assert.calledWith(getValidScenarioOutlineStub);
       assert.calledWith(getValidScenarioStub);
       assert.calledWith(getValidStateStub);
       assert.calledWith(getValidActionStub);
@@ -90,6 +109,26 @@ describe('#Analyzer', () => {
     });
   });
 
+  describe('#getValidScenarioOutline', () => {
+    it('should return a valid scenario outline ', () => {
+      const scenarioOutlineText = 'A does B';
+      const validScenarioOutline = `Scenario Outline: ${scenarioOutlineText}`;
+
+      const expectedScenario = analyzer['getValidScenarioOutline'](validScenarioOutline);
+
+      expect(expectedScenario).to.be.not.equal('');
+      expect(expectedScenario).to.be.deep.equal(scenarioOutlineText);
+    });
+
+    it('should not return a valid scenario outline', () => {
+      const invalidScenarioOutline = 'This is not valid';
+
+      const expectedScenarioOutline = analyzer['getValidScenarioOutline'](invalidScenarioOutline);
+
+      expect(expectedScenarioOutline).to.be.deep.equal(null);
+    });
+  });
+
   describe('#getValidScenario', () => {
     it('should return a valid scenario', () => {
       const scenarioText = 'A logged user requests a new credit card';
@@ -101,7 +140,7 @@ describe('#Analyzer', () => {
       expect(expectedScenario).to.be.deep.equal(scenarioText);
     });
 
-    it('should not return a valid feature', () => {
+    it('should not return a valid scenario', () => {
       const invalidScenario = 'This is not valid';
 
       const expectedScenario = analyzer['getValidScenario'](invalidScenario);
@@ -141,7 +180,7 @@ describe('#Analyzer', () => {
       expect(expectedState).to.be.deep.equal(stateText);
     });
 
-    it('should not return a valid feature', () => {
+    it('should not return a valid state', () => {
       const invalidState = 'This is not valid';
 
       const expectedState = analyzer['getValidState'](invalidState, '');
@@ -181,7 +220,7 @@ describe('#Analyzer', () => {
       expect(expectedAction).to.be.deep.equal(actionText);
     });
 
-    it('should not return a valid feature', () => {
+    it('should not return a valid action', () => {
       const invalidAction = 'This is not valid';
 
       const expectedAction = analyzer['getValidAction'](invalidAction, '');
@@ -221,7 +260,7 @@ describe('#Analyzer', () => {
       expect(expectedOutcome).to.be.deep.equal(outcomeText);
     });
 
-    it('should not return a valid feature', () => {
+    it('should not return a valid outcome', () => {
       const invalidOutcome = 'This is not valid';
 
       const expectedOutcome = analyzer['getValidOutcome'](invalidOutcome, '');

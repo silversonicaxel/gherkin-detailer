@@ -18,7 +18,7 @@ describe('#Configurer', () => {
 
   describe('#constructor', () => {
     it('should setup configurer options', () => {
-      const fetchDataSpy  = spy(configurer, 'fetchData');
+      const fetchDataSpy = spy(configurer, 'fetchData');
 
       assert.notCalled(fetchDataSpy);
     });

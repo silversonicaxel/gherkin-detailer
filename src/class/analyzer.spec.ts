@@ -42,7 +42,11 @@ describe('#Analyzer', () => {
           'Scenario Outline: Scenario Outline Feature with <a> and <b>',
           'Given an initial state is set',
           'When an action is taken',
-          'Then an outcome happens'
+          'Then an outcome happens',
+          'Examples',
+          '| a | b |',
+          '| 1 | 2 |',
+          '| 4 | 3 |'
         ],
         features: [
           'Extension Feature'
@@ -77,6 +81,8 @@ describe('#Analyzer', () => {
       const getValidStateStub = sandboxSet.stub(analyzer, 'getValidState');
       const getValidActionStub = sandboxSet.stub(analyzer, 'getValidAction');
       const getValidOutcomeStub = sandboxSet.stub(analyzer, 'getValidOutcome');
+      const getValidExampleTitleStub = sandboxSet.stub(analyzer, 'getValidExampleTitle');
+      const getValidExampleDataStub = sandboxSet.stub(analyzer, 'getValidExampleData');
 
       analyzer.getGherkins(gherkin);
 
@@ -86,6 +92,8 @@ describe('#Analyzer', () => {
       assert.calledWith(getValidStateStub);
       assert.calledWith(getValidActionStub);
       assert.calledWith(getValidOutcomeStub);
+      assert.calledWith(getValidExampleTitleStub);
+      assert.calledWith(getValidExampleDataStub);
     });
   });
 
@@ -266,6 +274,52 @@ describe('#Analyzer', () => {
       const expectedOutcome = analyzer['getValidOutcome'](invalidOutcome, '');
 
       expect(expectedOutcome).to.be.deep.equal(null);
+    });
+  });
+
+  describe('#getValidExampleTitle', () => {
+    it('should return a valid example title', () => {
+      const validExampleTitle = 'Examples';
+
+      const expectedValidExampleTitle = analyzer['getValidExampleTitle'](validExampleTitle);
+
+      expect(expectedValidExampleTitle).to.be.not.equal('');
+      expect(expectedValidExampleTitle).to.be.deep.equal(validExampleTitle);
+    });
+
+    it('should return nothing', () => {
+      const invalidExampleTitle = 'Wrong';
+
+      const expectedValidExampleTitle = analyzer['getValidExampleTitle'](invalidExampleTitle);
+
+      expect(expectedValidExampleTitle).to.be.deep.equal(null);
+    });
+  });
+
+  describe('#getValidExampleData', () => {
+    it('should return a valid example data', () => {
+      const validExampleData = `|A|B|`;
+
+      const expectedValidExampleData = analyzer['getValidExampleData'](validExampleData, 'example');
+
+      expect(expectedValidExampleData).to.be.not.equal('');
+      expect(expectedValidExampleData).to.be.deep.equal(validExampleData);
+    });
+
+    it('should return nothing due to invalid example data', () => {
+      const invalidExampleData = 'Wrong';
+
+      const expectedValidExampleData = analyzer['getValidExampleData'](invalidExampleData, 'example');
+
+      expect(expectedValidExampleData).to.be.deep.equal(null);
+    });
+
+    it('should return nothing due to invalid previous read line', () => {
+      const validExampleData = `|A|B|`;
+
+      const expectedValidExampleData = analyzer['getValidExampleData'](validExampleData, 'state');
+
+      expect(expectedValidExampleData).to.be.deep.equal(null);
     });
   });
 });

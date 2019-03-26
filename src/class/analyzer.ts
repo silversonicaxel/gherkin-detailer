@@ -6,6 +6,8 @@ export class Analyzer {
   private actionRegExp = new RegExp('^(when)+[:]?', 'i');
   private outcomeRegExp = new RegExp('^(then)+[:]?', 'i');
   private glueRegExp = new RegExp('^(and|but)+[:]?', 'i');
+  private examplesTitleRegExp = new RegExp('^(examples|example)', 'i');
+  private examplesDataRegExp = new RegExp('^[|]', 'i');
 
   getGherkins(listRows: string[]): any {
     const features: string[] = [];
@@ -36,6 +38,10 @@ export class Analyzer {
       } else if (rowAnalyzed = this.getValidOutcome(listRow, currentReadRow)) {
         outcomes.push(rowAnalyzed);
         currentReadRow = 'outcome';
+      } else if (rowAnalyzed = this.getValidExampleTitle(listRow)) {
+        currentReadRow = 'example';
+      } else if (rowAnalyzed = this.getValidExampleData(listRow, currentReadRow)) {
+        currentReadRow = 'example';
       } else {
         continue;
       }
@@ -74,5 +80,18 @@ export class Analyzer {
   private getValidOutcome(listRow: string, previousRow: string): string | null {
     const listRowToAnalyze = previousRow === 'outcome' ? this.glueRegExp.exec(listRow) : this.outcomeRegExp.exec(listRow);
     return listRowToAnalyze ? listRow.replace(listRowToAnalyze[0], '').trim() : null;
+  }
+
+  private getValidExampleTitle(listRow: string): string | null {
+    const listRowToAnalyze = this.examplesTitleRegExp.exec(listRow);
+    return listRowToAnalyze ? listRowToAnalyze[0].trim() : null;
+  }
+
+  private getValidExampleData(listRow: string, previousRow: string): string | null {
+    if (previousRow === 'example') {
+      const listRowToAnalyze = this.examplesDataRegExp.exec(listRow);
+      return listRowToAnalyze ? listRow.trim() : null;
+    }
+    return null;
   }
 }

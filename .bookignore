@@ -16,5 +16,3 @@ tsconfig.build.json
 tslint.json
 yarn.lock
 CHANGELOG.md
-EXAMPLE.md
-GLOSSARY.md

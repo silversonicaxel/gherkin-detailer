@@ -185,7 +185,7 @@
 <ul>
 <li>Files list (containing the entire list of all the detailed scenarios)</li>
 <li>Features list (containing the simple list of all the features)</li>
-<li>Scenarios list (containing the simple list of all the scenarios)</li>
+<li>Scenarios list (containing the simple list of all the scenarios and scenarios outlines)</li>
 <li>States list (containing the simple list of all the <strong>given</strong> - states)</li>
 <li>Actions list (containing the simple list of all the <strong>when</strong> - actions)</li>
 <li>Outcomes list (containing the simple list of all the <strong>then</strong> - outcomes)</li>
@@ -241,7 +241,6 @@ Usage: gherkin-detailer [options] &lt;option&gt;
 </code></pre>
 <h2 id="future-improvements">Future improvements</h2>
 <ul>
-<li>Management of <a href="GLOSSARY.html#scenario" class="glossary-term" title="A scenario is a flow of events through the feature being described and maps one to one with an executable test case for the system.">Scenario</a> Outlines</li>
 <li>Management of similarities in Gherkins</li>
 </ul>
 
@@ -283,7 +282,7 @@ Usage: gherkin-detailer [options] &lt;option&gt;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"EXAMPLE.md","ref":"EXAMPLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-02-23T21:05:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-02-24T11:08:46.737Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"EXAMPLE.md","ref":"EXAMPLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-03-26T06:08:00.011Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-26T06:10:24.375Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -291,6 +290,10 @@ Usage: gherkin-detailer [options] &lt;option&gt;
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>

@@ -1,3 +1,12 @@
+## 1.1.3 (March 26, 2019)
+
+### New feature
+
+* Fix link in the menu
+* Support Scenario Outline
+* Clean documentation folder
+
+
 ## 1.1.2 (February 24, 2019)
 
 ### New feature

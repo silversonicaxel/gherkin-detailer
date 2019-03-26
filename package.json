@@ -48,8 +48,8 @@
     "@types/chai": "^4.1.7",
     "@types/del": "^3.0.1",
     "@types/mocha": "^5.2.6",
-    "@types/node": "^11.11.0",
-    "@types/sinon": "^7.0.9",
+    "@types/node": "^11.11.7",
+    "@types/sinon": "^7.0.10",
     "@types/sinon-chai": "^3.2.2",
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
@@ -57,12 +57,12 @@
     "istanbul": "1.1.0-alpha.1",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
-    "sinon": "^7.2.7",
+    "sinon": "^7.3.0",
     "sinon-chai": "^3.3.0",
-    "source-map-support": "^0.5.10",
+    "source-map-support": "^0.5.11",
     "ts-node": "^8.0.3",
-    "tslint": "^5.13.1",
-    "typescript": "^3.3.3333"
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
   },
   "nyc": {
     "include": [

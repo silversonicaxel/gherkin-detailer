@@ -14,7 +14,7 @@
     "prepare-dist": "mkdir -p dist/templates; cp src/templates/* dist/templates",
     "build": "npm run clean; npm run prepare-dist; tsc -p tsconfig.build.json",
     "postinstall": "npm run prepare-dist",
-    "serve-doc": "gitbook serve",
+    "serve-doc": "gitbook serve . docs",
     "build-doc": "gitbook build . docs"
   },
   "main": "dist/index.js",

@@ -13,7 +13,6 @@ dist
 report
 coverage
 .nyc_output
-_book
 
 # exceptions
 !fixtures/features/dist

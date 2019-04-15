@@ -1,3 +1,10 @@
+## 1.1.4 (April 16, 2019)
+
+### Added
+
+* Upgrade libraries
+
+
 ## 1.1.3 (March 26, 2019)
 
 ### New feature

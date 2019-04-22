@@ -1,3 +1,14 @@
+## 1.2.0 (April 22, 2019)
+
+### Added
+
+* Upgrade libraries
+
+### Bugfixes
+
+* Fix missing css stylesheet in report folder
+
+
 ## 1.1.4 (April 16, 2019)
 
 ### Added

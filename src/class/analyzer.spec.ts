@@ -22,6 +22,7 @@ describe('#Analyzer', () => {
     '| 1 | 2 |',
     '| 4 | 3 |'
   ];
+  const indexReadFile = 2;
 
   let sandboxSet: any;
 
@@ -34,42 +35,42 @@ describe('#Analyzer', () => {
     it('should initialize the report folder with default one', () => {
       const expectedGherkins = {
         files: [
-          'Feature: Extension Feature',
-          'Scenario: Scenario Extension Feature',
-          'Given an initial state is set',
-          'When an extension action is taken',
-          'Then an outcome happens',
-          'Scenario Outline: Scenario Outline Feature with <a> and <b>',
-          'Given an initial state is set',
-          'When an action is taken',
-          'Then an outcome happens',
-          'Examples',
-          '| a | b |',
-          '| 1 | 2 |',
-          '| 4 | 3 |'
+          { id: `fi-${indexReadFile}-0`, text: 'Feature: Extension Feature' },
+          { id: `fi-${indexReadFile}-1`, text: 'Scenario: Scenario Extension Feature' },
+          { id: `fi-${indexReadFile}-2`, text: 'Given an initial state is set' },
+          { id: `fi-${indexReadFile}-3`, text: 'When an extension action is taken' },
+          { id: `fi-${indexReadFile}-4`, text: 'Then an outcome happens' },
+          { id: `fi-${indexReadFile}-5`, text: 'Scenario Outline: Scenario Outline Feature with <a> and <b>' },
+          { id: `fi-${indexReadFile}-6`, text: 'Given an initial state is set' },
+          { id: `fi-${indexReadFile}-7`, text: 'When an action is taken' },
+          { id: `fi-${indexReadFile}-8`, text: 'Then an outcome happens' },
+          { id: `fi-${indexReadFile}-9`, text: 'Examples' },
+          { id: `fi-${indexReadFile}-10`, text: '| a | b |' },
+          { id: `fi-${indexReadFile}-11`, text: '| 1 | 2 |' },
+          { id: `fi-${indexReadFile}-12`, text: '| 4 | 3 |' }
         ],
         features: [
-          'Extension Feature'
+          { id: `fe-${indexReadFile}-0`, text: 'Extension Feature' }
         ],
         scenarios: [
-          'Scenario Extension Feature',
-          'Scenario Outline Feature with <a> and <b>'
+          { id: `sc-${indexReadFile}-0`, text: 'Scenario Extension Feature' },
+          { id: `sc-${indexReadFile}-1`, text: 'Scenario Outline Feature with <a> and <b>' }
         ],
         states: [
-          'an initial state is set',
-          'an initial state is set'
+          { id: `st-${indexReadFile}-0`, text: 'an initial state is set' },
+          { id: `st-${indexReadFile}-1`, text: 'an initial state is set' }
         ],
         actions: [
-          'an extension action is taken',
-          'an action is taken'
+          { id: `ac-${indexReadFile}-0`, text: 'an extension action is taken' },
+          { id: `ac-${indexReadFile}-1`, text: 'an action is taken' }
         ],
         outcomes: [
-          'an outcome happens',
-          'an outcome happens'
+          { id: `ou-${indexReadFile}-0`, text: 'an outcome happens' },
+          { id: `ou-${indexReadFile}-1`, text: 'an outcome happens' }
         ]
       };
 
-      const gherkins = analyzer.getGherkins(gherkin);
+      const gherkins = analyzer.getGherkins(gherkin, indexReadFile);
 
       expect(gherkins).to.be.deep.equal(expectedGherkins);
     });
@@ -84,7 +85,7 @@ describe('#Analyzer', () => {
       const getValidExampleTitleStub = sandboxSet.stub(analyzer, 'getValidExampleTitle');
       const getValidExampleDataStub = sandboxSet.stub(analyzer, 'getValidExampleData');
 
-      analyzer.getGherkins(gherkin);
+      analyzer.getGherkins(gherkin, indexReadFile);
 
       assert.calledWith(getValidFeatureStub);
       assert.calledWith(getValidScenarioOutlineStub);

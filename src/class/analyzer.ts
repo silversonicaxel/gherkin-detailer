@@ -1,3 +1,8 @@
+export type AnalyzerRow = {
+  id: string;
+  text: string;
+};
+
 export class Analyzer {
   private featureRegExp = new RegExp('^(feature)+[:]?', 'i');
   private scenarioOutlineRegExp = new RegExp('^(scenario+[ ]+outline)+[:]?', 'i');
@@ -9,34 +14,34 @@ export class Analyzer {
   private examplesTitleRegExp = new RegExp('^(examples|example)', 'i');
   private examplesDataRegExp = new RegExp('^[|]', 'i');
 
-  getGherkins(listRows: string[]): any {
-    const features: string[] = [];
-    const scenarios: string[] = [];
-    const states: string[] = [];
-    const actions: string[] = [];
-    const outcomes: string[] = [];
-    const files: string[] = [];
+  getGherkins(listRows: string[], index: number): any {
+    const features: AnalyzerRow[] = [];
+    const scenarios: AnalyzerRow[] = [];
+    const states: AnalyzerRow[] = [];
+    const actions: AnalyzerRow[] = [];
+    const outcomes: AnalyzerRow[] = [];
+    const files: AnalyzerRow[] = [];
     let rowAnalyzed: string | null;
     let currentReadRow = '';
 
     for (const listRow of listRows) {
       if (rowAnalyzed = this.getValidFeature(listRow)) {
-        features.push(rowAnalyzed);
+        features.push({ id: `fe-${index}-${features.length}`, text: rowAnalyzed});
         currentReadRow = 'feature';
       } else if (rowAnalyzed = this.getValidScenarioOutline(listRow)) {
-        scenarios.push(rowAnalyzed);
+        scenarios.push({ id: `sc-${index}-${scenarios.length}`, text: rowAnalyzed});
         currentReadRow = 'scenario';
       } else if (rowAnalyzed = this.getValidScenario(listRow)) {
-        scenarios.push(rowAnalyzed);
+        scenarios.push({ id: `sc-${index}-${scenarios.length}`, text: rowAnalyzed});
         currentReadRow = 'scenario';
       } else if (rowAnalyzed = this.getValidState(listRow, currentReadRow)) {
-        states.push(rowAnalyzed);
+        states.push({ id: `st-${index}-${states.length}`, text: rowAnalyzed});
         currentReadRow = 'state';
       } else if (rowAnalyzed = this.getValidAction(listRow, currentReadRow)) {
-        actions.push(rowAnalyzed);
+        actions.push({ id: `ac-${index}-${actions.length}`, text: rowAnalyzed});
         currentReadRow = 'action';
       } else if (rowAnalyzed = this.getValidOutcome(listRow, currentReadRow)) {
-        outcomes.push(rowAnalyzed);
+        outcomes.push({ id: `ou-${index}-${outcomes.length}`, text: rowAnalyzed});
         currentReadRow = 'outcome';
       } else if (rowAnalyzed = this.getValidExampleTitle(listRow)) {
         currentReadRow = 'example';
@@ -46,7 +51,7 @@ export class Analyzer {
         continue;
       }
 
-      files.push(listRow);
+      files.push({ id: `fi-${index}-${files.length}`, text: listRow});
     }
 
     return { files, features, scenarios, states, actions, outcomes };

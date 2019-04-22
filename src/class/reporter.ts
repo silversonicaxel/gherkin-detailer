@@ -74,14 +74,15 @@ export class Reporter {
 
     await Promise.all(
       readFiles
-        .map(async(readFile: string) => {
+        .map(async(readFile: string, indexFile: number) => {
           const contentFile = await this.reader.readContentFeatureFile(readFile);
           const rowsFile = this.reader.getRowsFeatureFile(contentFile);
-          const gherkinsFile = this.analyzer.getGherkins(rowsFile);
+          const gherkinsFile = this.analyzer.getGherkins(rowsFile, indexFile);
           const dataFile = { ...gherkinsFile, file: readFile.replace(process.cwd(), '.') };
           rowsFiles.push(dataFile);
         })
     );
+
     return rowsFiles;
   }
 

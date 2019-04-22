@@ -16,13 +16,15 @@
       <table>
         <thead>
           <tr>
-            <th>{{file}}</th>
+            <th class="col-id">&num;</th>
+            <th class="col-data">{{file}}</th>
           </tr>
         </thead>
         <tbody>
           {{#states}}
           <tr>
-            <td>{{.}}</td>
+            <td class="col-id">{{id}}</td>
+            <td class="col-data">{{text}}</td>
           </tr>
           {{/states}}
         </tbody>

@@ -178,6 +178,7 @@ describe('#Reporter', () => {
       const readContentFeatureFileData = 'Content File';
       const readContentFeatureFileStub = sandboxSet.stub(reader, 'readContentFeatureFile').returns(readContentFeatureFileData);
       const getRowsFeatureFileData = 'Rows File';
+      const getRowsFeatureFileIndex = 4;
       const getRowsFeatureFileStub = sandboxSet.stub(reader, 'getRowsFeatureFile').returns(getRowsFeatureFileData);
       const getGherkinsData = 'Gherkins';
       const getGherkinsStub = sandboxSet.stub(analyzer, 'getGherkins').returns(getGherkinsData);
@@ -187,7 +188,7 @@ describe('#Reporter', () => {
 
       await reader.readContentFeatureFile(fileList[0]);
       await reader.getRowsFeatureFile(readContentFeatureFileData);
-      await analyzer.getGherkins([getRowsFeatureFileData]);
+      await analyzer.getGherkins([getRowsFeatureFileData], getRowsFeatureFileIndex);
 
       expect(analyzer).to.respondTo('getGherkins');
       assert.calledOnce(readContentFeatureFileStub);
@@ -195,7 +196,7 @@ describe('#Reporter', () => {
       assert.calledOnce(getRowsFeatureFileStub);
       assert.calledWith(getRowsFeatureFileStub, readContentFeatureFileData);
       assert.calledOnce(getGherkinsStub);
-      assert.calledWith(getGherkinsStub, [getRowsFeatureFileData]);
+      assert.calledWith(getGherkinsStub, [getRowsFeatureFileData], getRowsFeatureFileIndex);
     });
   });
 

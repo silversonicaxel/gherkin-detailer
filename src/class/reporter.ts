@@ -117,78 +117,48 @@ export class Reporter {
     };
   }
 
+  private handleError(error: Error | null): void {
+    if (error) {
+      console.error(error);
+      process.exit(1);
+      return;
+    }
+
+    return;
+  }
+
   private writeFilesReport(): void {
     const reportFilesList = Mustache.render(this.templates.files, this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}index.html`, reportFilesList, writeError => {
-      if (writeError) {
-        console.error(writeError);
-        process.exit(1);
-        return;
-      }
-    });
+    fs.writeFile(`${this.folderToWriteReport}index.html`, reportFilesList, this.handleError);
   }
 
   private writeFeaturesReport(): void {
     const reportFeaturesList = Mustache.render(this.templates.features, this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, writeError => {
-      if (writeError) {
-        console.error(writeError);
-        process.exit(1);
-        return;
-      }
-    });
+    fs.writeFile(`${this.folderToWriteReport}features.html`, reportFeaturesList, this.handleError);
   }
 
   private writeScenariosReport(): void {
     const reportScenariosList = Mustache.render(this.templates.scenarios, this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}scenarios.html`, reportScenariosList, writeError => {
-      if (writeError) {
-        console.error(writeError);
-        process.exit(1);
-        return;
-      }
-    });
+    fs.writeFile(`${this.folderToWriteReport}scenarios.html`, reportScenariosList, this.handleError);
   }
 
   private writeStatesReport(): void {
     const reportStatesList = Mustache.render(this.templates.states, this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}states.html`, reportStatesList, writeError => {
-      if (writeError) {
-        console.error(writeError);
-        process.exit(1);
-        return;
-      }
-    });
+    fs.writeFile(`${this.folderToWriteReport}states.html`, reportStatesList, this.handleError);
   }
 
   private writeActionsReport(): void {
     const reportActionsList = Mustache.render(this.templates.actions, this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}actions.html`, reportActionsList, writeError => {
-      if (writeError) {
-        console.error(writeError);
-        process.exit(1);
-        return;
-      }
-    });
+    fs.writeFile(`${this.folderToWriteReport}actions.html`, reportActionsList, this.handleError);
   }
 
   private writeOutcomesReport(): void {
     const reportOutcomesList = Mustache.render(this.templates.outcomes  , this.templatesView, this.templatePartials);
-    fs.writeFile(`${this.folderToWriteReport}outcomes.html`, reportOutcomesList, writeError => {
-      if (writeError) {
-        console.error(writeError);
-        process.exit(1);
-        return;
-      }
-    });
+    fs.writeFile(`${this.folderToWriteReport}outcomes.html`, reportOutcomesList, this.handleError);
   }
 
   private async reportFeaturesFiles(readError: Error, readFiles: string[]): Promise<void> {
-    if (readError) {
-      console.error(readError);
-      process.exit(1);
-      return;
-    }
+    this.handleError(readError);
 
     this.gherkins = await this.readAllGherkins(readFiles);
     this.templates = await this.readAllTemplates();

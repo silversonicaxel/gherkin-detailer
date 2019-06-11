@@ -282,6 +282,29 @@ describe('#Reporter', () => {
     });
   });
 
+  describe('#handleError', () => {
+    it('should do nothing', () => {
+      const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
+
+      reporter['handleError'](null);
+
+      assert.notCalled(consoleStub);
+      assert.notCalled(processStub);
+    });
+
+    it('should return an error', () => {
+      const writeError = <unknown>'No file written';
+      const consoleStub = sandboxSet.stub(console, 'error');
+      const processStub = sandboxSet.stub(process, 'exit');
+
+      reporter['handleError'](<Error>writeError);
+
+      expect(consoleStub).to.have.been.calledWith(writeError);
+      expect(processStub).to.have.been.calledWith(1);
+    });
+  });
+
   describe('#writeFilesReport', () => {
     it('should call the rendering functionality', () => {
       const filesReportTemplate = '<html></html>';
@@ -507,17 +530,14 @@ describe('#Reporter', () => {
       assert.calledWith(writeOutcomesReportStub);
     });
 
-    it('should do nothing due to an error', () => {
-      const reporterReadAllGherkinsStub = sandboxSet.stub(reporter, 'readAllGherkins');
+    it('should do nothing due to an error', async () => {
       const readError = <unknown>'random error';
-      const consoleStub = sandboxSet.stub(console, 'error');
-      const processStub = sandboxSet.stub(process, 'exit');
+      const handleErrorReportStub = sandboxSet.stub(reporter, 'handleError');
 
-      reporter['reportFeaturesFiles'](<Error>readError, []);
+      await reporter['reportFeaturesFiles'](<Error>readError, []);
 
-      assert.notCalled(reporterReadAllGherkinsStub);
-      expect(consoleStub).to.have.been.calledWith(readError);
-      expect(processStub).to.have.been.calledWith(1);
+      assert.calledOnce(handleErrorReportStub);
+      assert.calledWith(handleErrorReportStub, readError);
     });
   });
 });

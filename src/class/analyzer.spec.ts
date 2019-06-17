@@ -35,19 +35,19 @@ describe('#Analyzer', () => {
     it('should initialize the report folder with default one', () => {
       const expectedGherkins = {
         files: [
-          { id: `fi-${indexReadFile}-0`, text: 'Feature: Extension Feature' },
-          { id: `fi-${indexReadFile}-1`, text: 'Scenario: Scenario Extension Feature' },
-          { id: `fi-${indexReadFile}-2`, text: 'Given an initial state is set' },
-          { id: `fi-${indexReadFile}-3`, text: 'When an extension action is taken' },
-          { id: `fi-${indexReadFile}-4`, text: 'Then an outcome happens' },
-          { id: `fi-${indexReadFile}-5`, text: 'Scenario Outline: Scenario Outline Feature with <a> and <b>' },
-          { id: `fi-${indexReadFile}-6`, text: 'Given an initial state is set' },
-          { id: `fi-${indexReadFile}-7`, text: 'When an action is taken' },
-          { id: `fi-${indexReadFile}-8`, text: 'Then an outcome happens' },
-          { id: `fi-${indexReadFile}-9`, text: 'Examples' },
-          { id: `fi-${indexReadFile}-10`, text: '| a | b |' },
-          { id: `fi-${indexReadFile}-11`, text: '| 1 | 2 |' },
-          { id: `fi-${indexReadFile}-12`, text: '| 4 | 3 |' }
+          { id: `fe-${indexReadFile}-0`, text: 'Feature: Extension Feature' },
+          { id: `sc-${indexReadFile}-0`, text: 'Scenario: Scenario Extension Feature' },
+          { id: `st-${indexReadFile}-0`, text: 'Given an initial state is set' },
+          { id: `ac-${indexReadFile}-0`, text: 'When an extension action is taken' },
+          { id: `ou-${indexReadFile}-0`, text: 'Then an outcome happens' },
+          { id: `sc-${indexReadFile}-1`, text: 'Scenario Outline: Scenario Outline Feature with <a> and <b>' },
+          { id: `st-${indexReadFile}-1`, text: 'Given an initial state is set' },
+          { id: `ac-${indexReadFile}-1`, text: 'When an action is taken' },
+          { id: `ou-${indexReadFile}-1`, text: 'Then an outcome happens' },
+          { id: '', text: 'Examples' },
+          { id: '', text: '| a | b |' },
+          { id: '', text: '| 1 | 2 |' },
+          { id: '', text: '| 4 | 3 |' }
         ],
         features: [
           { id: `fe-${indexReadFile}-0`, text: 'Extension Feature' }

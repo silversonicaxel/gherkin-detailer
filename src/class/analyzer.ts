@@ -22,36 +22,47 @@ export class Analyzer {
     const outcomes: AnalyzerRow[] = [];
     const files: AnalyzerRow[] = [];
     let rowAnalyzed: string | null;
+    let currentId = '';
     let currentReadRow = '';
+
 
     for (const listRow of listRows) {
       if (rowAnalyzed = this.getValidFeature(listRow)) {
-        features.push({ id: `fe-${index}-${features.length}`, text: rowAnalyzed});
         currentReadRow = 'feature';
+        currentId = `fe-${index}-${features.length}`;
+        features.push({ id: currentId, text: rowAnalyzed});
       } else if (rowAnalyzed = this.getValidScenarioOutline(listRow)) {
-        scenarios.push({ id: `sc-${index}-${scenarios.length}`, text: rowAnalyzed});
         currentReadRow = 'scenario';
+        currentId = `sc-${index}-${scenarios.length}`;
+        scenarios.push({ id: currentId, text: rowAnalyzed});
       } else if (rowAnalyzed = this.getValidScenario(listRow)) {
-        scenarios.push({ id: `sc-${index}-${scenarios.length}`, text: rowAnalyzed});
         currentReadRow = 'scenario';
+        currentId = `sc-${index}-${scenarios.length}`;
+        scenarios.push({ id: currentId, text: rowAnalyzed});
       } else if (rowAnalyzed = this.getValidState(listRow, currentReadRow)) {
-        states.push({ id: `st-${index}-${states.length}`, text: rowAnalyzed});
         currentReadRow = 'state';
+        currentId = `st-${index}-${states.length}`;
+        states.push({ id: currentId, text: rowAnalyzed});
       } else if (rowAnalyzed = this.getValidAction(listRow, currentReadRow)) {
-        actions.push({ id: `ac-${index}-${actions.length}`, text: rowAnalyzed});
         currentReadRow = 'action';
+        currentId = `ac-${index}-${actions.length}`;
+        actions.push({ id: currentId, text: rowAnalyzed});
       } else if (rowAnalyzed = this.getValidOutcome(listRow, currentReadRow)) {
-        outcomes.push({ id: `ou-${index}-${outcomes.length}`, text: rowAnalyzed});
         currentReadRow = 'outcome';
+        currentId = `ou-${index}-${outcomes.length}`;
+        outcomes.push({ id: currentId, text: rowAnalyzed});
       } else if (rowAnalyzed = this.getValidExampleTitle(listRow)) {
         currentReadRow = 'example';
+        currentId = '';
       } else if (rowAnalyzed = this.getValidExampleData(listRow, currentReadRow)) {
         currentReadRow = 'example';
+        currentId = '';
       } else {
+        currentId = '';
         continue;
       }
 
-      files.push({ id: `fi-${index}-${files.length}`, text: listRow});
+      files.push({ id: currentId, text: listRow});
     }
 
     return { files, features, scenarios, states, actions, outcomes };

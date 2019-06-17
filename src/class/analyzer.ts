@@ -1,6 +1,10 @@
+import FuzzySet = require('fuzzyset.js');
+
 export type AnalyzerRow = {
   id: string;
   text: string;
+  class?: string;
+  similarities?: string[];
 };
 
 export class Analyzer {
@@ -24,7 +28,6 @@ export class Analyzer {
     let rowAnalyzed: string | null;
     let currentId = '';
     let currentReadRow = '';
-
 
     for (const listRow of listRows) {
       if (rowAnalyzed = this.getValidFeature(listRow)) {
@@ -61,11 +64,38 @@ export class Analyzer {
         currentId = '';
         continue;
       }
-
       files.push({ id: currentId, text: listRow});
     }
 
     return { files, features, scenarios, states, actions, outcomes };
+  }
+
+  getSimilarities(gherkinsTexts: string[], gherkinsObjects: AnalyzerRow[]): any {
+    const similarities: any = { };
+
+    for (let index = 0; index < gherkinsObjects.length; index++) {
+      const totalGherkins = [...gherkinsTexts];
+      totalGherkins.splice(index, 1);
+      const fuzzySetHandler = FuzzySet(totalGherkins, false);
+      const fuzzySetReport = fuzzySetHandler.get(gherkinsObjects[index].text, [], 0.75);
+
+      if (fuzzySetReport && fuzzySetReport.length) {
+        const gherkinId = gherkinsObjects[index].id;
+        similarities[gherkinId] = { };
+        similarities[gherkinId].class = (fuzzySetReport[0][0] === 1) ? 'equal' : 'similar';
+        similarities[gherkinId].similarities = this.getListSimilarities(fuzzySetReport, gherkinsObjects, gherkinId);
+      }
+    }
+
+    return similarities;
+  }
+
+  private getListSimilarities(report: any[], gherkins: any, gherkinId: string) {
+    const similarGherkins = report.map((elem: any) => elem[1]);
+    return gherkins
+      .filter((elem: any) => elem.id !== gherkinId)
+      .filter((elem: any) => similarGherkins.includes(elem.text))
+      .map((elem: any) => elem.id);
   }
 
   private getValidFeature(listRow: string): string | null {

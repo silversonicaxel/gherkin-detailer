@@ -70,7 +70,7 @@ export class Reporter {
   }
 
   private async readAllGherkins(readFiles: string[]): Promise<string[]> {
-    const rowsFiles: any = [];
+    let rowsFiles: any = [];
 
     await Promise.all(
       readFiles
@@ -83,12 +83,56 @@ export class Reporter {
         })
     );
 
+    let gherkinsTexts = rowsFiles.map( (rowFile: any) => {
+      return rowFile.files.filter((file: any) => file.id !== '').map((file: any) => file.text);
+    });
+    gherkinsTexts = [].concat(...gherkinsTexts);
+
+    let gherkinsObjects = rowsFiles.map( (rowFile: any) => {
+      return rowFile.files.filter((file: any) => file.id !== '').map((file: any) => file);
+    });
+    gherkinsObjects = [].concat(...gherkinsObjects);
+
+    const similarities = this.analyzer.getSimilarities(gherkinsTexts, gherkinsObjects);
+
+    rowsFiles = rowsFiles.map( (rowFile: any) => {
+      rowFile.files = rowFile.files.map((file: any) => {
+        return this.mapFileElement(file, similarities);
+      });
+      rowFile.features = rowFile.features.map((file: any) => {
+        return this.mapFileElement(file, similarities);
+      });
+      rowFile.scenarios = rowFile.scenarios.map((file: any) => {
+        return this.mapFileElement(file, similarities);
+      });
+      rowFile.states = rowFile.states.map((file: any) => {
+        return this.mapFileElement(file, similarities);
+      });
+      rowFile.actions = rowFile.actions.map((file: any) => {
+        return this.mapFileElement(file, similarities);
+      });
+      rowFile.outcomes = rowFile.outcomes.map((file: any) => {
+        return this.mapFileElement(file, similarities);
+      });
+
+      return rowFile;
+    });
+
     return rowsFiles;
+  }
+
+  private mapFileElement(file: any, similarities: any): any {
+    if (similarities[file.id]) {
+      file.class = similarities[file.id].class;
+      file.similarities = similarities[file.id].similarities;
+    }
+    return file;
   }
 
   private async readAllTemplates(): Promise<ReporterTemplatesList> {
     const templatesNames = ['meta', 'menu', 'footer', 'files', 'features', 'scenarios', 'states', 'actions', 'outcomes'];
     const templates: any = { };
+
     await Promise.all(
       templatesNames
         .map(async(templateName: string) => {

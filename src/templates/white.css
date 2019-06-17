@@ -71,3 +71,9 @@ table tr .col-id {
 table tr .col-data {
   width: 100%;
 }
+table tr.similar td {
+  background-color: orange;
+}
+table tr.equal td {
+  background-color: red
+}

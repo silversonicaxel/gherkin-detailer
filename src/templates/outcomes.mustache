@@ -18,13 +18,19 @@
           <tr>
             <th class="col-id">&num;</th>
             <th class="col-data">{{file}}</th>
+            <th class="col-data">Similarities</th>
           </tr>
         </thead>
         <tbody>
           {{#outcomes}}
-          <tr>
+          <tr class="{{class}}">
             <td class="col-id">{{id}}</td>
             <td class="col-data">{{text}}</td>
+            <td class="col-data">
+              {{#similarities}}
+              {{.}}<br/>
+              {{/similarities}}
+            </td>
           </tr>
           {{/outcomes}}
         </tbody>

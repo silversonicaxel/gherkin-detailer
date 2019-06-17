@@ -38,12 +38,13 @@
     "npm": ">= 6.0.0"
   },
   "dependencies": {
+    "@types/fuzzyset.js": "^0.0.2",
     "@types/mustache": "^0.8.32",
     "commander": "^2.20.0",
     "del": "^4.1.1",
+    "fuzzyset.js": "^0.0.8",
     "moment": "^2.24.0",
-    "mustache": "^3.0.1",
-    "string-similarity": "^3.0.0"
+    "mustache": "^3.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

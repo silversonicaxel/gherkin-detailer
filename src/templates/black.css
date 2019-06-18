@@ -73,8 +73,10 @@ table tr .col-data {
   width: 100%;
 }
 table tr.similar td {
-  background-color: orange;
+  background-color: #663d00;
+  color:  #fff5e6;
 }
 table tr.equal td {
-  background-color: red
+  background-color: #800000;
+  color: #ffe6e6;
 }

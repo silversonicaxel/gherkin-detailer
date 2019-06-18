@@ -70,7 +70,7 @@ table tr .col-id {
   width: auto;
 }
 table tr .col-data {
-  width: 100%;
+  width: 50%;
 }
 table tr.similar td, table tr.similar td a {
   background-color: #663d00;

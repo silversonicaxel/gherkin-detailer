@@ -2,7 +2,7 @@ Feature: Base Feature
 
   Scenario: Scenario Base Feature
     Given an initial state is set
-    When an action is taken
+    When something never read is read
     Then an outcome happens
 
   Scenario: Different Scenario Base Feature

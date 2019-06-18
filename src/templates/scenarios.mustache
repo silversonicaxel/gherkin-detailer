@@ -23,12 +23,12 @@
         </thead>
         <tbody>
           {{#scenarios}}
-          <tr class="{{class}}">
+          <tr class="{{class}}" id="{{id}}">
             <td class="col-id">{{id}}</td>
             <td class="col-data">{{text}}</td>
             <td class="col-data">
               {{#similarities}}
-              {{.}}<br/>
+              <a href="./{{type}}.html#{{id}}" alt="{{text}}" title="{{text}}">{{id}}</a><br/>
               {{/similarities}}
             </td>
           </tr>

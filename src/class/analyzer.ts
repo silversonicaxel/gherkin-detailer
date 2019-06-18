@@ -1,10 +1,16 @@
 import FuzzySet = require('fuzzyset.js');
 
+export type AnalyzerSimilarity = {
+  id: string;
+  type: string;
+  text: string;
+};
+
 export type AnalyzerRow = {
   id: string;
   text: string;
   class?: string;
-  similarities?: string[];
+  similarities?: AnalyzerSimilarity[];
 };
 
 export class Analyzer {
@@ -90,12 +96,45 @@ export class Analyzer {
     return similarities;
   }
 
-  private getListSimilarities(report: any[], gherkins: any, gherkinId: string) {
+  private getListSimilarities(report: any[], gherkins: any, gherkinId: string): AnalyzerSimilarity[] {
     const similarGherkins = report.map((elem: any) => elem[1]);
     return gherkins
       .filter((elem: any) => elem.id !== gherkinId)
       .filter((elem: any) => similarGherkins.includes(elem.text))
-      .map((elem: any) => elem.id);
+      .map((elem: any) => <AnalyzerSimilarity>{ id: elem.id, type: this.getSimilarityLinkType(elem.id), text: elem.text });
+  }
+
+  private getSimilarityLinkType(similarityId: string): string {
+    const similarityPrefix = similarityId.substring(0, 2);
+
+    let similarityType: string;
+    switch (similarityPrefix) {
+      case 'fe':
+        similarityType = 'features';
+        break;
+
+      case 'sc':
+        similarityType =  'scenarios';
+        break;
+
+      case 'st':
+        similarityType =  'states';
+        break;
+
+      case 'ac':
+        similarityType =  'actions';
+        break;
+
+      case 'ou':
+        similarityType =  'outcomes';
+        break;
+
+      default:
+        similarityType = '';
+        break;
+    }
+
+    return similarityType;
   }
 
   private getValidFeature(listRow: string): string | null {

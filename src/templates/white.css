@@ -71,11 +71,11 @@ table tr .col-id {
 table tr .col-data {
   width: 100%;
 }
-table tr.similar td {
+table tr.similar td, table tr.similar td a {
   background-color:  #fff5e6;
   color: #ff9900;
 }
-table tr.equal td {
+table tr.equal td, table tr.equal td a {
   background-color: #ffe6e6;
   color: #cc0000;
 }

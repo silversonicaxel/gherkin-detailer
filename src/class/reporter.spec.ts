@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import { spy, assert, createSandbox, useFakeTimers } from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import { Reporter } from './reporter';
-import { Analyzer } from './analyzer';
+import { Analyzer, AnalyzerRow } from './analyzer';
 import { Reader } from './reader';
 import { ConfigurerData } from './configurer';
 import * as fs from 'fs';
@@ -197,6 +197,28 @@ describe('#Reporter', () => {
       assert.calledWith(getRowsFeatureFileStub, readContentFeatureFileData);
       assert.calledOnce(getGherkinsStub);
       assert.calledWith(getGherkinsStub, [getRowsFeatureFileData], getRowsFeatureFileIndex);
+    });
+  });
+
+  describe('#addSimilarityInfo', () => {
+    it('should provide file with no added info', () => {
+      const file = <AnalyzerRow> { id: 'id', text: 'text' };
+      const notEnrichedFile = reporter['addSimilarityInfo'](file, []);
+
+      expect(notEnrichedFile).to.equal(file);
+    });
+
+    it('should provide file enriched with added info', () => {
+      const file = <AnalyzerRow> { id: 'id', text: 'text' };
+      const similarities: any = { };
+      similarities['id'] = {
+        class: 'c',
+        similarities: { }
+      };
+      const enrichedFile = reporter['addSimilarityInfo'](file, similarities);
+
+      expect(enrichedFile.class).to.equal(file.class);
+      expect(enrichedFile.similarities).to.equal(file.similarities);
     });
   });
 

@@ -1,5 +1,5 @@
 import { Reader } from './reader';
-import { Analyzer } from './analyzer';
+import { Analyzer, AnalyzerRow } from './analyzer';
 import { ConfigurerData } from './configurer';
 import * as Mustache from 'mustache';
 import * as fs from 'fs';
@@ -97,22 +97,22 @@ export class Reporter {
 
     rowsFiles = rowsFiles.map( (rowFile: any) => {
       rowFile.files = rowFile.files.map((file: any) => {
-        return this.mapFileElement(file, similarities);
+        return this.addSimilarityInfo(file, similarities);
       });
       rowFile.features = rowFile.features.map((file: any) => {
-        return this.mapFileElement(file, similarities);
+        return this.addSimilarityInfo(file, similarities);
       });
       rowFile.scenarios = rowFile.scenarios.map((file: any) => {
-        return this.mapFileElement(file, similarities);
+        return this.addSimilarityInfo(file, similarities);
       });
       rowFile.states = rowFile.states.map((file: any) => {
-        return this.mapFileElement(file, similarities);
+        return this.addSimilarityInfo(file, similarities);
       });
       rowFile.actions = rowFile.actions.map((file: any) => {
-        return this.mapFileElement(file, similarities);
+        return this.addSimilarityInfo(file, similarities);
       });
       rowFile.outcomes = rowFile.outcomes.map((file: any) => {
-        return this.mapFileElement(file, similarities);
+        return this.addSimilarityInfo(file, similarities);
       });
 
       return rowFile;
@@ -121,7 +121,7 @@ export class Reporter {
     return rowsFiles;
   }
 
-  private mapFileElement(file: any, similarities: any): any {
+  private addSimilarityInfo(file: AnalyzerRow, similarities: any): AnalyzerRow {
     if (similarities[file.id]) {
       file.class = similarities[file.id].class;
       file.similarities = similarities[file.id].similarities;

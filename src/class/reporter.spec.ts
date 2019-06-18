@@ -198,6 +198,13 @@ describe('#Reporter', () => {
       assert.calledOnce(getGherkinsStub);
       assert.calledWith(getGherkinsStub, [getRowsFeatureFileData], getRowsFeatureFileIndex);
     });
+
+    it('should analyze similarities', () => {
+      const fileList = ['./fixtures/features/base.feature'];
+      reporter['readAllGherkins'](fileList);
+
+      expect(analyzer).to.respondTo('getSimilarities');
+    });
   });
 
   describe('#addSimilarityInfo', () => {

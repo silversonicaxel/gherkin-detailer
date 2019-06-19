@@ -118,13 +118,45 @@ describe('#Analyzer', () => {
     });
   });
 
-  describe('#getSimilarities', () => {
-    it('should return a similarities array', () => {
-    });
-  });
-
   describe('#getListSimilarities', () => {
+    it('should return a similarities array empty', () => {
+      const report = [
+        [ 0.8, 'Feature: Copy Feature' ],
+        [ 0.7945521577046603, 'Feature: Base Feature' ]
+      ];
+      const gherkins = [ { id: 'fe-0-0', text: 'Feature: Outline Feature' } ];
+      const similarities = analyzer['getListSimilarities'](report, gherkins, 'fe-0-1');
+      const expectedSimilarities = <any>[];
+
+      expect(similarities).to.be.deep.equal(expectedSimilarities);
+    });
+
     it('should return a similarities array', () => {
+      const report = [
+        [ 0.8, 'Feature: Copy Feature' ],
+        [ 0.7945521577046603, 'Feature: Base Feature' ]
+      ];
+      const gherkins = [ { id: 'fe-0-0', text: 'Feature: Base Feature' } ];
+      const similarities = analyzer['getListSimilarities'](report, gherkins, 'fe-0-1');
+      const expectedSimilarities = <any>[{
+        id: 'fe-0-0',
+        text: 'Feature: Base Feature',
+        type: 'features'
+      }];
+
+      expect(similarities).to.be.deep.equal(expectedSimilarities);
+    });
+
+    it('should return a similarities array except itself', () => {
+      const report = [
+        [ 0.8, 'Feature: Copy Feature' ],
+        [ 0.7945521577046603, 'Feature: Base Feature' ]
+      ];
+      const gherkins = [ { id: 'fe-0-0', text: 'Feature: Base Feature' } ];
+      const similarities = analyzer['getListSimilarities'](report, gherkins, 'fe-0-0');
+      const expectedSimilarities = <any>[];
+
+      expect(similarities).to.be.deep.equal(expectedSimilarities);
     });
   });
 

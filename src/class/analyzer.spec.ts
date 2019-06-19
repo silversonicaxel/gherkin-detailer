@@ -118,6 +118,36 @@ describe('#Analyzer', () => {
     });
   });
 
+  describe('#getSimilarities', () => {
+    it('should return a similarities array empty', () => {
+      const gherkinsTexts = ['a', 'b', 'c'];
+      const gherkinsObjects = [
+        { id: '1', text: 'a'},
+        { id: '2', text: 'b'},
+        { id: '3', text: 'c'},
+      ];
+
+      const similarities = analyzer['getSimilarities'](gherkinsTexts, gherkinsObjects);
+
+      expect(similarities).to.be.deep.equal({ });
+    });
+
+    it('should return a similarities array', () => {
+      const gherkinsTexts = ['a', 'b', 'c', 'bb', 'bbc'];
+      const gherkinsObjects = [
+        { id: '1', text: 'a'},
+        { id: '2', text: 'b'},
+        { id: '3', text: 'c'},
+        { id: '4', text: 'bb'},
+        { id: '5', text: 'bbc'},
+      ];
+
+      const similarities = analyzer['getSimilarities'](gherkinsTexts, gherkinsObjects);
+
+      expect(similarities).not.to.be.deep.equal({ });
+    });
+  });
+
   describe('#getListSimilarities', () => {
     it('should return a similarities array empty', () => {
       const report = [

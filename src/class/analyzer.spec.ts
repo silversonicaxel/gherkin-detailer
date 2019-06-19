@@ -118,6 +118,48 @@ describe('#Analyzer', () => {
     });
   });
 
+  describe('#getSimilarities', () => {
+    it('should return a similarities array', () => {
+    });
+  });
+
+  describe('#getListSimilarities', () => {
+    it('should return a similarities array', () => {
+    });
+  });
+
+  describe('#getSimilarityLinkType', () => {
+    it('should return features type', () => {
+      const type = analyzer['getSimilarityLinkType']('fe-0-1');
+      expect(type).to.be.deep.equal('features');
+    });
+
+    it('should return scenarios type', () => {
+      const type = analyzer['getSimilarityLinkType']('sc-0-1');
+      expect(type).to.be.deep.equal('scenarios');
+    });
+
+    it('should return states type', () => {
+      const type = analyzer['getSimilarityLinkType']('st-0-1');
+      expect(type).to.be.deep.equal('states');
+    });
+
+    it('should return actions type', () => {
+      const type = analyzer['getSimilarityLinkType']('ac-0-1');
+      expect(type).to.be.deep.equal('actions');
+    });
+
+    it('should return outcomes type', () => {
+      const type = analyzer['getSimilarityLinkType']('ou-0-1');
+      expect(type).to.be.deep.equal('outcomes');
+    });
+
+    it('should return no type', () => {
+      const type = analyzer['getSimilarityLinkType']('');
+      expect(type).to.be.deep.equal('');
+    });
+  });
+
   describe('#getValidScenarioOutline', () => {
     it('should return a valid scenario outline ', () => {
       const scenarioOutlineText = 'A does B';

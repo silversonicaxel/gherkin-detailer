@@ -1,7 +1,7 @@
 {
   "name": "gherkin-detailer",
   "version": "1.2.0",
-  "description": "gherkin-detailer is a tool that check the gherkins included in you project and list them",
+  "description": "gherkin-detailer is a tool that check the gherkins included in you project and lists them, highlights their similarities.",
   "license": "MIT",
   "scripts": {
     "lint": "tslint src/**/*.ts",
@@ -103,6 +103,8 @@
     "scenarios",
     "states",
     "actions",
-    "outcomes"
+    "outcomes",
+    "list",
+    "similarities"
   ]
 }

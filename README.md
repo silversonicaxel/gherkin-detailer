@@ -2,7 +2,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/silversonicaxel/gherkin-detailer/badge.svg?branch=master)](https://coveralls.io/github/silversonicaxel/gherkin-detailer?branch=master)
 
 # gherkin-detailer
-gherkin-detailer is a tool that checks the gherkin files included in you project and list them, highlighting some of their details.
+gherkin-detailer is a tool that checks the gherkin files included in you project and:
+* list them per type - _to create a general total overview_
+* highlight similarities - _to prevent duplication of code for similar situations_
 
 ## Documentation
 * [Summary](SUMMARY.md)
@@ -16,6 +18,8 @@ gherkin-detailer is a tool that generates HTML reports related to the gherkins t
 * States list (containing the simple list of all the **given** - states)
 * Actions list (containing the simple list of all the **when** - actions)
 * Outcomes list (containing the simple list of all the **then** - outcomes)
+
+Every detail of every section has a background color that highlight potential similarities across the gherkins that might hide duplication of code within the project.
 
 ## Requirements
 * node 10.12+
@@ -86,6 +90,3 @@ Usage: gherkin-detailer [options] <option>
     -h, --help                              Output usage information
 
 ```
-
-## Future improvements
-* Management of similarities in Gherkins

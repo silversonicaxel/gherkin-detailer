@@ -1,3 +1,11 @@
+## 2.0.0 (June 2, 2019)
+
+### Added
+
+* Management of similarities in Gherkins
+* Upgrade libraries
+
+
 ## 1.2.0 (April 22, 2019)
 
 ### Added

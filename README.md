@@ -21,6 +21,22 @@ gherkin-detailer is a tool that generates HTML reports related to the gherkins t
 
 Every detail of every section has a background color that highlight potential similarities across the gherkins that might hide duplication of code within the project.
 
+## Examples
+![example 1](./example1.png "example 1")
+This first example shows the Files section, and it lists the entire gherkins in all _*.feature_ files. This page is the perfect documentation for the project, separated per file and describing all specific use cases.
+
+The colour shows extra information.
+* The red ones show the equal elements of every gherkins, so the developer should immediately understand that those sentences (actions, outcomes, scenarios, etc...) represent always the same entity and that there should be just one specific code associated to them all.
+* The orange one show the similar elements of every gherkins, so the developer should eventually check if those similarity are correct and really represent different entity with different associated code, or maybe they might hide some errors and duplication of code.
+
+---
+
+![example 2](./example2.png "example 2")
+The second example shows the Actions section, and it lists all the actions
+
+The menu help the developer to navigate to Files to have a general overview of all the gherkins of the project, or could chose specific elements of every gherkins, from Features to Scenarios, from States to Actions and Outcomes.
+
+
 ## Requirements
 * node 10.12+
 * npm 6.0+

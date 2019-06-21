@@ -195,6 +195,18 @@
 <li>Outcomes list (containing the simple list of all the <strong>then</strong> - outcomes)</li>
 </ul>
 <p>Every detail of every section has a background color that highlight potential similarities across the gherkins that might hide duplication of code within the project.</p>
+<h2 id="examples">Examples</h2>
+<p><img src="example1.png" alt="example 1" title="example 1">
+This first example shows the Files section, and it lists the entire gherkins in all <em>*.<a href="GLOSSARY.html#feature" class="glossary-term" title="A feature is a Use Case that describes a specific function of the software being tested.">feature</a></em> files. This page is the perfect documentation for the project, separated per file and describing all specific use cases.</p>
+<p>The colour shows extra information.</p>
+<ul>
+<li>The red ones show the equal elements of every gherkins, so the developer should immediately understand that those sentences (actions, outcomes, scenarios, etc...) represent always the same entity and that there should be just one specific code associated to them all.</li>
+<li>The orange one show the similar elements of every gherkins, so the developer should eventually check if those similarity are correct and really represent different entity with different associated code, or maybe they might hide some errors and duplication of code.</li>
+</ul>
+<hr>
+<p><img src="example2.png" alt="example 2" title="example 2">
+The second example shows the Actions section, and it lists all the actions</p>
+<p>The menu help the developer to navigate to Files to have a general overview of all the gherkins of the project, or could chose specific elements of every gherkins, from Features to Scenarios, from States to Actions and Outcomes.</p>
 <h2 id="requirements">Requirements</h2>
 <ul>
 <li>node 10.12+</li>
@@ -283,7 +295,7 @@ Usage: gherkin-detailer [options] &lt;option&gt;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"EXAMPLE.md","ref":"EXAMPLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-06-19T14:25:19.027Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-19T14:30:29.205Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Examples","level":"1.2","depth":1,"path":"EXAMPLE.md","ref":"EXAMPLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-06-21T21:44:15.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-21T21:46:42.577Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

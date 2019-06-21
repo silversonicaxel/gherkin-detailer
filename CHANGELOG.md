@@ -1,4 +1,11 @@
-## 2.0.0 (June 2, 2019)
+## 2.0.1 (June 21, 2019)
+
+### Added
+
+* README.md examples with images
+
+
+## 2.0.0 (June 20, 2019)
 
 ### Added
 

@@ -98,26 +98,6 @@ describe('#Analyzer', () => {
     });
   });
 
-  describe('#getValidFeature', () => {
-    it('should return a valid feature', () => {
-      const featureText = 'Create menu';
-      const validFeature = `Feature: ${featureText}`;
-
-      const expectedFeature = analyzer['getValidFeature'](validFeature);
-
-      expect(expectedFeature).to.be.not.equal('');
-      expect(expectedFeature).to.be.deep.equal(featureText);
-    });
-
-    it('should not return a valid feature', () => {
-      const invalidFeature = 'This is not valid';
-
-      const expectedFeature = analyzer['getValidFeature'](invalidFeature);
-
-      expect(expectedFeature).to.be.deep.equal(null);
-    });
-  });
-
   describe('#getSimilarities', () => {
     it('should return a similarities array empty', () => {
       const gherkinsTexts = ['a', 'b', 'c'];
@@ -222,6 +202,26 @@ describe('#Analyzer', () => {
     });
   });
 
+  describe('#getValidFeature', () => {
+    it('should return a valid feature', () => {
+      const featureText = 'Create menu';
+      const validFeature = `Feature: ${featureText}`;
+
+      const expectedFeature = analyzer['getValidFeature'](validFeature);
+
+      expect(expectedFeature).to.be.not.equal('');
+      expect(expectedFeature).to.be.deep.equal(featureText);
+    });
+
+    it('should not return an invalid feature', () => {
+      const invalidFeature = 'This is not valid';
+
+      const expectedFeature = analyzer['getValidFeature'](invalidFeature);
+
+      expect(expectedFeature).to.be.deep.equal(null);
+    });
+  });
+
   describe('#getValidScenarioOutline', () => {
     it('should return a valid scenario outline ', () => {
       const scenarioOutlineText = 'A does B';
@@ -233,7 +233,7 @@ describe('#Analyzer', () => {
       expect(expectedScenario).to.be.deep.equal(scenarioOutlineText);
     });
 
-    it('should not return a valid scenario outline', () => {
+    it('should not return an invalid scenario outline', () => {
       const invalidScenarioOutline = 'This is not valid';
 
       const expectedScenarioOutline = analyzer['getValidScenarioOutline'](invalidScenarioOutline);
@@ -253,7 +253,7 @@ describe('#Analyzer', () => {
       expect(expectedScenario).to.be.deep.equal(scenarioText);
     });
 
-    it('should not return a valid scenario', () => {
+    it('should not return an in valid scenario', () => {
       const invalidScenario = 'This is not valid';
 
       const expectedScenario = analyzer['getValidScenario'](invalidScenario);
@@ -293,7 +293,7 @@ describe('#Analyzer', () => {
       expect(expectedState).to.be.deep.equal(stateText);
     });
 
-    it('should not return a valid state', () => {
+    it('should not return an invalid state', () => {
       const invalidState = 'This is not valid';
 
       const expectedState = analyzer['getValidState'](invalidState, '');
@@ -333,7 +333,7 @@ describe('#Analyzer', () => {
       expect(expectedAction).to.be.deep.equal(actionText);
     });
 
-    it('should not return a valid action', () => {
+    it('should not return an invalid action', () => {
       const invalidAction = 'This is not valid';
 
       const expectedAction = analyzer['getValidAction'](invalidAction, '');
@@ -373,7 +373,7 @@ describe('#Analyzer', () => {
       expect(expectedOutcome).to.be.deep.equal(outcomeText);
     });
 
-    it('should not return a valid outcome', () => {
+    it('should not return n invalid outcome', () => {
       const invalidOutcome = 'This is not valid';
 
       const expectedOutcome = analyzer['getValidOutcome'](invalidOutcome, '');

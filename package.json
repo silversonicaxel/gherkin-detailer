@@ -43,7 +43,7 @@
     "commander": "^5.1.0",
     "del": "^5.1.0",
     "fuzzyset.js": "^1.0.5",
-    "moment": "^2.24.0",
+    "moment": "^2.25.3",
     "mustache": "^3.0.3"
   },
   "devDependencies": {

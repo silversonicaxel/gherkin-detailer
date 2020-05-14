@@ -47,13 +47,13 @@
     "mustache": "^3.0.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.2",
+    "@types/chai": "^4.2.11",
     "@types/del": "^4.0.0",
     "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.4",
-    "@types/sinon": "^7.0.13",
-    "@types/sinon-chai": "^3.2.3",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.1",
+    "@types/sinon": "^9.0.0",
+    "@types/sinon-chai": "^3.2.4",
     "chai": "^4.2.0",
     "coveralls": "^3.0.6",
     "gitbook-cli": "^2.3.2",
@@ -62,10 +62,10 @@
     "nyc": "^14.1.1",
     "sinon": "^7.4.2",
     "sinon-chai": "^3.3.0",
-    "source-map-support": "^0.5.13",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.2"
+    "source-map-support": "^0.5.19",
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.2"
   },
   "nyc": {
     "include": [

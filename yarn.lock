@@ -1574,10 +1574,10 @@ function-bind@^1.0.2, function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
-fuzzyset.js@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/fuzzyset.js/-/fuzzyset.js-0.0.8.tgz#398311fb54a5f84221db2cb143ac8cf1e523ae50"
-  integrity sha512-wymI6DYJgCBDFUrIyA/M2gIjJPEWj40pnCf04+Dma0PaprQRrTRh9/Cmz1wl9jCJxA+iqrCqNrGYuq7lVOtzXQ==
+fuzzyset.js@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/fuzzyset.js/-/fuzzyset.js-1.0.5.tgz#470a699bc8fbcf71f8361303e4c4f80dcdee942f"
+  integrity sha512-n9S1vbUGmcKEpnDaXEGlKBTxgkq5VeuNNoaB135hpFrUYn7yCp3KVhB0EP3GchoDfST9tVoacAC4djgo479EJA==
 
 gauge@~1.2.5:
   version "1.2.7"

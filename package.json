@@ -42,7 +42,7 @@
     "@types/mustache": "^0.8.32",
     "commander": "^5.1.0",
     "del": "^5.1.0",
-    "fuzzyset.js": "^0.0.8",
+    "fuzzyset.js": "^1.0.5",
     "moment": "^2.24.0",
     "mustache": "^3.0.3"
   },

@@ -39,12 +39,12 @@
   },
   "dependencies": {
     "@types/fuzzyset.js": "^0.0.2",
-    "@types/mustache": "^0.8.32",
+    "@types/mustache": "^4.0.1",
     "commander": "^5.1.0",
     "del": "^5.1.0",
     "fuzzyset.js": "^1.0.5",
     "moment": "^2.25.3",
-    "mustache": "^3.0.3"
+    "mustache": "^4.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",

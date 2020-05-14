@@ -1,6 +1,6 @@
 {
   "name": "gherkin-detailer",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "gherkin-detailer is a tool that check the gherkins included in you project and lists them, highlights their similarities.",
   "license": "MIT",
   "scripts": {

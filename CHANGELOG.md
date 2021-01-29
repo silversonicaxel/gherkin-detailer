@@ -1,3 +1,10 @@
+## 2.2.0 (January 29, 2021)
+
+### Added
+
+* Upgraded libraries
+
+
 ## 2.1.4 (May 14, 2020)
 
 ### Added

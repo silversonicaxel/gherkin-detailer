@@ -1,3 +1,38 @@
+## 2.1.4 (May 14, 2020)
+
+### Added
+
+* Upgraded libraries
+
+
+## 2.1.3 (September 9, 2019)
+
+### Added
+
+* Upgraded libraries
+
+
+## 2.1.2 (August 10, 2019)
+
+### Added
+
+* Upgraded libraries
+
+
+## 2.1.1 (July 28, 2019)
+
+### Added
+
+* Upgraded libraries
+
+
+## 2.1.0 (July 17, 2019)
+
+### Added
+
+* Improved unit tests
+
+
 ## 2.0.1 (June 21, 2019)
 
 ### Added

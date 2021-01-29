@@ -3,7 +3,7 @@ import { spy, assert, createSandbox, SinonSpy } from 'sinon';
 import * as program from 'commander';
 import { expect } from 'chai';
 
-const defaultTheme = 'white'
+// const defaultTheme = 'white';
 
 Object.defineProperty(program, 'analysis', {
   configurable: true,

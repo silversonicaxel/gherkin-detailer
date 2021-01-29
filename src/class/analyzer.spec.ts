@@ -112,7 +112,7 @@ describe('#Analyzer', () => {
       expect(similarities).to.be.deep.equal({ });
     });
 
-    it('should return a similarities array', () => {
+    it('should return a similarities array due to similar entities', () => {
       const gherkinsTexts = ['a', 'b', 'c', 'bb', 'bbc'];
       const gherkinsObjects = [
         { id: '1', text: 'a'},
@@ -120,6 +120,21 @@ describe('#Analyzer', () => {
         { id: '3', text: 'c'},
         { id: '4', text: 'bb'},
         { id: '5', text: 'bbc'},
+      ];
+
+      const similarities = analyzer['getSimilarities'](gherkinsTexts, gherkinsObjects);
+
+      expect(similarities).not.to.be.deep.equal({ });
+    });
+
+    it('should return a similarities array due to equal entities', () => {
+      const gherkinsTexts = ['a', 'b', 'c', 'd'];
+      const gherkinsObjects = [
+        { id: '1', text: 'a'},
+        { id: '2', text: 'b'},
+        { id: '3', text: 'c'},
+        { id: '4', text: 'd'},
+        { id: '5', text: 'd'},
       ];
 
       const similarities = analyzer['getSimilarities'](gherkinsTexts, gherkinsObjects);

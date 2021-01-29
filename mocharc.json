@@ -1,0 +1,9 @@
+{
+  "full-trace": true,
+  "require" : [
+    "ts-node/register",
+    "source-map-support/register"
+  ],
+  "spec": "src/class/**/*.spec.ts",
+  "watch-extensions": "ts"
+}

@@ -3,8 +3,6 @@ import { spy, assert, createSandbox, SinonSpy } from 'sinon';
 import * as program from 'commander';
 import { expect } from 'chai';
 
-// const defaultTheme = 'white';
-
 Object.defineProperty(program, 'analysis', {
   configurable: true,
   value: ''
@@ -13,10 +11,6 @@ Object.defineProperty(program, 'output', {
   configurable: true,
   value: ''
 });
-/*Object.defineProperty(program, 'theme', {
-  configurable: true,
-  value: defaultTheme
-});*/
 
 describe('#Configurer', () => {
   const configurer = new Configurer();
@@ -123,47 +117,5 @@ describe('#Configurer', () => {
         value: ''
       });
     });
-
-    /*it('should return customized report theme', () => {
-      const theme = 'black';
-      const expectedConfigurerData = <ConfigurerData>{
-        analysisFolder: '',
-        outputFolder: '',
-        theme: theme
-      };
-
-      Object.defineProperty(program, 'theme', {
-        value: theme
-      });
-
-      const data = configurer.fetchData();
-
-      expect(data).to.deep.equal(expectedConfigurerData);
-
-      Object.defineProperty(program, 'theme', {
-        value: defaultTheme
-      });
-    });
-
-    it('should return default report theme', () => {
-      const theme = 'white';
-      const expectedConfigurerData = <ConfigurerData>{
-        analysisFolder: '',
-        outputFolder: '',
-        theme: 'white'
-      };
-
-      Object.defineProperty(program, 'theme', {
-        value: theme
-      });
-
-      const data = configurer.fetchData();
-
-      expect(data).to.deep.equal(expectedConfigurerData);
-
-      Object.defineProperty(program, 'theme', {
-        value: defaultTheme
-      });
-    });*/
   });
 });

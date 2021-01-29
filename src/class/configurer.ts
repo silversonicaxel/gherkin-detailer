@@ -15,6 +15,7 @@ export class Configurer {
     const version = '2.1.4';
 
     program
+      .storeOptionsAsProperties(true)
       .version(version, '-v, --version')
       .allowUnknownOption()
       .option('-a, --analysis [analysis]', 'Select folder to analyse')
@@ -24,9 +25,11 @@ export class Configurer {
   }
 
   fetchData(): ConfigurerData {
-    const userAnalysisFolder = program.analysis || '';
-    const userOutputFolder = program.output || '';
-    const userTheme = program.theme;
+    const opts = program.opts();
+
+    const userAnalysisFolder = opts.analysis || '';
+    const userOutputFolder = opts.output || '';
+    const userTheme = opts.theme;
 
     return {
       analysisFolder: userAnalysisFolder,

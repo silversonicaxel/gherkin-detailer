@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-      "lib": [ "es7", "dom" ],
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "dist",
-      "strict": true,
-      "noImplicitAny": true,
-      "moduleResolution": "node",
-      "sourceMap": false
+    "lib": [ "es7", "dom" ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "sourceMap": false,
+    "strict": true,
+    "target": "es6"
   },
   "exclude": [
-      "node_modules",
-      "**/*.spec.ts",
+    "node_modules",
+    "**/*.spec.ts",
   ],
   "include": [
-      "src/**/*"
+    "src/**/*"
   ]
 }

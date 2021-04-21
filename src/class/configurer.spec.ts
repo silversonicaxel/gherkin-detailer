@@ -1,20 +1,19 @@
 import { Configurer, ConfigurerData } from './configurer';
 import { spy, assert, createSandbox, SinonSpy } from 'sinon';
-import * as program from 'commander';
 import { expect } from 'chai';
-
-Object.defineProperty(program, 'analysis', {
-  configurable: true,
-  value: ''
-});
-Object.defineProperty(program, 'output', {
-  configurable: true,
-  value: ''
-});
 
 describe('#Configurer', () => {
   const configurer = new Configurer();
   let sandboxSet: any;
+
+  Object.defineProperty(configurer['program'], 'analysis', {
+    configurable: true,
+    value: ''
+  });
+  Object.defineProperty(configurer['program'], 'output', {
+    configurable: true,
+    value: ''
+  });
 
   beforeEach(() => {
     sandboxSet = createSandbox();
@@ -37,28 +36,32 @@ describe('#Configurer', () => {
     let versionStub: SinonSpy<any, any>;
     let allowUnknownOptionStub: SinonSpy<any, any>;
     let optionStub: SinonSpy<any, any>;
+    let addOptionStub: SinonSpy<any, any>;
     let parseStub: SinonSpy<any, any>;
 
     beforeEach(() => {
-      storeOptionsAsPropertiesStub = sandboxSet.stub(program, 'storeOptionsAsProperties').returns(program);
-      versionStub = sandboxSet.stub(program, 'version').returns(program);
-      allowUnknownOptionStub = sandboxSet.stub(program, 'allowUnknownOption').returns(program);
-      optionStub = sandboxSet.stub(program, 'option').returns(program);
-      parseStub = sandboxSet.stub(program, 'parse').returns(program);
+      storeOptionsAsPropertiesStub = sandboxSet.stub(configurer['program'], 'storeOptionsAsProperties').returns(configurer['program']);
+      versionStub = sandboxSet.stub(configurer['program'], 'version').returns(configurer['program']);
+      allowUnknownOptionStub = sandboxSet.stub(configurer['program'], 'allowUnknownOption').returns(configurer['program']);
+      optionStub = sandboxSet.stub(configurer['program'], 'option').returns(configurer['program']);
+      addOptionStub = sandboxSet.stub(configurer['program'], 'addOption').returns(configurer['program']);
+      parseStub = sandboxSet.stub(configurer['program'], 'parse').returns(configurer['program']);
     });
 
     it('should setup the program options', () => {
       configurer['setupOptions']();
 
-      expect(program).to.respondTo('storeOptionsAsProperties');
-      expect(program).to.respondTo('version');
-      expect(program).to.respondTo('allowUnknownOption');
-      expect(program).to.respondTo('option');
-      expect(program).to.respondTo('parse');
+      expect(configurer['program']).to.respondTo('storeOptionsAsProperties');
+      expect(configurer['program']).to.respondTo('version');
+      expect(configurer['program']).to.respondTo('allowUnknownOption');
+      expect(configurer['program']).to.respondTo('option');
+      expect(configurer['program']).to.respondTo('addOption');
+      expect(configurer['program']).to.respondTo('parse');
       assert.calledOnce(storeOptionsAsPropertiesStub);
       assert.calledOnce(versionStub);
       assert.calledOnce(allowUnknownOptionStub);
-      assert.callCount(optionStub, 3);
+      assert.callCount(optionStub, 2);
+      assert.calledOnce(addOptionStub);
       assert.calledOnce(parseStub);
     });
   });
@@ -84,7 +87,7 @@ describe('#Configurer', () => {
         theme: 'white'
       };
 
-      Object.defineProperty(program, 'analysis', {
+      Object.defineProperty(configurer['program'], 'analysis', {
         value: analysisFolder
       });
 
@@ -92,7 +95,7 @@ describe('#Configurer', () => {
 
       expect(data).to.deep.equal(expectedConfigurerData);
 
-      Object.defineProperty(program, 'analysis', {
+      Object.defineProperty(configurer['program'], 'analysis', {
         value: ''
       });
     });
@@ -105,7 +108,7 @@ describe('#Configurer', () => {
         theme: 'white'
       };
 
-      Object.defineProperty(program, 'output', {
+      Object.defineProperty(configurer['program'], 'output', {
         value: outputFolder
       });
 
@@ -113,7 +116,7 @@ describe('#Configurer', () => {
 
       expect(data).to.deep.equal(expectedConfigurerData);
 
-      Object.defineProperty(program, 'output', {
+      Object.defineProperty(configurer['program'], 'output', {
         value: ''
       });
     });

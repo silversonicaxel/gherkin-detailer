@@ -1,4 +1,4 @@
-import * as program from 'commander';
+import { Command, Option } from 'commander';
 
 export type ConfigurerData = {
   analysisFolder?: string;
@@ -7,25 +7,28 @@ export type ConfigurerData = {
 };
 
 export class Configurer {
+  private program: any;
+
   constructor() {
+    this.program = new Command();
     this.setupOptions();
   }
 
   private setupOptions(): void {
     const version = '2.2.0';
 
-    program
+    this.program
       .storeOptionsAsProperties(true)
       .version(version, '-v, --version')
       .allowUnknownOption()
-      .option('-a, --analysis [analysis]', 'Select folder to analyse')
-      .option('-o, --output [output]', 'Select folder to output')
-      .option('-t, --theme [theme]', 'Select report theme', /^(white|black)$/i, 'white')
+      .option('-a, --analysis <analysis>', 'Select folder to analyse')
+      .option('-o, --output <output>', 'Select folder to output')
+      .addOption(new Option('-t, --theme <theme>', 'Select report theme').choices(['white', 'black']).default('white'))
       .parse(process.argv);
   }
 
   fetchData(): ConfigurerData {
-    const opts = program.opts();
+    const opts = this.program.opts();
 
     const userAnalysisFolder = opts.analysis || '';
     const userOutputFolder = opts.output || '';

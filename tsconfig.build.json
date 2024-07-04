@@ -1,13 +1,22 @@
 {
   "compilerOptions": {
-    "lib": [ "es7", "dom" ],
-    "module": "commonjs",
+    "target": "es2021",
+    "module": "es2022",
+    "lib": ["es2021"],
     "moduleResolution": "node",
-    "noImplicitAny": true,
+    "esModuleInterop": true,
     "outDir": "dist",
-    "sourceMap": false,
+    "noImplicitAny": true,
     "strict": true,
-    "target": "es6"
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "incremental": true
   },
   "exclude": [
     "node_modules",

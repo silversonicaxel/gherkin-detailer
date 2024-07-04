@@ -1,21 +1,21 @@
-import { Command, Option } from 'commander';
+import { Command, Option } from 'commander'
 
 export type ConfigurerData = {
-  analysisFolder?: string;
-  outputFolder?: string;
-  theme: string;
-};
+  analysisFolder?: string
+  outputFolder?: string
+  theme: string
+}
 
 export class Configurer {
-  private program: any;
+  private program: any
 
   constructor() {
-    this.program = new Command();
-    this.setupOptions();
+    this.program = new Command()
+    this.setupOptions()
   }
 
   private setupOptions(): void {
-    const version = '2.2.0';
+    const version = '2.2.0'
 
     this.program
       .storeOptionsAsProperties(true)
@@ -24,20 +24,20 @@ export class Configurer {
       .option('-a, --analysis <analysis>', 'Select folder to analyse')
       .option('-o, --output <output>', 'Select folder to output')
       .addOption(new Option('-t, --theme <theme>', 'Select report theme').choices(['white', 'black']).default('white'))
-      .parse(process.argv);
+      .parse(process.argv)
   }
 
   fetchData(): ConfigurerData {
-    const opts = this.program.opts();
+    const opts = this.program.opts()
 
-    const userAnalysisFolder = opts.analysis || '';
-    const userOutputFolder = opts.output || '';
-    const userTheme = opts.theme;
+    const userAnalysisFolder = opts.analysis || ''
+    const userOutputFolder = opts.output || ''
+    const userTheme = opts.theme
 
     return {
       analysisFolder: userAnalysisFolder,
       outputFolder: userOutputFolder,
       theme: userTheme
-    };
+    }
   }
 }

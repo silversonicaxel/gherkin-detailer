@@ -11,9 +11,7 @@
     "clean": "rm -rf dist",
     "prepare-dist": "mkdir -p dist/templates; cp src/templates/* dist/templates",
     "build": "npm run clean; npm run prepare-dist; tsc -p tsconfig.build.json",
-    "postinstall": "npm run prepare-dist",
-    "serve-doc": "gitbook serve . docs",
-    "build-doc": "gitbook build . docs"
+    "postinstall": "npm run prepare-dist"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -57,7 +55,6 @@
     "@typescript-eslint/parser": "^7.10.0",
     "chai": "^5.1.1",
     "eslint": "^8.57.0",
-    "gitbook-cli": "^2.3.2",
     "mocha": "^10.6.0",
     "sinon": "^18.0.0",
     "sinon-chai": "^3.7.0",

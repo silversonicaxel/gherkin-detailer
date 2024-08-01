@@ -1,3 +1,14 @@
+## 2.3.0 (August 1, 2024)
+
+### Added
+
+* Upgraded libraries
+
+### Removed
+
+* Removed gitbook
+
+
 ## 2.2.0 (January 29, 2021)
 
 ### Added

@@ -1,3 +1,10 @@
+## 2.4.0 (August 1, 2024)
+
+### Added
+
+* Improved README documentation
+
+
 ## 2.3.0 (August 1, 2024)
 
 ### Added

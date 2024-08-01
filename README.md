@@ -1,45 +1,68 @@
 [![Coverage Status](https://coveralls.io/repos/github/silversonicaxel/gherkin-detailer/badge.svg?branch=master)](https://coveralls.io/github/silversonicaxel/gherkin-detailer?branch=master)
 
 # gherkin-detailer
-gherkin-detailer is a tool that checks the gherkin files included in you project and:
-* list them per type - _to create a general total overview_
-* highlight similarities - _to prevent duplication of code for similar situations_
+
+`gherkin-detailer` is a powerful tool designed to analyze and optimize your gherkin files within a project. It helps you maintain a clean and efficient codebase by providing an overview of your gherkin files and highlighting potential duplications.
 
 ## Documentation
+
 * [Summary](SUMMARY.md)
 
 ## Introduction
-gherkin-detailer is a tool that generates HTML reports related to the gherkins that are part of the project you are working on. Currently there are six sections available:
-* Files list (containing the entire list of all the detailed scenarios)
-* Features list (containing the simple list of all the features)
-* Scenarios list (containing the simple list of all the scenarios and scenarios outlines)
-* States list (containing the simple list of all the **given** - states)
-* Actions list (containing the simple list of all the **when** - actions)
-* Outcomes list (containing the simple list of all the **then** - outcomes)
 
-Every detail of every section has a background color that highlight potential similarities across the gherkins that might hide duplication of code within the project.
+`gherkin-detailer` is a tool that generates comprehensive HTML reports for the gherkin files in your project. These reports help you manage and optimize your gherkin scenarios, ensuring a cleaner and more efficient codebase. The tool currently provides six detailed sections:
+
+- **Files List**: Contains the entire list of all detailed scenarios.
+- **Features List**: Provides a simple list of all the features.
+- **Scenarios List**: Offers a simple list of all scenarios and scenario outlines.
+- **States List**: Lists all the **Given** states.
+- **Actions List**: Lists all the **When** actions.
+- **Outcomes List**: Lists all the **Then** outcomes.
+
+Each detail in these sections is color-coded to highlight potential similarities, helping you identify and address code duplication within your project.
 
 ## Examples
+
+### Example: Files Section
+
 ![example 1](./example1.png "example 1")
-This first example shows the Files section, and it lists the entire gherkins in all _*.feature_ files. This page is the perfect documentation for the project, separated per file and describing all specific use cases.
 
-The colour shows extra information.
-* The red ones show the equal elements of every gherkins, so the developer should immediately understand that those sentences (actions, outcomes, scenarios, etc...) represent always the same entity and that there should be just one specific code associated to them all.
-* The orange one show the similar elements of every gherkins, so the developer should eventually check if those similarity are correct and really represent different entity with different associated code, or maybe they might hide some errors and duplication of code.
+The **Files** section lists all the gherkin scenarios across all `*.feature` files in your project. This page serves as a comprehensive documentation of your project, organized by file and detailing all specific use cases.
 
----
+#### Color Coding
+
+The color coding provides additional insights into the gherkin elements:
+
+- **Red**: Indicates elements that are identical across all gherkins. These elements (actions, outcomes, scenarios, etc.) represent the same entity across different files, suggesting that there should be a single, specific piece of code associated with all of them. Developers should ensure that these red-highlighted elements are consistently implemented and do not require multiple definitions.
+
+- **Orange**: Highlights elements that are similar across gherkins. These elements may represent different entities but with some common attributes. Developers should review these orange-highlighted elements to verify whether the similarities are accurate and whether they truly represent distinct entities with different code. This check helps prevent potential errors and code duplication.
+
+### Example: Actions Section
 
 ![example 2](./example2.png "example 2")
-The second example shows the Actions section, and it lists all the actions
 
-The menu help the developer to navigate to Files to have a general overview of all the gherkins of the project, or could chose specific elements of every gherkins, from Features to Scenarios, from States to Actions and Outcomes.
+The **Actions** section lists all the actions (`When` steps) present in your gherkin files. This page helps developers quickly locate and review all the actions defined across the project.
 
+#### Navigation Menu
+
+The navigation menu allows developers to efficiently move between different sections of the report:
+
+- **Files**: Provides a general overview of all gherkin files in the project.
+- **Features**: Lists all the features present in your gherkin files.
+- **Scenarios**: Displays all scenarios and scenario outlines.
+- **States**: Shows all `Given` states.
+- **Actions**: Lists all `When` actions (this section).
+- **Outcomes**: Lists all `Then` outcomes.
+
+This menu enables you to switch between sections to gain detailed insights into specific elements of your gherkin files, allowing for thorough analysis and easy navigation throughout the project.
 
 ## Requirements
+
 * node 10.12+
 * npm 6.0+
 
 ## Installation
+
 gherkin-detailer can be installed as a global tool:
 
 ```bash
@@ -57,6 +80,7 @@ $ yarn add --dev gherkin-detailer
 ```
 
 ## Usage
+
 If you've installed it as a devDependency, you need to add it in the `script` section of the `package.json`.
 
 To execute it with all default options, so to let its analysis starts from the current folder, set this up:
@@ -78,7 +102,6 @@ To customize the report theme, set this up:
 ```bash
 "gherkin-detailer": "gherkin-detailer -t 'black'"
 ```
-
 
 Then the `gherkin-detailer` can be executed in order to have a gherkins report created in a default folder `./report/gherkin-detailer/`
 
